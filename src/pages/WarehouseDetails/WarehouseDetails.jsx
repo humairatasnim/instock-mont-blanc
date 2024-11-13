@@ -55,39 +55,41 @@ function WarehouseDetails({ inventories }) {
           </div>
           {/* TABLET/DESKTOP LIST HEADER */}
           <div className="header">
-            <div className="header__item header__title">
-              <span className="header__text">Invetory Item</span>
-              <img
-                className="link__icon"
-                src={sortIcon}
-                alt="sort icon to sort inventory item"
-              ></img>
+            <div className="header__box">
+              <div className="header__item header__title">
+                <span className="header__text">Invetory Item</span>
+                <img
+                  className="link__icon"
+                  src={sortIcon}
+                  alt="sort icon to sort inventory item"
+                ></img>
+              </div>
+              <div className="header__status header__title">
+                <span className="header__text">Status</span>
+                <img
+                  className="link__icon"
+                  src={sortIcon}
+                  alt="sort icon to sort inventory item"
+                ></img>
+              </div>
+              <div className="header__category header__title">
+                <span className="header__text">Category</span>
+                <img
+                  className="link__icon"
+                  src={sortIcon}
+                  alt="sort icon to sort inventory item"
+                ></img>
+              </div>
+              <div className="header__quantity header__title">
+                <span className="header__text">Quantity</span>
+                <img
+                  className="link__icon"
+                  src={sortIcon}
+                  alt="sort icon to sort inventory item"
+                ></img>
+              </div>
             </div>
-            <div className="header__status header__title">
-              <span className="header__text">Status</span>
-              <img
-                className="link__icon"
-                src={sortIcon}
-                alt="sort icon to sort inventory item"
-              ></img>
-            </div>
-            <div className="header__category header__title">
-              <span className="header__text">Category</span>
-              <img
-                className="link__icon"
-                src={sortIcon}
-                alt="sort icon to sort inventory item"
-              ></img>
-            </div>
-            <div className="header__quantity header__title">
-              <span className="header__text">Quantity</span>
-              <img
-                className="link__icon"
-                src={sortIcon}
-                alt="sort icon to sort inventory item"
-              ></img>
-            </div>
-            <div className="header__actions header__title">
+            <div className="header__actions">
               <span className="header__text">Actions</span>
             </div>
           </div>

@@ -12,6 +12,14 @@
     justify-content: space-between;
     padding: 2rem 1.5rem;
     border-bottom: 0.0625rem solid $cloud;
+
+    @include tablet {
+      padding: 2rem 2rem 1.25rem 2rem;
+    }
+
+    @include desktop {
+      padding: 2rem 2.5rem 1.25rem 2.5rem;
+    }
   }
 
   &__title {
@@ -60,6 +68,10 @@
       flex-direction: row;
       padding: 1.5rem 2rem;
     }
+
+    @include desktop {
+      padding: 1.5rem 2.5rem;
+    }
   }
 
   &__subtitle {
@@ -94,20 +106,42 @@
 }
 
 .header {
-display: none;
-    @include tablet{
-        height: 2.5rem;
-        padding: 0 2rem;
-        background-color: $light-grey;
-        color: $slate;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        &__title {
-          display: flex;
-          align-items: center;
-          gap: 0.25rem;
-        }
+  display: none;
+
+  @include tablet {
+    height: 2.5rem;
+    padding: 0 2rem;
+    background-color: $light-grey;
+    color: $slate;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include desktop{
+        padding: 0 2.5rem;
     }
- 
+
+    &__box {
+      display: flex;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    &__title {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      width: 25%;
+    }
+
+    &__status {
+      order: 2;
+      width: 30%;
+    }
+
+    &__quantity {
+      width: 30%;
+      order: 3;
+    }
+  }
 }

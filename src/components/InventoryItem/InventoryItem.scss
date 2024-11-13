@@ -8,23 +8,65 @@
   flex-direction: column;
   border-bottom: 1px solid $cloud;
 
-  &__subtitle {
-    font-size: 0.6875rem;
-    color: $slate;
-    font-weight: 600;
+  @include tablet {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
   }
 
-  &__row {
-    display: flex;
-    padding-bottom: 1rem;
+  @include desktop {
+    padding: 1rem 2.5rem;
   }
 
   &__column {
     width: 50%;
+    padding-bottom: 1rem;
+
+    @include tablet {
+      padding: 0;
+      width: 25%;
+    }
+  }
+  &__mobile-box {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include tablet {
+      flex-wrap: nowrap;
+      width: 100%;
+    }
   }
 
-  &__icons{
+  &__subtitle {
+    font-size: 0.6875rem;
+    color: $slate;
+    font-weight: 600;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__status {
+    @include tablet {
+      order: 2;
+      width: 30%;
+    }
+  }
+
+  &__quantity {
+    @include tablet {
+      order: 3;
+      width: 30%;
+    }
+  }
+
+  &__icons {
     display: flex;
     justify-content: space-between;
+
+    @include tablet {
+      gap: 1rem;
+    }
   }
 }
