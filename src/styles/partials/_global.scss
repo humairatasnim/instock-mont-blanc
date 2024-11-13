@@ -1,0 +1,300 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+input,
+textarea,
+button {
+  font-family: "Titillium Web", sans-serif;
+  color: $instock-black;
+}
+
+img {
+  width: 100%;
+}
+
+// Typography
+
+.page-header {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  font-weight: $semibold;
+
+  @include tablet {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+
+.subheader {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: $semibold;
+
+  @include tablet {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+.label-text,
+.link-text,
+.button-text {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-weight: $semibold;
+
+  @include tablet {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
+}
+
+.table-header,
+.tag-text {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: $semibold;
+  text-transform: uppercase;
+
+  @include tablet {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+}
+
+.body-large {
+  font-size: 0.9375rem;
+  line-height: 1.625rem;
+  font-weight: $regular;
+
+  @include tablet {
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+}
+
+.body-medium {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-weight: $regular;
+
+  @include tablet {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
+}
+
+.body-small {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: $regular;
+
+  @include tablet {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+}
+
+// Layout
+
+.container {
+  padding: 1rem;
+
+  @include tablet {
+    padding: 0 2.25rem;
+  }
+
+  @include desktop {
+    padding: 0 8.125rem;
+  }
+}
+
+// Icons
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+// Buttons and Links
+
+.button {
+  @extend .button-text;
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 1rem;
+  border-radius: 1.25rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  @include tablet {
+    width: auto;
+    height: 2.375rem;
+  }
+}
+
+.button-primary {
+  @extend .button;
+  background-color: $instock-indigo;
+  color: $white;
+  border: none;
+
+  &:hover {
+    background-color: $graphite;
+  }
+}
+
+.button-secondary {
+  @extend .button;
+  background-color: $white;
+  color: $slate;
+  border: 1px solid $cloud;
+
+  &:hover {
+    color: $instock-indigo;
+    border-color: $instock-indigo;
+  }
+}
+
+.button-delete {
+  @extend .button;
+  background-color: $red;
+  color: $white;
+  border: none;
+
+  &:hover {
+    background-color: $graphite;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &__copy {
+    @extend .link-text;
+  }
+
+  &__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+// Form Fields
+
+.form {
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 0;
+  }
+
+  &__label {
+    @extend .label-text;
+  }
+
+  &__input,
+  &__textarea {
+    @extend .body-medium;
+    width: 100%;
+    height: 2.25rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1.25rem;
+    border: 1px solid $cloud;
+    outline: none;
+    background-color: $white;
+
+    @include tablet {
+      width: auto;
+    }
+
+    &::placeholder {
+      color: $slate;
+    }
+
+    &:focus {
+      border: 1px solid $instock-indigo;
+    }
+
+    &:error {
+      border: 1px solid $red;
+    }
+  }
+
+  &__input {
+    @include tablet {
+      height: 2.375rem;
+    }
+  }
+
+  &__textarea {
+    height: 7.5rem;
+    resize: none;
+  }
+
+  &__radio-group {
+    display: flex;
+  }
+
+  &__radio-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__radio-label {
+    @extend .body-medium;
+    color: $slate;
+  }
+
+  &__radio-input:checked + label {
+    color: $instock-black;
+  }
+}
+
+// Tags
+
+.tag {
+  @extend .tag-text;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  height: 1.5rem;
+  border-radius: 1.25rem;
+
+  @include tablet {
+    height: 1.625rem;
+  }
+}
+
+.in-stock {
+  background-color: rgba(21, 132, 99, 0.07);
+  color: $green;
+}
+
+.out-of-stock {
+  background-color: rgba(201, 69, 21, 0.07);
+  color: $red;
+}
