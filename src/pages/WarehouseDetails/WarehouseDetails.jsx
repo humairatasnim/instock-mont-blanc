@@ -57,7 +57,7 @@ function WarehouseDetails({ inventories }) {
           <div className="header">
             <div className="header__box">
               <div className="header__item header__title">
-                <span className="header__text">Invetory Item</span>
+                <span className="header__text">INVENTORY ITEM</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -65,7 +65,7 @@ function WarehouseDetails({ inventories }) {
                 ></img>
               </div>
               <div className="header__status header__title">
-                <span className="header__text">Status</span>
+                <span className="header__text">STATUS</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -73,7 +73,7 @@ function WarehouseDetails({ inventories }) {
                 ></img>
               </div>
               <div className="header__category header__title">
-                <span className="header__text">Category</span>
+                <span className="header__text">CATEGORY</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -81,7 +81,7 @@ function WarehouseDetails({ inventories }) {
                 ></img>
               </div>
               <div className="header__quantity header__title">
-                <span className="header__text">Quantity</span>
+                <span className="header__text">QUANTITY</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -90,7 +90,7 @@ function WarehouseDetails({ inventories }) {
               </div>
             </div>
             <div className="header__actions">
-              <span className="header__text">Actions</span>
+              <span className="header__text">ACTIONS</span>
             </div>
           </div>
           {/* WAREHOUSE INVENTORY LIST */}

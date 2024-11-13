@@ -107,6 +107,9 @@
 
 .header {
   display: none;
+  font-size: .75rem;
+  line-height: 1.125rem;
+  gap: 1rem;
 
   @include tablet {
     height: 2.5rem;
