@@ -9,7 +9,15 @@
         flex-direction: row;
         justify-content: space-between;
     }
+}
 
+.divider {
+    border: .5px solid $cloud;
+    margin: 24px 0px;
+
+    @include tablet {
+        margin: 0px 16px;
+    }
 }
 
 .submit-container {

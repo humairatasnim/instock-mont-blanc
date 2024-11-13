@@ -1,6 +1,13 @@
 import "./WarehouseForm.scss";
+import { useState } from "react";
+import axios from "axios";
 
-function WarehouseForm({action}) {
+const baseUrl = import.meta.env.VITE_API_URL;
+
+function WarehouseForm( { action } ) {
+
+
+
     return (
       <section className="container">
 
@@ -49,6 +56,8 @@ function WarehouseForm({action}) {
             />
             </fieldset>
 
+            <div className="divider"></div>
+       
             <fieldset className="form__field">
             <h2 className="subheader">Contact Details</h2>
             <label className="form__label" htmlFor="contact_name">
