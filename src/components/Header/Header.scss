@@ -1,0 +1,58 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $graphite;
+  padding: 1.5rem;
+  height: 20vh;
+  @include tablet {
+    display: flex;
+    height: 12vh;
+    padding: 0 32px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @include desktop {
+    height: 12vh;
+    padding: 1.5rem 5rem;
+  }
+  &__logo {
+    padding-bottom: 1rem;
+    @include tablet {
+      padding: 0;
+    }
+    &-link {
+      text-decoration: none;
+      list-style: none;
+    }
+  }
+  &__list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    justify-content: space-between;
+    @include tablet {
+      width: 30%;
+    }
+    &-item {
+      width: 100%;
+      text-align: center;
+    }
+    &-link {
+      text-decoration: none;
+      color: $light-grey;
+    }
+  }
+}
+.active {
+  color: $white;
+  background-color: $instock-black;
+  border-radius: 1.25rem;
+  padding: 0.25rem 1rem;
+}
