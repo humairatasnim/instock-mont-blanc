@@ -1,10 +1,25 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
+
+.form-container {
+
+    @include tablet {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+}
+
 .submit-container {
     background-color: $light-grey;
     padding: 16px 24px;
     display: flex;
     flex-direction: row;
     gap: 17px;
+
+    @include tablet {
+        justify-content: end;
+    }
 }
