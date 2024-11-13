@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import Warehouses from "./pages/Warehouses/Warehouses";
 import WarehouseDetails from "./pages/WarehouseDetails/WarehouseDetails";
 import AddWarehouse from "./pages/AddWarehouse/AddWarehouse";
@@ -33,6 +34,7 @@ function App() {
         {/* Fallback route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
