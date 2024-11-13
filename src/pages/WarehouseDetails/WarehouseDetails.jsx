@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./WarehouseDetails.scss";
 import arrowBack from "/src/assets/icons/arrow_back-24px.svg";
 import InventoryItem from "../../components/InventoryItem/InventoryItem";
+import editWhite from "/src/assets/icons/edit-white-24px.svg";
 
 function WarehouseDetails({ inventories }) {
   return (
@@ -11,7 +12,7 @@ function WarehouseDetails({ inventories }) {
           {/* WAREHOUSE HEADER */}
           <div className="warehouse__header">
             <div className="warehouse__title">
-              <NavLink className="warehouse__navlink">
+              <NavLink to="/warehouses">
                 <img
                   className="link__icon"
                   src={arrowBack}
@@ -21,9 +22,10 @@ function WarehouseDetails({ inventories }) {
               {/* NEED TO REMOVE built-in style */}
               <h2 className="warehouse__name">Washington</h2>
             </div>
-            <button className="button button-primary warehouse__edit">
-              Edit
-            </button>
+            <NavLink to="/warehouses/:id/edit" className="warehouse__edit">
+              <img className="link__icon" src={editWhite}></img>
+              <p className="warehouse__edit--hidden">Edit</p>
+            </NavLink>
           </div>
           {/* WAREHOUSE DETAILS */}
           <div className="warehouse__details">
