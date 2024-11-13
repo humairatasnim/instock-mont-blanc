@@ -1,10 +1,16 @@
-import './App.scss'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import UILibrary from "./pages/UILibrary/UILibrary";
+import "./App.scss";
 
 function App() {
-
   return (
-    <h1>InStock</h1>
-  )
+    <BrowserRouter>
+      <Routes>
+        {/* TEMPORARY: UI Library Route */}
+        <Route path="/ui" element={<UILibrary />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
