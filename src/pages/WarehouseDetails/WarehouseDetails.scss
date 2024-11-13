@@ -4,6 +4,7 @@
 
 .warehouse {
   border: 1px solid $cloud;
+  border-radius: 0.1875rem;
 
   &__header {
     display: flex;
@@ -27,14 +28,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0.5rem 1rem;
+
+    @include tablet {
+      width: 5.0625rem;
+      height: 2.375rem;
+    }
   }
 
   &__edit--hidden {
-    text-decoration: none;
     display: none;
+    color: $white;
 
-    @include tablet{
-        display: initial;
+    @include tablet {
+      display: inherit;
     }
   }
 
@@ -42,15 +49,17 @@
     font-size: 1.75rem;
   }
 
-  &__edit {
-    width: 2.1875rem;
-    height: 2.1875rem;
-  }
-
   &__details {
     color: $instock-black;
     padding: 1rem 1.5rem;
     border-bottom: 0.0625rem solid $cloud;
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+      flex-direction: row;
+      padding: 1.5rem 2rem;
+    }
   }
 
   &__subtitle {
@@ -61,13 +70,44 @@
 
   &__address {
     padding-bottom: 2.25rem;
+
+    @include tablet {
+      width: 60%;
+      padding-right: 2rem;
+      padding-bottom: 0;
+    }
   }
 
   &__contact {
     display: flex;
+
+    @include tablet {
+      border-left: 1px solid $cloud;
+      padding-left: 2.5rem;
+      width: 100%;
+    }
   }
 
   &__column {
     width: 50%;
   }
+}
+
+.header {
+display: none;
+    @include tablet{
+        height: 2.5rem;
+        padding: 0 2rem;
+        background-color: $light-grey;
+        color: $slate;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__title {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+    }
+ 
 }
