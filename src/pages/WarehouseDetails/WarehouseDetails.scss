@@ -1,0 +1,53 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.warehouse {
+  border: 1px solid $cloud;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 1.5rem ;
+    border-bottom: .0625rem solid $cloud;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  &__name{
+    font-size: 1.75rem;
+  }
+
+  &__edit{
+    max-width: 1.25rem;
+  }
+
+  &__details {
+    color: $instock-black;
+    padding: 1rem 1.5rem;
+    border-bottom: .0625rem solid $cloud;
+  }
+
+  &__subtitle {
+    font-size: 0.6875rem;
+    color: $slate;
+    font-weight: 600;
+  }
+
+  &__address {
+    padding-bottom: 2.25rem;
+  }
+
+  &__contact {
+    display: flex;
+  }
+
+  &__column {
+    width: 50%;
+  }
+}

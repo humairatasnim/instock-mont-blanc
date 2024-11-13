@@ -1,0 +1,30 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.inventory {
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $cloud;
+
+  &__subtitle {
+    font-size: 0.6875rem;
+    color: $slate;
+    font-weight: 600;
+  }
+
+  &__row {
+    display: flex;
+    padding-bottom: 1rem;
+  }
+
+  &__column {
+    width: 50%;
+  }
+
+  &__icons{
+    display: flex;
+    justify-content: space-between;
+  }
+}
