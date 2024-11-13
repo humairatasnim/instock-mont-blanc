@@ -9,6 +9,7 @@ import Inventory from "./pages/Inventory/Inventory";
 import InventoryItemDetails from "./pages/InventoryItemDetails/InventoryItemDetails";
 import AddInventoryItem from "./pages/AddInventoryItem/AddInventoryItem";
 import EditInventoryItem from "./pages/EditInventoryItem/EditInventoryItem";
+import UILibrary from "./pages/UILibrary/UILibrary";
 import "./App.scss";
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
         <Route path="/inventory/:id" element={<InventoryItemDetails />} />
         <Route path="/inventory/add" element={<AddInventoryItem />} />
         <Route path="/inventory/:id/edit" element={<EditInventoryItem />} />
+        
+        {/* TEMPORARY: UI Library Route */}
+        <Route path="/ui" element={<UILibrary />} />
 
         {/* Fallback route */}
         <Route path="*" element={<Navigate to="/" />} />
