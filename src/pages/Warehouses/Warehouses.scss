@@ -13,55 +13,102 @@
     gap: 1rem;
     padding: 2rem 1.5rem 1.5rem;
     border-bottom: 1px solid $cloud;
+
+    @include tablet {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      flex-direction: row;
+      border: 0;
+    }
+
+    @include desktop {
+      padding: 2rem 2.5rem 1.5rem;
+    }
+  }
+
+  &__title {
+    @include tablet {
+      flex: 1;
+    }
   }
 }
 
 .table {
   &__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 1.5rem 1.5rem;
     border-bottom: 1px solid $cloud;
 
     &:last-child {
       border: 0;
     }
-  }
 
-  &__info {
-    padding: 1rem 1.5rem;
-    display: flex;
-    gap: 1rem;
+    @include tablet {
+      padding: 1rem 2rem;
+      gap: 2.5rem;
+    }
+
+    @include desktop {
+      padding: 1rem 2.5rem;
+    }
   }
 
   &__column {
-    flex: 1;
+    flex: 1 1 46%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    @include tablet {
+      flex: 1 1 30%;
+      flex-direction: row;
+      gap: 2.5rem;
+    }
+  }
+
+  &__actions {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @include tablet {
+      flex: 0 0 auto;
+      gap: 1rem;
+    }
   }
 
   &__content-group {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 0.25rem;
+
+    @include tablet {
+      flex: 1;
+    }
   }
 
-  &-header {
+  &__header {
+    @extend .table-header;
     color: $slate;
+
+    @include tablet {
+      display: none;
+    }
   }
 
-  &-body {
+  &__body {
     @extend .body-medium;
   }
 
-  &__actions {
-    padding: 0rem 1.5rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
-
-    &--delete-btn,
-    &--edit-btn {
-      border: 0;
-      background: none;
-      height: 1.5rem;
-    }
+  &__delete-btn,
+  &__edit-btn {
+    border: none;
+    background: none;
+    height: 1.5rem;
+    cursor: pointer;
   }
 }
