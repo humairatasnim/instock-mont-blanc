@@ -19,7 +19,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 function App() {
   const [warehouses, setWarehouses] = useState([]);
 
-  const getWarehouse = async () => {
+  const getWarehouses = async () => {
     try {
       const { data } = await axios.get(`${BASE_URL}/warehouses`);
       setWarehouses(data);
@@ -29,10 +29,10 @@ function App() {
   }
 
   useEffect(() => {
-    getWarehouse();
+    getWarehouses();
   }, []);
 
-  if (!warehouses) {
+  if (warehouses.length === 0) {
     return <div>Loading...</div>;
   }
 

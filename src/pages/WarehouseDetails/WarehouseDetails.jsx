@@ -99,7 +99,7 @@ function WarehouseDetails({ warehouses }) {
           <div className="invetory-list"></div>
           {/* <ul> */}
           {/* <li> */}
-          <InventoryItem warehouse={warehouse} />
+          <InventoryItem warehouses={warehouses} />
           <InventoryItem />
           {/* </li> */}
           {/* {inventory.map((item) => {return (
