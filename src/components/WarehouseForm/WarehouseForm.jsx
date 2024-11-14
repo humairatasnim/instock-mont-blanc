@@ -1,11 +1,17 @@
 import "./WarehouseForm.scss";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
 function WarehouseForm( {action} ) {
     const [id, setTestValueOnly] = useState("2")
+    // id state used only as a test value, this should come as a prop from warehouse details page as well as the below UseState default values 
+
+    const navigate = useNavigate();
+
+    //Form Field UseStates
 
     const [warehouseNameInput, setWarehouseNameInput] = useState("Washington");
     const [addressInput, setAddressInput] = useState("Canada");
@@ -15,7 +21,8 @@ function WarehouseForm( {action} ) {
     const [contactPositionInput, setContactPositionInput] = useState("Warehouse Manager");
     const [contactPhoneInput, setContactPhoneInput] = useState("+1 (646) 123-1234");
     const [contactEmailInput, setContactEmailInput] = useState("glyon@instock.com");
-
+    
+    //Form Field HandleChange Events
  
     const handleWarehouseChange = (e) => {
         setWarehouseNameInput(e.target.value);
@@ -42,13 +49,14 @@ function WarehouseForm( {action} ) {
         setContactEmailInput(e.target.value);
     };
 
-
     const isFormValid = () => {
         if (!warehouseNameInput || !addressInput || !countryInput || !cityInput || !contactNameInput || !contactPositionInput || !contactPhoneInput || !contactEmailInput) {
             return false;
         }
         return true;
     };
+
+    // Save Button Function:
 
     const handleSubmit = (e) =>  {
         e.preventDefault();
@@ -57,27 +65,33 @@ function WarehouseForm( {action} ) {
         return;
         }
 
-    const editWarehouse = async () => {
-        try {
-            const {data} = await axios.put(`${baseUrl}/warehouses/${id}`, 
-                {warehouse_name: warehouseNameInput,
-                    address: addressInput,
-                    city: cityInput,
-                    country: countryInput,
-                    contact_name: contactNameInput, 
-                    contact_position: contactPositionInput,
-                    contact_phone: contactPhoneInput,
-                    contact_email: contactEmailInput,
-                });
-            console.log(data); 
-        } catch (error) {
-            console.error("Error posting to API", error);
-            }
-        };
+        const editWarehouse = async () => {
+            try {
+                const {data} = await axios.put(`${baseUrl}/warehouses/${id}`, 
+                    {warehouse_name: warehouseNameInput,
+                        address: addressInput,
+                        city: cityInput,
+                        country: countryInput,
+                        contact_name: contactNameInput, 
+                        contact_position: contactPositionInput,
+                        contact_phone: contactPhoneInput,
+                        contact_email: contactEmailInput,
+                    });
+                alert(`Changes made to Warehouse ${warehouseNameInput}`);
+                navigate(`/warehouses/${id}`);
+                console.log(data); 
+            } catch (error) {
+                console.error("Error posting to API", error);
+                }
+            };
+            editWarehouse();
+    }
 
-        
-        editWarehouse();
-}
+    // Cancel Button Function:
+
+    const handleCancel = () => {
+        navigate(`/warehouses/${id}`);
+    };
 
     return (
       <section className="container">
@@ -183,13 +197,11 @@ function WarehouseForm( {action} ) {
         </div>
 
         <div className="submit-container">
-            <button className="button button-secondary">Cancel</button>
+            <button className="button button-secondary" onClick={handleCancel} >Cancel</button>
             <button type="submit" onClick={handleSubmit} className="button button-primary">{action}</button>
         </div>
 
         </section>
-
-  
     );
   }
   
