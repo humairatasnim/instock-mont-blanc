@@ -1,10 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import "./WarehouseList.scss";
 
 function WarehouseList({ warehouse }) {
+  const navigate = useNavigate();
+
+  const handleDelete = () => {
+    alert("show Delete modal");
+    navigate("/");
+  };
+
+  const handleEdit = () => {
+    navigate(`/warehouses/${warehouse.id}/edit`);
+  };
+
   return (
     <li className="table__row">
       <div className="table__column table__column--warehouse">
@@ -13,11 +24,7 @@ function WarehouseList({ warehouse }) {
           <div className="table__cell-text">
             <NavLink to={`/warehouses/${warehouse.id}`} className="link">
               <span className="link__text">{warehouse.warehouse_name}</span>
-              <img
-                src={chevronIcon}
-                alt="Chevron icon"
-                className="link__icon"
-              />
+              <img src={chevronIcon} alt="Chevron icon" className="link__icon" />
             </NavLink>
           </div>
         </div>
@@ -49,11 +56,11 @@ function WarehouseList({ warehouse }) {
       </div>
 
       <div className="table__actions">
-        <button className="table__delete-btn">
-          <img src={deleteIcon} className="icon" />
+        <button type="button" onClick={handleDelete} className="table__delete-btn">
+          <img src={deleteIcon} alt="Delete icon" className="icon" />
         </button>
-        <button className="table__edit-btn">
-          <img src={editIcon} className="icon" />
+        <button type="button" onClick={handleEdit} className="table__edit-btn">
+          <img src={editIcon} alt="Edit icon" className="icon" />
         </button>
       </div>
     </li>

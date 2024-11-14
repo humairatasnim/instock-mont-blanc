@@ -33,6 +33,10 @@
 
   &__search {
     @extend .form__input;
+    background-image: url("/src/assets/icons/search-24px.svg");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.5rem 1.5rem;
   }
 }
 

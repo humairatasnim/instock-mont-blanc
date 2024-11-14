@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 import WarehouseList from "../../components/WarehouseList/WarehouseList";
 import "./Warehouses.scss";
@@ -36,7 +37,9 @@ function Warehouses() {
             name="name"
             placeholder="Search..."
           />
-          <button className="button button-primary">+ Add New Warehouse</button>
+          <Link to="warehouses/add" className="button button-primary">
+            + Add New Warehouse
+          </Link>
         </div>
 
         <div className="warehouses__body">
