@@ -1,6 +1,5 @@
 import "./WarehouseForm.scss";
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_URL;
@@ -10,22 +9,42 @@ function WarehouseForm( {action} ) {
 
     const [warehouseNameInput, setWarehouseNameInput] = useState("Washington");
     const [addressInput, setAddressInput] = useState("Canada");
+    const [countryInput, setCountryInput] = useState("Washington");
+    const [cityInput, setCityInput] = useState("Washington");
+    const [contactNameInput, setContactNameInput] = useState("33 Pearl Street SW");
+    const [contactPositionInput, setContactPositionInput] = useState("Warehouse Manager");
+    const [contactPhoneInput, setContactPhoneInput] = useState("+1 (646) 123-1234");
+    const [contactEmailInput, setContactEmailInput] = useState("glyon@instock.com");
 
  
-    const handleWarehouseInputChange = (e) => {
+    const handleWarehouseChange = (e) => {
         setWarehouseNameInput(e.target.value);
       };
-    const handleAddressInputChange = (e) => {
+    const handleAddressChange = (e) => {
         setAddressInput(e.target.value);
+    };
+    const handleCountryChange = (e) => {
+        setCountryInput(e.target.value);
+      };
+    const handleCityChange = (e) => {
+        setCityInput(e.target.value);
+    };
+    const handleContactNameChange = (e) => {
+        setContactNameInput(e.target.value);
+    };
+    const handleContactPositionChange = (e) => {
+        setContactPositionInput(e.target.value);
+    };
+    const handleContactPhoneChange = (e) => {
+        setContactPhoneInput(e.target.value);
+    };
+    const handleContactEmailChange = (e) => {
+        setContactEmailInput(e.target.value);
     };
 
 
-
-
-
-
     const isFormValid = () => {
-        if (!warehouseNameInput || !addressInput) {
+        if (!warehouseNameInput || !addressInput || !countryInput || !cityInput || !contactNameInput || !contactPositionInput || !contactPhoneInput || !contactEmailInput) {
             return false;
         }
         return true;
@@ -42,7 +61,13 @@ function WarehouseForm( {action} ) {
         try {
             const {data} = await axios.put(`${baseUrl}/warehouses/${id}`, 
                 {warehouse_name: warehouseNameInput,
-                    address: addressInput
+                    address: addressInput,
+                    city: cityInput,
+                    country: countryInput,
+                    contact_name: contactNameInput, 
+                    contact_position: contactPositionInput,
+                    contact_phone: contactPhoneInput,
+                    contact_email: contactEmailInput,
                 });
             console.log(data); 
         } catch (error) {
@@ -68,7 +93,7 @@ function WarehouseForm( {action} ) {
                 type="text"
                 id="warehouse_name"
                 name="warehouse_name"
-                onChange={handleWarehouseInputChange}
+                onChange={handleWarehouseChange}
                 value={warehouseNameInput}
             />
             <label className="form__label" htmlFor="address">
@@ -79,7 +104,7 @@ function WarehouseForm( {action} ) {
                 type="text"
                 id="address"
                 name="address"
-                onChange={handleAddressInputChange}
+                onChange={handleAddressChange}
                 value={addressInput}
             />
             <label className="form__label" htmlFor="city">
@@ -90,7 +115,8 @@ function WarehouseForm( {action} ) {
                 type="text"
                 id="city"
                 name="city"
-                placeholder="insert warehouse details prop"
+                onChange={handleCityChange}
+                value={cityInput}
             />
             <label className="form__label" htmlFor="country">
                 Country
@@ -100,7 +126,8 @@ function WarehouseForm( {action} ) {
                 type="text"
                 id="country"
                 name="country"
-                placeholder="insert warehouse details prop"
+                onChange={handleCountryChange}
+                value={countryInput}
             />
             </fieldset>
 
@@ -116,7 +143,8 @@ function WarehouseForm( {action} ) {
                 type="text"
                 id="contact_name"
                 name="contact_name"
-                placeholder="insert warehouse details prop"
+                onChange={handleContactNameChange}
+                value={contactNameInput}
             />
             <label className="form__label" htmlFor="contact_position">
                 Position
@@ -126,7 +154,8 @@ function WarehouseForm( {action} ) {
                 type="text"
                 id="contact_position"
                 name="contact_position"
-                placeholder="insert warehouse details prop"
+                onChange={handleContactPositionChange}
+                value={contactPositionInput}
             />
             <label className="form__label" htmlFor="contact_phone">
                 Phone Number
@@ -136,7 +165,8 @@ function WarehouseForm( {action} ) {
                 type="text"
                 id="contact_phone"
                 name="contact_phone"
-                placeholder="insert warehouse details prop"
+                onChange={handleContactPhoneChange}
+                value={contactPhoneInput}
             />
             <label className="form__label" htmlFor="contact_email">
                 Email
@@ -146,7 +176,8 @@ function WarehouseForm( {action} ) {
                 type="text"
                 id="contact_email"
                 name="contact_email"
-                placeholder="insert warehouse details prop"
+                onChange={handleContactEmailChange}
+                value={contactEmailInput}
             />
             </fieldset>
         </div>
