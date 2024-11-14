@@ -3,12 +3,29 @@ import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import "./WarehouseList.scss";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function WarehouseList({ warehouse, deleteHandler }) {
   const navigate = useNavigate();
 
+  const {
+    id,
+    warehouse_name,
+    address,
+    city,
+    country,
+    contact_name,
+    contact_phone,
+    contact_email
+  } = warehouse;
+
+  const handleDelete = () => {
+    alert("show Delete modal");
+    navigate("/");
+  };
+
   const handleEdit = () => {
-    navigate(`/warehouses/${warehouse.id}/edit`);
+    navigate(`/warehouses/${id}/edit`);
   };
 
   return (
@@ -17,9 +34,13 @@ function WarehouseList({ warehouse, deleteHandler }) {
         <div className="table__body-cell table__cell--name">
           <h2 className="table__header-text mobile-only">Warehouse</h2>
           <div className="table__cell-text">
-            <NavLink to={`/warehouses/${warehouse.id}`} className="link">
-              <span className="link__text">{warehouse.warehouse_name}</span>
-              <img src={chevronIcon} alt="Chevron icon" className="link__icon" />
+            <NavLink to={`/warehouses/${id}`} className="link">
+              <span className="link__text">{warehouse_name}</span>
+              <img
+                src={chevronIcon}
+                alt="Chevron icon"
+                className="link__icon"
+              />
             </NavLink>
           </div>
         </div>
@@ -27,7 +48,7 @@ function WarehouseList({ warehouse, deleteHandler }) {
         <div className="table__body-cell table__cell--address">
           <h2 className="table__header-text mobile-only">Address</h2>
           <div className="table__cell-text">
-            {warehouse.address}, {warehouse.city}, {warehouse.country}
+            {address}, {city}, {country}
           </div>
         </div>
       </div>
@@ -35,7 +56,7 @@ function WarehouseList({ warehouse, deleteHandler }) {
       <div className="table__column table__column--contact">
         <div className="table__body-cell table__cell--contact">
           <h2 className="table__header-text mobile-only">Contact Name</h2>
-          <div className="table__cell-text">{warehouse.contact_name}</div>
+          <div className="table__cell-text">{contact_name}</div>
         </div>
 
         <div className="table__body-cell table__cell--contact-info">
@@ -43,15 +64,22 @@ function WarehouseList({ warehouse, deleteHandler }) {
             Contact Information
           </h2>
           <div className="table__cell-text">
-            {warehouse.contact_phone}
+            {contact_phone}
             <br />
-            {warehouse.contact_email}
+            {contact_email}
           </div>
         </div>
       </div>
 
       <div className="table__actions">
+
         <button type="button" onClick={() => deleteHandler(warehouse)} className="table__delete-btn">
+        <button
+          type="button"
+          onClick={handleDelete}
+          className="table__delete-btn"
+        >
+
           <img src={deleteIcon} alt="Delete icon" className="icon" />
         </button>
         <button type="button" onClick={handleEdit} className="table__edit-btn">
