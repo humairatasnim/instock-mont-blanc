@@ -2,37 +2,42 @@ import "./Modal.scss";
 import closeButton from "/src/assets/icons/close-24px.svg";
 import { useEffect, useRef } from "react";
 
-const Modal = ({ openModal, setOpenModal, name }) => {
+const Modal = ({ warehouse, type, onClose }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    if (openModal) {
+    if (warehouse) {
       modalRef.current?.showModal();
     } else {
       modalRef.current?.close();
     }
-  }, [openModal]);
+  }, [warehouse]);
+
+  const handleClose = () => {
+    modalRef.current?.close();
+    onClose(); 
+  };
 
   return (
-    <dialog className="modal" ref={modalRef}>
-      <button onClick={() => setOpenModal(false)}>
+    <dialog className="modal" ref={modalRef} onClose={handleClose}>
+      <button onClick={handleClose}>
         <img src={closeButton} alt="close icon" className="modal__icon icon" />
       </button>
       <div className="modal__content">
         <div className="modal__details">
           <h1 className="modal__heading page-header">
-            Delete {name} warehouse?
+            {type === "warehouse"
+              ? `Delete ${warehouse?.warehouse_name} warehouse?`
+              : `Delete Television inventory item?`}
           </h1>
           <p className="modal__description">
-            Please confirm that you’d like to delete the {name} from the
-            list of warehouses. You won’t be able to undo this action.
+            {type === "warehouse"
+              ? `Please confirm that you’d like to delete ${warehouse?.warehouse_name} from the list of warehouses. You won’t be able to undo this action.`
+              : "Please confirm that you’d like to delete Television from the inventory list. You won’t be able to undo this action."}
           </p>
         </div>
         <div className="modal__ctas">
-          <button
-            className="modal__button button-secondary"
-            onClick={() => setOpenModal(false)}
-          >
+          <button className="modal__button button-secondary" onClick={handleClose}>
             Cancel
           </button>
           <button className="modal__button button-delete">Delete</button>
