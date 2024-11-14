@@ -20,6 +20,7 @@ function App() {
   const [warehouses, setWarehouses] = useState(null);
   const [inventories, setInventories] = useState(null);
 
+
   const getWarehouses = async () => {
     try {
       const { data } = await axios.get(`${BASE_URL}/api/warehouses`);

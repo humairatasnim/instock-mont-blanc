@@ -4,11 +4,22 @@ import { Link } from "react-router-dom";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 import WarehouseList from "../../components/WarehouseList/WarehouseList";
 import "./Warehouses.scss";
+import Modal from "../../components/Modal/Modal";
 
 function Warehouses({ warehouses }) {
+  const [warehouseToDelete, setWarehouseToDelete] = useState(null);
+
+  function deleteWarehouseHandler(warehouse) {
+    setWarehouseToDelete(warehouse);
+  }
 
   return (
     <main className="container">
+      <Modal
+        warehouse={warehouseToDelete}
+        type={'warehouse'}
+        onClose={() => setWarehouseToDelete(null)}
+      />
       <section className="panel warehouses">
         <div className="warehouses__header">
           <h1 className="warehouses__title">Warehouses</h1>
@@ -81,7 +92,11 @@ function Warehouses({ warehouses }) {
 
           <ul className="table__body">
             {warehouses.map((warehouse) => (
-              <WarehouseList key={warehouse.id} warehouse={warehouse} />
+              <WarehouseList
+                key={warehouse.id}
+                warehouse={warehouse}
+                deleteHandler={deleteWarehouseHandler}
+              />
             ))}
           </ul>
         </div>
