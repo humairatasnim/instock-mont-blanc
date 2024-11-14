@@ -16,6 +16,22 @@ textarea,
 button {
   font-family: "Titillium Web", sans-serif;
   color: $instock-black;
+  background-color: $light-grey;
+}
+
+body {
+  background: linear-gradient(
+    rgba(35, 41, 65, 1) 200px,
+    rgba(255, 255, 255, 1) 200px
+  );
+  min-height: 100vh;
+
+  @include tablet {
+    background: linear-gradient(
+      rgba(35, 41, 65, 1) 196px,
+      rgba(255, 255, 255, 1) 196px
+    );
+  }
 }
 
 img {
@@ -108,7 +124,7 @@ img {
 // Layout
 
 .container {
-  padding: 1rem;
+  padding: 0 1rem;
 
   @include tablet {
     padding: 0 2.25rem;
@@ -132,13 +148,14 @@ img {
   @extend .button-text;
   width: 100%;
   height: 2.25rem;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 1.25rem;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  text-decoration: none;
 
   @include tablet {
     width: auto;
@@ -298,4 +315,12 @@ img {
 .out-of-stock {
   background-color: rgba(201, 69, 21, 0.07);
   color: $red;
+}
+
+// Responsive Displays
+
+.mobile-only {
+  @include tablet {
+    display: none;
+  }
 }

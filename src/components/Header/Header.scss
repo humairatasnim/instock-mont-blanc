@@ -1,58 +1,71 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global";
 
-.nav {
+.header {
+  background-color: $graphite;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: $graphite;
-  padding: 1.5rem;
-  height: 20vh;
+  padding: 1.5rem 1rem;
+  gap: 1.5rem;
+
   @include tablet {
-    display: flex;
-    height: 12vh;
-    padding: 0 32px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 2rem;
   }
+
   @include desktop {
-    height: 12vh;
-    padding: 1.5rem 5rem;
+    padding: 2rem 8.125rem;
   }
+
   &__logo {
-    padding-bottom: 1rem;
-    @include tablet {
-      padding: 0;
-    }
-    &-link {
-      text-decoration: none;
-      list-style: none;
-    }
-  }
-  &__list {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    list-style: none;
-    width: 100%;
-    justify-content: space-between;
-    @include tablet {
-      width: 30%;
+  }
+
+  &__link {
+    height: 28px;
+  }
+
+  &__image {
+    max-height: 28px;
+  }
+
+  .nav {
+    &__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1rem;
+
+      @include desktop {
+        gap: 1.5rem;
+      }
     }
-    &-item {
-      width: 100%;
-      text-align: center;
+
+    &__item {
+      flex: 1;
+      display: flex;
     }
-    &-link {
+
+    &__link {
+      @extend .button;
+      color: $cloud;
       text-decoration: none;
-      color: $light-grey;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.active {
+        background-color: $instock-black;
+        color: $white;
+        text-decoration: none;
+      }
     }
   }
-}
-.active {
-  color: $white;
-  background-color: $instock-black;
-  border-radius: 1.25rem;
-  padding: 0.25rem 1rem;
 }
