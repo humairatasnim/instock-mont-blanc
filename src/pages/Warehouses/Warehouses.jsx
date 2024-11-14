@@ -27,7 +27,7 @@ function Warehouses() {
 
   return (
     <main className="container">
-      <section className="warehouses">
+      <section className="panel warehouses">
         <div className="warehouses__header">
           <h1 className="warehouses__title">Warehouses</h1>
           <input
