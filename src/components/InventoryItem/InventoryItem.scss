@@ -48,6 +48,12 @@
     }
   }
 
+  &__name{
+    background-color: none;
+    border: none;
+    display: flex;
+  }
+
   &__status {
     @include tablet {
       order: 2;

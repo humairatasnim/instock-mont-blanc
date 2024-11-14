@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./WarehouseDetails.scss";
 import arrowBack from "/src/assets/icons/arrow_back-24px.svg";
@@ -8,7 +8,7 @@ import sortIcon from "/src/assets/icons/sort-24px.svg";
 
 function WarehouseDetails({ warehouses }) {
   const [inventories, setInvetories] = useState([]);
-
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const warehouse = warehouses[id];
@@ -30,6 +30,10 @@ function WarehouseDetails({ warehouses }) {
   //   return <div>Loading...</div>;
   // }
 
+  const editWarehouse = () => {
+    navigate(`/warehouses/${id}/edit`);
+  };
+
   return (
     <>
       <main className="container">
@@ -47,10 +51,10 @@ function WarehouseDetails({ warehouses }) {
               {/* NEED TO REMOVE built-in style */}
               <h2 className="warehouse__name">{warehouse.warehouse_name}</h2>
             </div>
-            <NavLink to="/warehouses/:id/edit" className="warehouse__edit link">
+            <div onClick={editWarehouse} className="warehouse__edit">
               <img className="link__icon" src={editWhite}></img>
               <span className="warehouse__edit--hidden">Edit</span>
-            </NavLink>
+            </div>
           </div>
           {/* WAREHOUSE DETAILS */}
           <div className="warehouse__details">
@@ -120,12 +124,12 @@ function WarehouseDetails({ warehouses }) {
             {inventories.map((item) => {
               return (
                 <li key={item.id}>
-                  <InventoryItem inventories={inventories} />
+                  <InventoryItem items={item} />
                 </li>
               );
             })}
           </ul> */}
-          <InventoryItem/>
+          <InventoryItem />
         </div>
       </main>
     </>
