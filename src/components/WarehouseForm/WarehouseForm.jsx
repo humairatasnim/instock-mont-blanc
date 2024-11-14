@@ -1,12 +1,58 @@
 import "./WarehouseForm.scss";
-import { useState } from "react";
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
-function WarehouseForm( { action } ) {
+function WarehouseForm( {action} ) {
+    const [id, setTestValueOnly] = useState("2")
+
+    const [warehouseNameInput, setWarehouseNameInput] = useState("Washington");
+    const [addressInput, setAddressInput] = useState("Canada");
+
+ 
+    const handleWarehouseInputChange = (e) => {
+        setWarehouseNameInput(e.target.value);
+      };
+    const handleAddressInputChange = (e) => {
+        setAddressInput(e.target.value);
+    };
 
 
+
+
+
+
+    const isFormValid = () => {
+        if (!warehouseNameInput || !addressInput) {
+            return false;
+        }
+        return true;
+    };
+
+    const handleSubmit = (e) =>  {
+        e.preventDefault();
+        if (!isFormValid()) {
+            alert("Please ensure all fields are filled out");
+        return;
+        }
+
+    const editWarehouse = async () => {
+        try {
+            const {data} = await axios.put(`${baseUrl}/warehouses/${id}`, 
+                {warehouse_name: warehouseNameInput,
+                    address: addressInput
+                });
+            console.log(data); 
+        } catch (error) {
+            console.error("Error posting to API", error);
+            }
+        };
+
+        
+        editWarehouse();
+}
 
     return (
       <section className="container">
@@ -22,7 +68,8 @@ function WarehouseForm( { action } ) {
                 type="text"
                 id="warehouse_name"
                 name="warehouse_name"
-                placeholder="insert warehouse details prop"
+                onChange={handleWarehouseInputChange}
+                value={warehouseNameInput}
             />
             <label className="form__label" htmlFor="address">
                 Street Address
@@ -32,7 +79,8 @@ function WarehouseForm( { action } ) {
                 type="text"
                 id="address"
                 name="address"
-                placeholder="insert warehouse details prop"
+                onChange={handleAddressInputChange}
+                value={addressInput}
             />
             <label className="form__label" htmlFor="city">
                 City
@@ -105,7 +153,7 @@ function WarehouseForm( { action } ) {
 
         <div className="submit-container">
             <button className="button button-secondary">Cancel</button>
-            <button className="button button-primary">{action}</button>
+            <button type="submit" onClick={handleSubmit} className="button button-primary">{action}</button>
         </div>
 
         </section>
