@@ -18,6 +18,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [warehouses, setWarehouses] = useState(null);
+  const [inventories, setInventories] = useState(null);
 
   const getWarehouses = async () => {
     try {
@@ -28,15 +29,30 @@ function App() {
     }
   };
 
+  const getInventories = async () => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/api/inventories`);
+      setInventories(data);
+    } catch (error) {
+      console.error("Error fetching warehouses:", error);
+    }
+  };
+
   useEffect(() => {
     getWarehouses();
   }, []);
 
-  if (!warehouses) return <div>Loading warehouses...</div>;
+
+  useEffect(() => {
+    getInventories();
+  }, []);
 
   return (
     <BrowserRouter>
       <Header />
+      {(!warehouses || !inventories) ? (
+        <div>Loading data...</div>
+      ) : (
       <Routes>
         {/* Homepage - Warehouses list */}
         <Route path="/" element={<Warehouses warehouses={warehouses} />} />
@@ -55,7 +71,7 @@ function App() {
         <Route path="/warehouses/:id/edit" element={<EditWarehouse />} />
 
         {/* Inventory routes */}
-        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/inventory" element={<Inventory inventories={inventories} />} />
         <Route path="/inventory/:id" element={<InventoryItemDetails />} />
         <Route path="/inventory/add" element={<AddInventoryItem />} />
         <Route path="/inventory/:id/edit" element={<EditInventoryItem />} />
@@ -65,7 +81,7 @@ function App() {
 
         {/* Fallback route */}
         <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      </Routes>)}
       <Footer />
     </BrowserRouter>
   );

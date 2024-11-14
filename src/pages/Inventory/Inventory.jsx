@@ -64,66 +64,11 @@ function Inventory({ inventories }) {
           </div>
         </div>
 
-        {/* <div className="inventory__body">
-          <div className="table__header">
-            <div className="table__column table__column--warehouse">
-              <div className="table__header-cell table__cell--name">
-                <h2 className="table__header-text">Warehouse</h2>
-                <button className="table__sort-btn">
-                  <img
-                    src={sortIcon}
-                    alt="Sort icon"
-                    className="table__sort-icon"
-                  />
-                </button>
-              </div>
-
-              <div className="table__header-cell table__cell--address">
-                <h2 className="table__header-text">Address</h2>
-                <button className="table__sort-btn">
-                  <img
-                    src={sortIcon}
-                    alt="Sort icon"
-                    className="table__sort-icon"
-                  />
-                </button>
-              </div>
-            </div>
-
-            <div className="table__column table__column--contact">
-              <div className="table__header-cell table__cell--contact">
-                <h2 className="table__header-text">Contact Name</h2>
-                <button className="table__sort-btn">
-                  <img
-                    src={sortIcon}
-                    alt="Sort icon"
-                    className="table__sort-icon"
-                  />
-                </button>
-              </div>
-
-              <div className="table__header-cell table__cell--contact-info">
-                <h2 className="table__header-text">Contact Information</h2>
-                <button className="table__sort-btn">
-                  <img
-                    src={sortIcon}
-                    alt="Sort icon"
-                    className="table__sort-icon"
-                  />
-                </button>
-              </div>
-            </div>
-
-            <div className="table__actions">
-              <h2 className="table__header-text">Actions</h2>
-            </div>
-          </div> */}
-        {/* <ul className="table__body">
+        <ul className="table__body">
             {inventories.map((inventory) => (
-              <InventoryItem key={inventory.id} />
+              <InventoryItem key={inventory.id} item={inventory} />
             ))}
-          </ul> */}
-        {/* </div> */}
+          </ul>
       </section>
     </main>
   );
