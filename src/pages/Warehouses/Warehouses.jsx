@@ -22,30 +22,28 @@ function Warehouses() {
     getWarehouses();
   }, []);
 
-  if (!warehouses) return <div>Loading warehouses...</div>
+  if (!warehouses) return <div>Loading warehouses...</div>;
 
   return (
     <main className="container">
-      <section className="panel">
-        <div className="panel__header">
-          <h1 className="panel__title">Warehouses</h1>
+      <section className="warehouses">
+        <div className="warehouses__header">
+          <h1 className="warehouses__title">Warehouses</h1>
           <input
-            className="form__input panel__search"
+            className="warehouses__search"
             type="text"
             id="name"
             name="name"
             placeholder="Search..."
           />
-          <button className="button button-primary panel__button">
-            + Add New Warehouse
-          </button>
+          <button className="button button-primary">+ Add New Warehouse</button>
         </div>
 
-        <div className="panel__body">
-          <div className="table__row table__header-row">
-            <div className="table__column">
-              <div className="table__content-group table__header-group">
-                <h2 className="table__header">Warehouse</h2>
+        <div className="warehouses__body">
+          <div className="table__header">
+            <div className="table__column table__column--warehouse">
+              <div className="table__header-cell table__cell--name">
+                <h2 className="table__header-text">Warehouse</h2>
                 <button className="table__sort-btn">
                   <img
                     src={sortIcon}
@@ -54,30 +52,9 @@ function Warehouses() {
                   />
                 </button>
               </div>
-              <div className="table__content-group table__header-group table__address">
-                <h2 className="table__header">Address</h2>
-                <button className="table__sort-btn">
-                  <img
-                    src={sortIcon}
-                    alt="Sort icon"
-                    className="table__sort-icon"
-                  />
-                </button>
-              </div>
-            </div>
-            <div className="table__column">
-              <div className="table__content-group table__header-group">
-                <h2 className="table__header">Contact Name</h2>
-                <button className="table__sort-btn">
-                  <img
-                    src={sortIcon}
-                    alt="Sort icon"
-                    className="table__sort-icon"
-                  />
-                </button>
-              </div>
-              <div className="table__content-group table__header-group table__contact-info">
-                <h2 className="table__header">Contact Information</h2>
+
+              <div className="table__header-cell table__cell--address">
+                <h2 className="table__header-text">Address</h2>
                 <button className="table__sort-btn">
                   <img
                     src={sortIcon}
@@ -87,15 +64,41 @@ function Warehouses() {
                 </button>
               </div>
             </div>
+
+            <div className="table__column table__column--contact">
+              <div className="table__header-cell table__cell--contact">
+                <h2 className="table__header-text">Contact Name</h2>
+                <button className="table__sort-btn">
+                  <img
+                    src={sortIcon}
+                    alt="Sort icon"
+                    className="table__sort-icon"
+                  />
+                </button>
+              </div>
+
+              <div className="table__header-cell table__cell--contact-info">
+                <h2 className="table__header-text">Contact Information</h2>
+                <button className="table__sort-btn">
+                  <img
+                    src={sortIcon}
+                    alt="Sort icon"
+                    className="table__sort-icon"
+                  />
+                </button>
+              </div>
+            </div>
+
             <div className="table__actions">
-              <h2 className="table__header">Actions</h2>
+              <h2 className="table__header-text">Actions</h2>
             </div>
           </div>
 
-          {warehouses.map(warehouse => (
-            <WarehouseList key={warehouse.id} warehouse={warehouse} />
-          ))}
-
+          <ul className="table__body">
+            {warehouses.map((warehouse) => (
+              <WarehouseList key={warehouse.id} warehouse={warehouse} />
+            ))}
+          </ul>
         </div>
       </section>
     </main>

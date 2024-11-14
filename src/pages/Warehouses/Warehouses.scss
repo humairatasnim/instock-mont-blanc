@@ -2,7 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/global";
 
-.panel {
+.warehouses {
   background-color: $white;
   border-radius: 3px;
   box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
@@ -15,9 +15,8 @@
     border-bottom: 1px solid $cloud;
 
     @include tablet {
-      padding-left: 2rem;
-      padding-right: 2rem;
       flex-direction: row;
+      padding: 2rem 2rem 1.5rem;
       border: 0;
     }
 
@@ -31,126 +30,43 @@
       flex: 1;
     }
   }
+
+  &__search {
+    @extend .form__input;
+  }
 }
 
 .table {
-  &__row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem 1.5rem 1.5rem;
-    border-bottom: 1px solid $cloud;
-
-    &:last-child {
-      border: 0;
-    }
-
-    @include tablet {
-      padding: 1rem 2rem;
-      gap: 1.5rem;
-    }
-
-    @include desktop {
-      padding: 1rem 2.5rem;
-    }
-  }
-
-  &__column {
-    flex: 1 1 46%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    @include tablet {
-      flex: 1 1 30%;
-      flex-direction: row;
-      gap: 1.5rem;
-    }
-  }
-
-  &__actions {
-    flex: 1 1 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    @include tablet {
-      flex: 0 0 10%;
-      gap: 1rem;
-      justify-content: flex-end;
-    }
-  }
-
-  &__content-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.25rem;
-
-    @include tablet {
-      flex: 1;
-    }
-  }
-
-  &__address {
-    @include desktop {
-      flex: 1.5;
-    }
-  }
-
-  &__contact-info {
-    @include tablet {
-      flex: 1.5;
-    }
-
-    @include desktop {
-      flex: 1;
-    }
-  }
-
-  &__header,
-  &__header--mobile {
-    @extend .table-header;
-    color: $slate;
-  }
-
-  &__header--mobile {
-    @include tablet {
-      display: none;
-    }
-  }
-
-  &__body {
-    @extend .body-medium;
-  }
-
-  &__delete-btn,
-  &__edit-btn {
-    border: none;
-    background: none;
-    height: 1.5rem;
-    cursor: pointer;
-  }
-
-  &__header-row {
+  &__header {
     display: none;
 
     @include tablet {
       display: flex;
       background-color: $light-grey;
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      border: 0;
+      padding: 0.75rem 2rem;
+      gap: 1rem;
+    }
+
+    @include desktop {
+      padding: 0.75rem 2.5rem;
+      gap: 2.5rem;
     }
   }
 
-  &__header-group {
+  &__header-cell {
     display: flex;
     flex-direction: row;
     gap: 0.25rem;
     align-items: center;
-    justify-content: flex-start;
+
+    @include tablet {
+      flex: 0.5;
+    }
+  }
+
+  &__header-text {
+    @extend .table-header;
+    color: $slate;
   }
 
   &__sort-btn {
@@ -163,5 +79,35 @@
   &__sort-icon {
     width: 1rem;
     height: 1rem;
+  }
+
+  &__column--warehouse {
+    @include tablet {
+      width: 40%;
+    }
+    @include desktop {
+      width: 44%;
+    }
+  }
+
+  &__column--contact {
+    @include tablet {
+      width: 44%;
+    }
+    @include desktop {
+      width: 40%;
+    }
+  }
+
+  &__cell--address {
+    @include desktop {
+      flex: 0.75;
+    }
+  }
+
+  &__cell--contact-info {
+    @include tablet {
+      flex: 0.65;
+    }
   }
 }
