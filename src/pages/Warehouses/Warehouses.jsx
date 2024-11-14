@@ -1,11 +1,29 @@
-import { NavLink } from "react-router-dom";
-import chevronIcon from "../../assets/icons/chevron_right-24px.svg";
-import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
-import editIcon from "../../assets/icons/edit-24px.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import sortIcon from "../../assets/icons/sort-24px.svg";
+import WarehouseList from "../../components/WarehouseList/WarehouseList";
 import "./Warehouses.scss";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 function Warehouses() {
+  const [warehouses, setWarehouses] = useState(null);
+
+  const getWarehouses = async () => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/warehouses`);
+      setWarehouses(data);
+    } catch (error) {
+      console.error("Error fetching warehouses:", error);
+    }
+  };
+
+  useEffect(() => {
+    getWarehouses();
+  }, []);
+
+  if (!warehouses) return <div>Loading warehouses...</div>
+
   return (
     <main className="container">
       <section className="panel">
@@ -44,7 +62,7 @@ function Warehouses() {
                     alt="Sort icon"
                     className="table__sort-icon"
                   />
-                </button>{" "}
+                </button>
               </div>
             </div>
             <div className="table__column">
@@ -56,7 +74,7 @@ function Warehouses() {
                     alt="Sort icon"
                     className="table__sort-icon"
                   />
-                </button>{" "}
+                </button>
               </div>
               <div className="table__content-group table__header-group table__contact-info">
                 <h2 className="table__header">Contact Information</h2>
@@ -66,7 +84,7 @@ function Warehouses() {
                     alt="Sort icon"
                     className="table__sort-icon"
                   />
-                </button>{" "}
+                </button>
               </div>
             </div>
             <div className="table__actions">
@@ -74,47 +92,10 @@ function Warehouses() {
             </div>
           </div>
 
-          <div className="table__row">
-            <div className="table__column">
-              <div className="table__content-group">
-                <h2 className="table__header--mobile">Warehouse</h2>
-                <NavLink to="" className="link table__body">
-                  <span className="link__text">Manhattan</span>
-                  <img
-                    src={chevronIcon}
-                    alt="Chevron icon"
-                    className="link__icon"
-                  />
-                </NavLink>
-              </div>
-              <div className="table__content-group table__address">
-                <h2 className="table__header--mobile">Address</h2>
-                <div className="table__body">503 Broadway, New York, USA</div>
-              </div>
-            </div>
-            <div className="table__column">
-              <div className="table__content-group">
-                <h2 className="table__header--mobile">Contact Name</h2>
-                <div className="table__body">Parmin Aujla</div>
-              </div>
-              <div className="table__content-group table__contact-info">
-                <h2 className="table__header--mobile">Contact Information</h2>
-                <div className="table__body">
-                  +1 (629) 555-0129
-                  <br />
-                  paujla@instock.com
-                </div>
-              </div>
-            </div>
-            <div className="table__actions">
-              <button className="table__delete-btn">
-                <img src={deleteIcon} className="icon" />
-              </button>
-              <button className="table__edit-btn">
-                <img src={editIcon} className="icon" />
-              </button>
-            </div>
-          </div>
+          {warehouses.map(warehouse => (
+            <WarehouseList key={warehouse.id} warehouse={warehouse} />
+          ))}
+
         </div>
       </section>
     </main>
