@@ -19,6 +19,11 @@ function WarehouseList({ warehouse, deleteHandler }) {
     contact_email
   } = warehouse;
 
+  const handleDelete = () => {
+    alert("show Delete modal");
+    navigate("/");
+  };
+
   const handleEdit = () => {
     navigate(`/warehouses/${id}/edit`);
   };
@@ -67,7 +72,14 @@ function WarehouseList({ warehouse, deleteHandler }) {
       </div>
 
       <div className="table__actions">
-        <button type="button" onClick={handleDelete} className="table__delete-btn">
+
+        <button type="button" onClick={() => deleteHandler(warehouse)} className="table__delete-btn">
+        <button
+          type="button"
+          onClick={handleDelete}
+          className="table__delete-btn"
+        >
+
           <img src={deleteIcon} alt="Delete icon" className="icon" />
         </button>
         <button type="button" onClick={() => deleteHandler(warehouse)} className="table__edit-btn">
