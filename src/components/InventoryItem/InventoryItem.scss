@@ -1,0 +1,79 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.inventory {
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $cloud;
+
+  @include tablet {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+
+  @include desktop {
+    padding: 1rem 2.5rem;
+  }
+
+  &__column {
+    width: 50%;
+    padding-bottom: 1rem;
+
+    @include tablet {
+      padding: 0;
+      width: 25%;
+    }
+  }
+  
+  &__mobile-box {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include tablet {
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+  }
+
+  &__subtitle {
+    font-size: 0.6875rem;
+    color: $slate;
+    font-weight: 600;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__name{
+    background-color: none;
+    border: none;
+    display: flex;
+  }
+
+  &__status {
+    @include tablet {
+      order: 2;
+      width: 30%;
+    }
+  }
+
+  &__quantity {
+    @include tablet {
+      order: 3;
+      width: 30%;
+    }
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: space-between;
+
+    @include tablet {
+      gap: 1rem;
+    }
+  }
+}

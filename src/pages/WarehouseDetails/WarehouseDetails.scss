@@ -1,0 +1,153 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.warehouse {
+  background-color: $white;
+  border-radius: 3px;
+  box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
+
+  &__header {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem 1.5rem 1.5rem;
+    justify-content: space-between;
+    border-bottom: 1px solid $cloud;
+
+    @include tablet {
+      flex-direction: row;
+      padding: 2rem 2rem 1.5rem;
+    }
+
+    @include desktop {
+      padding: 2rem 2.5rem 1.5rem;
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__edit {
+    width: 2.25rem;
+    height: 2.25rem;
+    background-color: $instock-indigo;
+    border-radius: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+
+    @include tablet {
+      width: 5.0625rem;
+      height: 2.375rem;
+    }
+  }
+
+  &__edit--hidden {
+    display: none;
+    color: $white;
+
+    @include tablet {
+      display: inherit;
+    }
+  }
+
+  &__name {
+    font-size: 1.75rem;
+  }
+
+  &__details {
+    color: $instock-black;
+    padding: 1rem 1.5rem;
+    border-bottom: 0.0625rem solid $cloud;
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+      flex-direction: row;
+      padding: 1.5rem 2rem;
+      border-bottom: none;
+    }
+
+    @include desktop {
+      padding: 1.5rem 2.5rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 0.6875rem;
+    color: $slate;
+    font-weight: 600;
+  }
+
+  &__address {
+    padding-bottom: 2.25rem;
+
+    @include tablet {
+      width: 60%;
+      padding-right: 2rem;
+      padding-bottom: 0;
+    }
+  }
+
+  &__contact {
+    display: flex;
+
+    @include tablet {
+      border-left: 1px solid $cloud;
+      padding-left: 2.5rem;
+      width: 100%;
+    }
+  }
+
+  &__column {
+    width: 50%;
+  }
+}
+
+.table-header {
+  display: none;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  gap: 1rem;
+
+  @include tablet {
+    height: 2.5rem;
+    padding: 0 2rem;
+    background-color: $light-grey;
+    color: $slate;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include desktop {
+      padding: 0 2.5rem;
+    }
+
+    &__box {
+      display: flex;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    &__title {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      width: 25%;
+    }
+
+    &__status {
+      order: 2;
+      width: 30%;
+    }
+
+    &__quantity {
+      width: 30%;
+      order: 3;
+    }
+  }
+}

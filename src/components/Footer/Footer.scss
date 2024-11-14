@@ -1,6 +1,9 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
+.footer {
+  padding: 2.5rem;
+}
 
 .body-small {
     color: $slate;
