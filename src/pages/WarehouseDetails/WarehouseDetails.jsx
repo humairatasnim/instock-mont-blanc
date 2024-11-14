@@ -1,11 +1,16 @@
 import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./WarehouseDetails.scss";
 import arrowBack from "/src/assets/icons/arrow_back-24px.svg";
 import InventoryItem from "../../components/InventoryItem/InventoryItem";
 import editWhite from "/src/assets/icons/edit-white-24px.svg";
 import sortIcon from "/src/assets/icons/sort-24px.svg";
 
-function WarehouseDetails({ inventories }) {
+function WarehouseDetails({ warehouses }) {
+  const { id } = useParams();
+
+  const warehouse = warehouses[id];
+
   return (
     <>
       <main className="container">
@@ -21,7 +26,7 @@ function WarehouseDetails({ inventories }) {
                 ></img>
               </NavLink>
               {/* NEED TO REMOVE built-in style */}
-              <h2 className="warehouse__name">Washington</h2>
+              <h2 className="warehouse__name">{warehouse.warehouse_name}</h2>
             </div>
             <NavLink to="/warehouses/:id/edit" className="warehouse__edit link">
               <img className="link__icon" src={editWhite}></img>
@@ -32,24 +37,21 @@ function WarehouseDetails({ inventories }) {
           <div className="warehouse__details">
             <div className="warehouse__address">
               <p className="warehouse__subtitle">WAREHOUSE ADDRESS:</p>
+              <p className="body-medium">{warehouse.address}</p>
               <p className="body-medium">
-                Street Address<br></br>Street Address
+                {`${warehouse.city}, ${warehouse.country}`}
               </p>
-              {/*JS TO GET DATA */}
             </div>
             <div className="warehouse__contact">
               <div className="warehouse__column">
                 <p className="warehouse__subtitle">CONTACT NAME:</p>
-                <p className="body-medium">Contact Name</p>
-                {/*JS TO GET DATA */}
-                <p className="body-medium">position</p>
-                {/*JS TO GET DATA */}
+                <p className="body-medium">{warehouse.contact_name}</p>
+                <p className="body-medium">{warehouse.contact_position}</p>
               </div>
               <div className="warehouse__column">
                 <p className="warehouse__subtitle">CONTACT INFORMATION:</p>
-                <p className="body-medium">Phone Mumber</p>
-                {/*JS TO GET DATA */}
-                <p className="body-medium">email</p> {/*JS TO GET DATA */}
+                <p className="body-medium">{warehouse.contact_phone}</p>
+                <p className="body-medium">{warehouse.contact_email}</p>
               </div>
             </div>
           </div>
@@ -97,7 +99,7 @@ function WarehouseDetails({ inventories }) {
           <div className="invetory-list"></div>
           {/* <ul> */}
           {/* <li> */}
-          <InventoryItem />
+          <InventoryItem warehouse={warehouse} />
           <InventoryItem />
           {/* </li> */}
           {/* {inventory.map((item) => {return (

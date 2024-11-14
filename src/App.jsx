@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Warehouses from "./pages/Warehouses/Warehouses";
@@ -11,14 +13,28 @@ import AddInventoryItem from "./pages/AddInventoryItem/AddInventoryItem";
 import EditInventoryItem from "./pages/EditInventoryItem/EditInventoryItem";
 import UILibrary from "./pages/UILibrary/UILibrary";
 import "./App.scss";
-import { useState } from "react";
+
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function App() {
+  const [warehouses, setWarehouses] = useState([]);
 
+  const getWarehouse = async () => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/warehouses`);
+      setWarehouses(data);
+    } catch (error) {
+      console.log("Error getting warehouse list");
+    }
+  }
 
+  useEffect(() => {
+    getWarehouse();
+  }, []);
 
-
-
+  if (!warehouses) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <BrowserRouter>
@@ -29,7 +45,10 @@ function App() {
 
         {/* Warehouse routes */}
         <Route path="/warehouses" element={<Warehouses />} />
-        <Route path="/warehouses/:id" element={<WarehouseDetails />} />
+        <Route
+          path="/warehouses/:id"
+          element={<WarehouseDetails warehouses={warehouses} />}
+        />
         <Route path="/warehouses/add" element={<AddWarehouse />} />
         <Route path="/warehouses/:id/edit" element={<EditWarehouse />} />
 
@@ -38,7 +57,7 @@ function App() {
         <Route path="/inventory/:id" element={<InventoryItemDetails />} />
         <Route path="/inventory/add" element={<AddInventoryItem />} />
         <Route path="/inventory/:id/edit" element={<EditInventoryItem />} />
-        
+
         {/* TEMPORARY: UI Library Route */}
         <Route path="/ui" element={<UILibrary />} />
 

@@ -1,10 +1,11 @@
 import "./InventoryItem.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import editIcon from "/src/assets/icons/edit-24px.svg";
 import deleteIcon from "/src/assets/icons/delete_outline-24px.svg";
 import chevronIcon from "/src/assets/icons/chevron_right-24px.svg";
 
 function InventoryItem() {
+
   return (
     <div className="inventory">
       <div className="inventory__mobile-box">
