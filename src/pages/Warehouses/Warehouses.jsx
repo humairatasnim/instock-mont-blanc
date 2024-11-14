@@ -5,8 +5,6 @@ import sortIcon from "../../assets/icons/sort-24px.svg";
 import WarehouseList from "../../components/WarehouseList/WarehouseList";
 import "./Warehouses.scss";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
-
 function Warehouses({ warehouses }) {
 
   return (

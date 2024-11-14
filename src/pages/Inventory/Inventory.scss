@@ -1,0 +1,165 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global";
+
+.inventory {
+  background-color: $white;
+  border-radius: 3px;
+  box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 1.5rem 1.5rem;
+    border-bottom: 1px solid $cloud;
+
+    @include tablet {
+      flex-direction: row;
+      padding: 2rem 2rem 1.5rem;
+      border: 0;
+    }
+
+    @include desktop {
+      padding: 2rem 2.5rem 1.5rem;
+    }
+  }
+
+  &__title {
+    @extend .page-header;
+    @include tablet {
+      flex: 1;
+    }
+  }
+
+  &__search {
+    @extend .form__input;
+    background-image: url("/src/assets/icons/search-24px.svg");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.5rem 1.5rem;
+  }
+}
+
+.table-header {
+  display: none;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  gap: 1rem;
+
+  @include tablet {
+    height: 2.5rem;
+    padding: 0 2rem;
+    background-color: $light-grey;
+    color: $slate;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include desktop {
+      padding: 0 2.5rem;
+    }
+
+    &__box {
+      display: flex;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    &__title {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      width: 25%;
+    }
+
+    &__status {
+      order: 2;
+      width: 30%;
+    }
+
+    &__quantity {
+      width: 30%;
+      order: 3;
+    }
+  }
+}
+
+// .table {
+//   &__header {
+//     display: none;
+
+//     @include tablet {
+//       display: flex;
+//       background-color: $light-grey;
+//       padding: 0.75rem 2rem;
+//       gap: 1rem;
+//     }
+
+//     @include desktop {
+//       padding: 0.75rem 2.5rem;
+//       gap: 2.5rem;
+//     }
+//   }
+
+//   &__header-cell {
+//     display: flex;
+//     flex-direction: row;
+//     gap: 0.25rem;
+//     align-items: center;
+
+//     @include tablet {
+//       flex: 0.5;
+//     }
+//   }
+
+//   &__header-text {
+//     @extend .table-header;
+//     color: $slate;
+//   }
+
+//   &__sort-btn {
+//     border: none;
+//     background: none;
+//     cursor: pointer;
+//     height: 1rem;
+//   }
+
+//   &__sort-icon {
+//     width: 1rem;
+//     height: 1rem;
+//   }
+
+//   &__column--warehouse {
+//     @include tablet {
+//       width: 40%;
+//     }
+//     @include desktop {
+//       width: 44%;
+//     }
+//   }
+
+//   &__column--contact {
+//     @include tablet {
+//       width: 44%;
+//     }
+//     @include desktop {
+//       width: 40%;
+//     }
+//   }
+
+//   &__cell--address {
+//     @include desktop {
+//       flex: 0.75;
+//     }
+//   }
+
+//   &__cell--contact-info {
+//     @include tablet {
+//       flex: 0.65;
+//     }
+//   }
+// }
