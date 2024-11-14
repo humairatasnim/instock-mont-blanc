@@ -18,8 +18,6 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [warehouses, setWarehouses] = useState(null);
-  // const [inventories, setInventorie] = useState([]);
-
 
   const getWarehouses = async () => {
     try {
@@ -30,26 +28,11 @@ function App() {
     }
   };
 
-  const getInventories = async () => {
-    try {
-      const { data } = await axios.get(`${BASE_URL}/api/inventories`);
-      setInventories(data);
-    } catch (error) {
-      console.error("Error fetching inventories:", error);
-    }
-  };
-
   useEffect(() => {
     getWarehouses();
   }, []);
 
   if (!warehouses) return <div>Loading warehouses...</div>;
-
-  // useEffect(() => {
-  //   getInventories();
-  // }, []);
-
-  // if (!inventories) return <div>Loading inventories...</div>;
 
   return (
     <BrowserRouter>
