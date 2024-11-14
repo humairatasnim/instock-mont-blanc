@@ -3,11 +3,13 @@
 
 
 .form-container {
-
+    padding: 16px;
+    
     @include tablet {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
     }
 }
 

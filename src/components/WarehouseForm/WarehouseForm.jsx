@@ -118,7 +118,8 @@ function WarehouseForm( {action, warehouses} ) {
     };
 
     return (
-      <section className="container">
+    //   <section className="container">
+    <>
 
         <div className="form-container">
             <fieldset className="form__field">
@@ -224,8 +225,8 @@ function WarehouseForm( {action, warehouses} ) {
             <button className="button button-secondary" onClick={handleCancel} >Cancel</button>
             <button type="submit" onClick={handleSubmit} className="button button-primary">{action}</button>
         </div>
-
-        </section>
+        </>
+        // </section>
     );
   }
   
