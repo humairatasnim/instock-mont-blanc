@@ -3,10 +3,6 @@
 @use "../../styles/partials/global";
 
 .warehouses {
-  background-color: $white;
-  border-radius: 3px;
-  box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
-
   &__header {
     display: flex;
     flex-direction: column;
