@@ -1,0 +1,19 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.footer {
+  padding: 2.5rem;
+}
+
+.body-small {
+    color: $slate;
+    text-align: center;
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    font-weight: $regular;
+  
+    @include tablet {
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+    }
+  }
