@@ -37,7 +37,6 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Modal trigger={true} warehouse_name={'Washington'}/>
       <Routes>
         {/* Homepage - Warehouses list */}
         <Route path="/" element={<Warehouses />} />

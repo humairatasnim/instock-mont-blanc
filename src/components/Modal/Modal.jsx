@@ -2,7 +2,7 @@ import "./Modal.scss";
 import closeButton from "/src/assets/icons/close-24px.svg";
 import { useEffect, useRef } from "react";
 
-const Modal = ({ openModal, setOpenModal }) => {
+const Modal = ({ openModal, setOpenModal, name }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -21,10 +21,10 @@ const Modal = ({ openModal, setOpenModal }) => {
       <div className="modal__content">
         <div className="modal__details">
           <h1 className="modal__heading page-header">
-            Delete {"Washington"} warehouse?
+            Delete {name} warehouse?
           </h1>
           <p className="modal__description">
-            Please confirm that you’d like to delete the Washington from the
+            Please confirm that you’d like to delete the {name} from the
             list of warehouses. You won’t be able to undo this action.
           </p>
         </div>

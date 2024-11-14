@@ -4,13 +4,8 @@ import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import "./WarehouseList.scss";
 
-function WarehouseList({ warehouse }) {
+function WarehouseList({ warehouse, deleteHandler }) {
   const navigate = useNavigate();
-
-  const handleDelete = () => {
-    alert("show Delete modal");
-    navigate("/");
-  };
 
   const handleEdit = () => {
     navigate(`/warehouses/${warehouse.id}/edit`);
@@ -56,7 +51,7 @@ function WarehouseList({ warehouse }) {
       </div>
 
       <div className="table__actions">
-        <button type="button" onClick={handleDelete} className="table__delete-btn">
+        <button type="button" onClick={() => deleteHandler(warehouse)} className="table__delete-btn">
           <img src={deleteIcon} alt="Delete icon" className="icon" />
         </button>
         <button type="button" onClick={handleEdit} className="table__edit-btn">

@@ -3,14 +3,23 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 import WarehouseList from "../../components/WarehouseList/WarehouseList";
+import Modal from "../../components/Modal/Modal";
 import "./Warehouses.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function Warehouses({ warehouses }) {
 
+  const [warehouseToDelete, setWarehouseToDelete] = useState(null)
+
+  function deleteWarehouseHandler(warehouse) {
+    console.log(warehouse)
+    setWarehouseToDelete(warehouse)
+  }
+
   return (
     <main className="container">
+      <Modal openModal={warehouseToDelete} name={warehouseToDelete?.warehouse_name}/>
       <section className="panel warehouses">
         <div className="warehouses__header">
           <h1 className="warehouses__title">Warehouses</h1>
@@ -83,7 +92,7 @@ function Warehouses({ warehouses }) {
 
           <ul className="table__body">
             {warehouses.map((warehouse) => (
-              <WarehouseList key={warehouse.id} warehouse={warehouse} />
+              <WarehouseList key={warehouse.id} warehouse={warehouse} deleteHandler={deleteWarehouseHandler} />
             ))}
           </ul>
         </div>
