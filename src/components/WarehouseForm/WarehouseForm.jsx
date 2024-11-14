@@ -5,48 +5,44 @@ import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
-function WarehouseForm( {action} ) {
-    // const [id, testValueonly] = useState("2")
-    const [ warehouse, setWarehouse] = useState([0])
-    // id state used only as a test value, this should come as a prop from warehouse details page as well as the below UseState default values 
-
+function WarehouseForm( {action, warehouses} ) {
+    const [ warehouse, setWarehouse] = useState(warehouses[0])
     const navigate = useNavigate();
-
     const { id } = useParams();
-    console.log(id);
 
-    const getWarehouse = async (id) => {
-        try {
-          const { data } = await axios.get(`${baseUrl}/warehouses/${id}/`);
-          setWarehouse(data[0]);
-          console.log(data[0]);
-        } catch (error) {
-          console.error(error);
+    console.log(id)
+
+    console.log(warehouses[id])
+
+
+    useEffect(() => {
+        if (warehouses && id) {
+        const foundWarehouse = warehouses.find((wh) => wh.id === Number(id));
+                if (foundWarehouse) {
+                setWarehouse(foundWarehouse);
+                console.log(foundWarehouse)
+            }
         }
-      };
+    }, [id, warehouses]);
 
-      useEffect(() => {
-        getWarehouse(id);
-      }, []);
+    console.log(warehouse)
     
-      if (!warehouse) {
-        return <>Loading...</>;
-      }
+    if (!warehouse) {
+        return <>Loading...</>; 
+    }
 
-      console.log(warehouse)
-
-      const { address, city, country } = warehouse
+    const { warehouse_name, address, city, country, contact_email, contact_name, contact_phone, contact_position } = warehouse;
 
     //Form Field UseStates
 
-    const [warehouseNameInput, setWarehouseNameInput] = useState("Washington");
+    const [warehouseNameInput, setWarehouseNameInput] = useState(`${warehouse_name}`);
     const [addressInput, setAddressInput] = useState( `${address}`);
-    const [countryInput, setCountryInput] = useState("Washington");
-    const [cityInput, setCityInput] = useState("Washington");
-    const [contactNameInput, setContactNameInput] = useState("33 Pearl Street SW");
-    const [contactPositionInput, setContactPositionInput] = useState("Warehouse Manager");
-    const [contactPhoneInput, setContactPhoneInput] = useState("+1 (646) 123-1234");
-    const [contactEmailInput, setContactEmailInput] = useState("glyon@instock.com");
+    const [countryInput, setCountryInput] = useState(`${country}`);
+    const [cityInput, setCityInput] = useState(`${city}`);
+    const [contactNameInput, setContactNameInput] = useState(`${contact_name}`);
+    const [contactPositionInput, setContactPositionInput] = useState(`${contact_position}`);
+    const [contactPhoneInput, setContactPhoneInput] = useState(`${contact_phone}`);
+    const [contactEmailInput, setContactEmailInput] = useState(`${contact_email}`);
     
     //Form Field HandleChange Events
  
@@ -95,7 +91,7 @@ function WarehouseForm( {action} ) {
 
         const editWarehouse = async () => {
             try {
-                const {data} = await axios.put(`${baseUrl}/warehouses/${id}`, 
+                const {data} = await axios.put(`${baseUrl}/api/warehouses/${id}`, 
                     {warehouse_name: warehouseNameInput,
                         address: addressInput,
                         city: cityInput,
