@@ -12,7 +12,7 @@ function Warehouses() {
 
   const getWarehouses = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}/warehouses`);
+      const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
       setWarehouses(data);
     } catch (error) {
       console.error("Error fetching warehouses:", error);
