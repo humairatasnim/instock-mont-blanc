@@ -26,7 +26,7 @@ function App() {
     } catch (error) {
       console.log("Error getting warehouse list");
     }
-  }
+  };
 
   useEffect(() => {
     getWarehouses();
@@ -35,7 +35,7 @@ function App() {
   if (warehouses.length === 0) {
     return <div>Loading...</div>;
   }
-
+  
   return (
     <BrowserRouter>
       <Header />
@@ -47,7 +47,11 @@ function App() {
         <Route path="/warehouses" element={<Warehouses />} />
         <Route
           path="/warehouses/:id"
-          element={<WarehouseDetails warehouses={warehouses} />}
+          element={
+            <WarehouseDetails
+              warehouses={warehouses}
+            />
+          }
         />
         <Route path="/warehouses/add" element={<AddWarehouse />} />
         <Route path="/warehouses/:id/edit" element={<EditWarehouse />} />

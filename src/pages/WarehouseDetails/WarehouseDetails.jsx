@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import { useState } from "react";
 import "./WarehouseDetails.scss";
 import arrowBack from "/src/assets/icons/arrow_back-24px.svg";
 import InventoryItem from "../../components/InventoryItem/InventoryItem";
@@ -7,9 +7,28 @@ import editWhite from "/src/assets/icons/edit-white-24px.svg";
 import sortIcon from "/src/assets/icons/sort-24px.svg";
 
 function WarehouseDetails({ warehouses }) {
+  const [inventories, setInvetories] = useState([]);
+
   const { id } = useParams();
 
   const warehouse = warehouses[id];
+
+  // const getInventories = async () => {
+  //   try {
+  //     const { data } = await axios.get(`${BASE_URL}/warehouses/${id}/inventories`);
+  //     setInvetories(data);
+  //   } catch (error) {
+  //     console.log("Error getting warehouse list");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getInventories();
+  // }, []);
+
+  // if (inventories.length === 0) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <>
@@ -97,16 +116,16 @@ function WarehouseDetails({ warehouses }) {
           </div>
           {/* WAREHOUSE INVENTORY LIST */}
           <div className="invetory-list"></div>
-          {/* <ul> */}
-          {/* <li> */}
-          <InventoryItem warehouses={warehouses} />
-          <InventoryItem />
-          {/* </li> */}
-          {/* {inventory.map((item) => {return (
-                  <li><InventoryItem/></li>
-                )}
-              )} */}
-          {/* </ul> */}
+          {/* <ul>
+            {inventories.map((item) => {
+              return (
+                <li key={item.id}>
+                  <InventoryItem inventories={inventories} />
+                </li>
+              );
+            })}
+          </ul> */}
+          <InventoryItem/>
         </div>
       </main>
     </>
