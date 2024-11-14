@@ -2,6 +2,10 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
 
+ul {
+  list-style: none;
+}
+
 .inventory {
   padding: 1rem 1.5rem 1.5rem 1.5rem;
   display: flex;
@@ -49,8 +53,6 @@
   }
 
   &__name{
-    background-color: none;
-    border: none;
     display: flex;
   }
 
