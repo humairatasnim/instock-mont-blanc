@@ -26,6 +26,7 @@
   }
 
   &__title {
+    @extend .page-header;
     @include tablet {
       flex: 1;
     }

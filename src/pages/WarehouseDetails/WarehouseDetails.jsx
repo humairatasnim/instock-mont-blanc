@@ -38,7 +38,7 @@ function WarehouseDetails({ warehouses }) {
     <>
       <main className="container">
         <div className="warehouse">
-          {/* WAREHOUSE HEADER */}
+          {/* WAREHOUSE table-header */}
           <div className="warehouse__header">
             <div className="warehouse__title">
               <NavLink to="/warehouses" className="link">
@@ -78,35 +78,35 @@ function WarehouseDetails({ warehouses }) {
               </div>
             </div>
           </div>
-          {/* TABLET/DESKTOP LIST HEADER */}
-          <div className="header">
-            <div className="header__box">
-              <div className="header__item header__title">
-                <span className="header__text">INVENTORY ITEM</span>
+          {/* TABLET/DESKTOP LIST table-header */}
+          <div className="table-header">
+            <div className="table-header__box">
+              <div className="table-header__item table-header__title">
+                <span className="table-header__text">INVENTORY ITEM</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
-              <div className="header__status header__title">
-                <span className="header__text">STATUS</span>
+              <div className="table-header__status table-header__title">
+                <span className="table-header__text">STATUS</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
-              <div className="header__category header__title">
-                <span className="header__text">CATEGORY</span>
+              <div className="table-header__category table-header__title">
+                <span className="table-header__text">CATEGORY</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
-              <div className="header__quantity header__title">
-                <span className="header__text">QUANTITY</span>
+              <div className="table-header__quantity table-header__title">
+                <span className="table-header__text">QUANTITY</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -114,8 +114,8 @@ function WarehouseDetails({ warehouses }) {
                 ></img>
               </div>
             </div>
-            <div className="header__actions">
-              <span className="header__text">ACTIONS</span>
+            <div className="table-header__actions">
+              <span className="table-header__text">ACTIONS</span>
             </div>
           </div>
           {/* WAREHOUSE INVENTORY LIST */}

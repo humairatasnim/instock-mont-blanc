@@ -7,23 +7,7 @@ import "./Warehouses.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-function Warehouses() {
-  const [warehouses, setWarehouses] = useState(null);
-
-  const getWarehouses = async () => {
-    try {
-      const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
-      setWarehouses(data);
-    } catch (error) {
-      console.error("Error fetching warehouses:", error);
-    }
-  };
-
-  useEffect(() => {
-    getWarehouses();
-  }, []);
-
-  if (!warehouses) return <div>Loading warehouses...</div>;
+function Warehouses({ warehouses }) {
 
   return (
     <main className="container">

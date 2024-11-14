@@ -17,14 +17,14 @@ import "./App.scss";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function App() {
-  const [warehouses, setWarehouses] = useState([]);
+  const [warehouses, setWarehouses] = useState(null);
 
   const getWarehouses = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}/warehouses`);
+      const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
       setWarehouses(data);
     } catch (error) {
-      console.log("Error getting warehouse list");
+      console.error("Error fetching warehouses:", error);
     }
   };
 
@@ -32,19 +32,17 @@ function App() {
     getWarehouses();
   }, []);
 
-  if (warehouses.length === 0) {
-    return <div>Loading...</div>;
-  }
+  if (!warehouses) return <div>Loading warehouses...</div>;
   
   return (
     <BrowserRouter>
       <Header />
       <Routes>
         {/* Homepage - Warehouses list */}
-        <Route path="/" element={<Warehouses />} />
+        <Route path="/" element={<Warehouses warehouses={warehouses} />} />
 
         {/* Warehouse routes */}
-        <Route path="/warehouses" element={<Warehouses />} />
+        <Route path="/warehouses" element={<Warehouses warehouses={warehouses} />} />
         <Route
           path="/warehouses/:id"
           element={
