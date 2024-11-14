@@ -1,20 +1,46 @@
 import "./WarehouseForm.scss";
-import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
 function WarehouseForm( {action} ) {
-    const [id, setTestValueOnly] = useState("2")
+    // const [id, testValueonly] = useState("2")
+    const [ warehouse, setWarehouse] = useState([0])
     // id state used only as a test value, this should come as a prop from warehouse details page as well as the below UseState default values 
 
     const navigate = useNavigate();
 
+    const { id } = useParams();
+    console.log(id);
+
+    const getWarehouse = async (id) => {
+        try {
+          const { data } = await axios.get(`${baseUrl}/warehouses/${id}/`);
+          setWarehouse(data[0]);
+          console.log(data[0]);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      useEffect(() => {
+        getWarehouse(id);
+      }, []);
+    
+      if (!warehouse) {
+        return <>Loading...</>;
+      }
+
+      console.log(warehouse)
+
+      const { address, city, country } = warehouse
+
     //Form Field UseStates
 
     const [warehouseNameInput, setWarehouseNameInput] = useState("Washington");
-    const [addressInput, setAddressInput] = useState("Canada");
+    const [addressInput, setAddressInput] = useState( `${address}`);
     const [countryInput, setCountryInput] = useState("Washington");
     const [cityInput, setCityInput] = useState("Washington");
     const [contactNameInput, setContactNameInput] = useState("33 Pearl Street SW");
@@ -48,6 +74,8 @@ function WarehouseForm( {action} ) {
     const handleContactEmailChange = (e) => {
         setContactEmailInput(e.target.value);
     };
+
+    //Form Validation
 
     const isFormValid = () => {
         if (!warehouseNameInput || !addressInput || !countryInput || !cityInput || !contactNameInput || !contactPositionInput || !contactPhoneInput || !contactEmailInput) {
