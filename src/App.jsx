@@ -34,7 +34,7 @@ function App() {
   }, []);
 
   if (!warehouses) return <div>Loading warehouses...</div>;
-  
+
   return (
     <BrowserRouter>
       <Header />
