@@ -7,8 +7,8 @@ import { Link } from "react-router-dom"
 function EditWarehouse({warehouses}) {
   return (
     <div className="container">
-      <section className="panel warehouses">
-      <section className="title-container">
+      <section className="warehouse">
+      <section className="formcontainer__title">
         <Link to="/warehouses">
           <img className="icon" src={backbutton}/>
         </Link>
@@ -17,7 +17,6 @@ function EditWarehouse({warehouses}) {
       
       <WarehouseForm warehouses={warehouses}action={"Save"}/>
       </section>
-
     </div>
   );
 }

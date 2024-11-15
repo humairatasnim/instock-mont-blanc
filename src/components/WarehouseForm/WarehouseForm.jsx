@@ -125,7 +125,7 @@ function WarehouseForm( {action, warehouses} ) {
     return (
     <section>
 
-        <div className="form-container">
+        <div className="formcontainer">
             <fieldset className="form__field">
             <h2 className="subheader">Warehouse Details</h2>
             <label className="form__label" htmlFor="warehouse_name">
