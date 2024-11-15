@@ -6,45 +6,50 @@ import axios from "axios";
 const baseUrl = import.meta.env.VITE_API_URL;
 
 function WarehouseForm( {action, warehouses} ) {
-    const [ warehouse, setWarehouse] = useState(warehouses[0])
+    const [ warehouse, setWarehouse] = useState([])
     const navigate = useNavigate();
     const { id } = useParams();
 
-    console.log(id)
-
-    console.log(warehouses[id])
-
-
     useEffect(() => {
-        if (warehouses && id) {
-        const foundWarehouse = warehouses.find((wh) => wh.id === Number(id));
-                if (foundWarehouse) {
+        if (warehouses.length > 0) {
+            const foundWarehouse = warehouses.find((wh) => wh.id == id);
+            if (foundWarehouse) {
                 setWarehouse(foundWarehouse);
-                console.log(foundWarehouse)
-            }
+                setWarehouseNameInput(foundWarehouse.warehouse_name);
+                setAddressInput(foundWarehouse.address);
+                setCityInput(foundWarehouse.city);
+                setCountryInput(foundWarehouse.country);
+                setContactNameInput(foundWarehouse.contact_name);
+                setContactPositionInput(foundWarehouse.contact_position);
+                setContactPhoneInput(foundWarehouse.contact_phone);
+                setContactEmailInput(foundWarehouse.contact_email);
+             }
         }
-    }, [id, warehouses]);
+    }, []);
 
     console.log(warehouse)
-    
-    if (!warehouse) {
-        return <>Loading...</>; 
-    }
+    // if (!warehouse) {
+    //     return <>Loading...</>; 
+    // }
 
     const { warehouse_name, address, city, country, contact_email, contact_name, contact_phone, contact_position } = warehouse;
 
     //Form Field UseStates
 
-    const [warehouseNameInput, setWarehouseNameInput] = useState(`${warehouse_name}`);
-    const [addressInput, setAddressInput] = useState( `${address}`);
-    const [countryInput, setCountryInput] = useState(`${country}`);
-    const [cityInput, setCityInput] = useState(`${city}`);
-    const [contactNameInput, setContactNameInput] = useState(`${contact_name}`);
-    const [contactPositionInput, setContactPositionInput] = useState(`${contact_position}`);
-    const [contactPhoneInput, setContactPhoneInput] = useState(`${contact_phone}`);
-    const [contactEmailInput, setContactEmailInput] = useState(`${contact_email}`);
+    const [warehouseNameInput, setWarehouseNameInput] = useState("");
+    const [addressInput, setAddressInput] = useState("");
+    const [countryInput, setCountryInput] = useState("");
+    const [cityInput, setCityInput] = useState("");
+    const [contactNameInput, setContactNameInput] = useState("");
+    const [contactPositionInput, setContactPositionInput] = useState("");
+    const [contactPhoneInput, setContactPhoneInput] = useState("");
+    const [contactEmailInput, setContactEmailInput] = useState("");
+
+    console.log(warehouse_name)
+    console.log(warehouseNameInput)
     
     //Form Field HandleChange Events
+
  
     const handleWarehouseChange = (e) => {
         setWarehouseNameInput(e.target.value);
@@ -118,8 +123,7 @@ function WarehouseForm( {action, warehouses} ) {
     };
 
     return (
-    //   <section className="container">
-    <>
+    <section>
 
         <div className="form-container">
             <fieldset className="form__field">
@@ -225,8 +229,7 @@ function WarehouseForm( {action, warehouses} ) {
             <button className="button button-secondary" onClick={handleCancel} >Cancel</button>
             <button type="submit" onClick={handleSubmit} className="button button-primary">{action}</button>
         </div>
-        </>
-        // </section>
+    </section>
     );
   }
   
