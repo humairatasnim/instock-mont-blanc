@@ -14,7 +14,7 @@ function AddWarehouse({warehouses}) {
       <h1 className="page-header">Add Warehouse</h1>
     </section>
     
-    <WarehouseForm warehouses={warehouses} action={"+ Add Warehouse"}/>
+    <WarehouseForm warehouses={warehouses} action={"add"}/>
     </section>
   </div>
   );
