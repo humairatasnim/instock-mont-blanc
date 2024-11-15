@@ -2,16 +2,18 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/global" as *;
 
-.icon {
-  transition: transform 0.2s ease;
-  &:hover {
-    transform: translateX(-0.25rem);
-  }
-}
+
 
 .container {
   gap: 0px;
 }
+
+.icon {
+    transition: transform 0.2s ease;
+    &:hover {
+      transform: translateX(-0.25rem);
+    }
+  }
 
 .formcontainer {
   border-top: 1px solid $cloud;
@@ -21,6 +23,10 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 1.5rem 0;
+  }
+
+  @include desktop {
+    padding: 2rem 1rem; 
   }
   &__title {
     display: flex;
@@ -36,14 +42,30 @@
 
 .form__field {
   padding: 1rem 1.5rem 1.5rem 1.5rem;
+
+  @include tablet {
+    padding: 0 2rem;
+  }
+
+  @include desktop {
+    padding: 0 2.5rem;
+  }
+}
+
+.form__input {
+    margin-bottom: 1rem;
+    &:last-of-type{
+        margin:0;
+    }
+
+    @include tablet {
+    margin-bottom: 1.5rem;
+    }
+
 }
 
 .divider {
   border: 0.5px solid $cloud;
-
-  @include tablet {
-    margin: 0px 1rem;
-  }
 }
 
 .submit-container {
