@@ -12,6 +12,10 @@ ul {
   display: flex;
   flex-direction: column;
 
+  &:last-of-type{
+    border: none;
+  }
+
   @include tablet {
     padding: 1rem 2rem;
     flex-direction: row;
@@ -51,7 +55,6 @@ ul {
       display: none;
     }
   }
-
 
   &__status {
     @include tablet {

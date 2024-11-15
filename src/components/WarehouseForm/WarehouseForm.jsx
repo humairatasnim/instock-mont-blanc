@@ -228,7 +228,7 @@ function WarehouseForm( {action, warehouses} ) {
 
         <div className="submit-container">
             <button className="button button-secondary" onClick={handleCancel} >Cancel</button>
-            <button type="submit" onClick={handleSubmit} className="button button-primary">{action === "edit" ? "Save Changes" : "+ Add Warehouse"}</button>
+            <button type="submit" onClick={handleSubmit} className="button button-primary">{action === "edit" ? "Save" : "+ Add Warehouse"}</button>
         </div>
     </section>
     );
