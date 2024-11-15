@@ -27,11 +27,6 @@ function WarehouseForm( {action, warehouses} ) {
         }
     }, []);
 
-    console.log(warehouse)
-    // if (!warehouse) {
-    //     return <>Loading...</>; 
-    // }
-
     const { warehouse_name, address, city, country, contact_email, contact_name, contact_phone, contact_position } = warehouse;
 
     //Form Field UseStates
@@ -82,8 +77,6 @@ function WarehouseForm( {action, warehouses} ) {
         return true;
     };
 
-    // Add Warehouse Button Function:
-
     const handleSubmit = async (e) =>  {
         e.preventDefault();
         if (!isFormValid()) {
@@ -122,8 +115,7 @@ function WarehouseForm( {action, warehouses} ) {
         }
     }
 
-    
-    
+
 
     // Cancel Button Function:
 
