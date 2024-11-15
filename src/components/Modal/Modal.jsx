@@ -20,9 +20,7 @@ const Modal = ({ warehouse, type, onClose }) => {
 
   return (
     <dialog className="modal" ref={modalRef} onClose={handleClose}>
-      <button onClick={handleClose}>
-        <img src={closeButton} alt="close icon" className="modal__icon icon" />
-      </button>
+        <img src={closeButton} alt="close icon" className="modal__icon icon" onClick={handleClose}/>
       <div className="modal__content">
         <div className="modal__details">
           <h1 className="modal__heading page-header">
