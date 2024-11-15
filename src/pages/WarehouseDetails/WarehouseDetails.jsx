@@ -12,6 +12,8 @@ function WarehouseDetails({ warehouses }) {
   const [inventories, setInventories] = useState([]);
   const { id } = useParams();
 
+  const warehouse = warehouses.find((wh)=>(wh.id == id));
+
   const {
     warehouse_name,
     address,
@@ -21,7 +23,7 @@ function WarehouseDetails({ warehouses }) {
     contact_position,
     contact_phone,
     contact_email,
-  } = warehouses[id - 1] || {};
+  } = warehouse || {};
 
   const getInventories = async () => {
     try {
