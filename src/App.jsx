@@ -57,7 +57,7 @@ function App() {
 
         {/* Inventory routes */}
         <Route path="/inventory" element={<Inventory />} />
-        <Route path="/inventory/:id" element={<InventoryItemDetails />} />
+      <Route path="/inventory/:id" element={<InventoryItemDetails warehouses={warehouses} />} />
         <Route path="/inventory/add" element={<AddInventoryItem />} />
         <Route path="/inventory/:id/edit" element={<EditInventoryItem />} />
 

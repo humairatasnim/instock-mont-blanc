@@ -1,0 +1,12 @@
+.inventory-item{
+    display: grid;
+    grid-template-areas:
+        "inventory-item__header inventory-item__header"
+        "inventory-item__description inventory-item__description"
+        "inventory-item__category"
+        "inventory-item__category"
+       "inventory-item__status"
+     "  inventory-item__warehouse"
+        
+
+}
