@@ -27,11 +27,6 @@ function WarehouseForm( {action, warehouses} ) {
         }
     }, []);
 
-    console.log(warehouse)
-    // if (!warehouse) {
-    //     return <>Loading...</>; 
-    // }
-
     const { warehouse_name, address, city, country, contact_email, contact_name, contact_phone, contact_position } = warehouse;
 
     //Form Field UseStates
@@ -45,9 +40,6 @@ function WarehouseForm( {action, warehouses} ) {
     const [contactPhoneInput, setContactPhoneInput] = useState("");
     const [contactEmailInput, setContactEmailInput] = useState("");
 
-    console.log(warehouse_name)
-    console.log(warehouseNameInput)
-    
     //Form Field HandleChange Events
 
  
@@ -85,36 +77,45 @@ function WarehouseForm( {action, warehouses} ) {
         return true;
     };
 
-    // Save Button Function:
-
-    const handleSubmit = (e) =>  {
+    const handleSubmit = async (e) =>  {
         e.preventDefault();
         if (!isFormValid()) {
             alert("Please ensure all fields are filled out");
         return;
         }
+        const warehouseData = {
+            warehouse_name: warehouseNameInput,
+            address: addressInput,
+            city: cityInput,
+            country: countryInput,
+            contact_name: contactNameInput, 
+            contact_position: contactPositionInput,
+            contact_phone: contactPhoneInput,
+            contact_email: contactEmailInput,
+        };
 
-        const editWarehouse = async () => {
+        if (action === "add") {
             try {
-                const {data} = await axios.put(`${baseUrl}/api/warehouses/${id}`, 
-                    {warehouse_name: warehouseNameInput,
-                        address: addressInput,
-                        city: cityInput,
-                        country: countryInput,
-                        contact_name: contactNameInput, 
-                        contact_position: contactPositionInput,
-                        contact_phone: contactPhoneInput,
-                        contact_email: contactEmailInput,
-                    });
-                alert(`Changes made to Warehouse ${warehouseNameInput}`);
-                navigate(`/warehouses/${id}`);
+                const {data} = await axios.post(`${baseUrl}/api/warehouses/`, warehouseData);
+                alert(`New warehouse ${warehouseNameInput} added`);
+                navigate(`/warehouses/`);
                 console.log(data); 
             } catch (error) {
-                console.error("Error posting to API", error);
+                console.error("Error adding warehouse", error);
                 }
-            };
-            editWarehouse();
+            }
+        else if ( action === "edit") {
+            try {
+                const {data} = await axios.put(`${baseUrl}/api/warehouses/${id}`, warehouseData);
+                alert(`Changes made to Warehouse ${warehouseNameInput}`);
+                navigate(`/warehouses/${id}`);
+            } catch (error) {
+                console.error("Error updating warehouse", error);
+            }
+        }
     }
+
+
 
     // Cancel Button Function:
 
@@ -227,7 +228,7 @@ function WarehouseForm( {action, warehouses} ) {
 
         <div className="submit-container">
             <button className="button button-secondary" onClick={handleCancel} >Cancel</button>
-            <button type="submit" onClick={handleSubmit} className="button button-primary">{action}</button>
+            <button type="submit" onClick={handleSubmit} className="button button-primary">{action === "edit" ? "Save Changes" : "+ Add Warehouse"}</button>
         </div>
     </section>
     );
