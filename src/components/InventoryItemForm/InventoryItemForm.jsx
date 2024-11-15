@@ -11,22 +11,27 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 function InventoryItemForm({ warehouses, item }) {
   
   // Get list of inventory categories for Category dropdown
-  const [categoryList, setCategoryList] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  const getCategoryList = async () => {
+  const getCategories = async () => {
     try {
       const { data } = await axios.get(`${BASE_URL}/api/inventories/categories`);
-      setCategoryList(data);
+      setCategories(data);
     } catch (error) {
       console.error("Error fetching inventory categories:", error);
     }
   };
 
   useEffect(() => {
-    getCategoryList();
+    getCategories();
   }, []);
 
-  if (!categoryList) return <div>Loading...</div>;
+  if (!categories) return <div>Loading categories...</div>;
+
+  const categoryList = categories.map(category => ({
+    label: category,
+    value: category,
+  }));
 
   // Get list of warehouses for Warehouse dropdown
   const warehouseList = warehouses.map(warehouse => ({
@@ -43,16 +48,25 @@ function InventoryItemForm({ warehouses, item }) {
   // State for form fields
   const [itemName, setItemName] = useState(item?.item_name || "");
   const [description, setDescription] = useState(item?.description || "");
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState(item ? { label: item.category, value: item.category } : null);
   const [status, setStatus] = useState(item?.status || "In Stock");
   const [quantity, setQuantity] = useState(item?.quantity || 0);
   const [warehouse, setWarehouse] = useState(item ? warehouseList.find(option => option.value === item.warehouse_id) : null);
-
+  
   const [itemNameError, setItemNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [categoryError, setCategoryError] = useState(false);
   const [quantityError, setQuantityError] = useState(false);
   const [warehouseError, setWarehouseError] = useState(false);
+
+  useEffect(() => {
+    if (item && categoryList.length > 0) {
+      const matchedCategory = categoryList.find(category => category.value === item.category);
+      if (matchedCategory) {
+        setCategory(matchedCategory);
+      }
+    }
+  }, [item, categoryList]);
 
   const handleNameChange = (event) => {
     setItemName(event.target.value);
@@ -170,7 +184,7 @@ function InventoryItemForm({ warehouses, item }) {
             />
             {itemNameError && (
               <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                 <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
@@ -187,7 +201,7 @@ function InventoryItemForm({ warehouses, item }) {
             ></textarea>
             {descriptionError && (
               <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                 <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
@@ -201,12 +215,12 @@ function InventoryItemForm({ warehouses, item }) {
               menuClassName="inventory-form__dropdown--menu"
               options={categoryList}
               placeholder="Please select"
-              value={item?.category}
+              value={category}
               onChange={handleCategorySelect}
             />
             {categoryError && (
               <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                 <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
@@ -259,7 +273,7 @@ function InventoryItemForm({ warehouses, item }) {
               />
               {quantityError && (
                 <div className="inventory-form__error">
-                  <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                  <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                   <span className="inventory-form__error-message">This field is required</span>
                 </div>
               )}
@@ -279,7 +293,7 @@ function InventoryItemForm({ warehouses, item }) {
             />
             {warehouseError && (
               <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                 <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
