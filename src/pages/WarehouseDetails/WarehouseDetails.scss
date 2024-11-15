@@ -108,7 +108,7 @@
   }
 }
 
-.table-header {
+.item-header {
   display: none;
   font-size: 0.75rem;
   line-height: 1.125rem;
@@ -120,6 +120,7 @@
     background-color: $light-grey;
     color: $slate;
     display: flex;
+    flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 
@@ -129,21 +130,14 @@
 
     &__box {
       display: flex;
-      // flex-grow: 1;
-      justify-content: flex-start;
       width: 100%;
     }
-
 
     &__title {
       display: flex;
       align-items: center;
       gap: 0.25rem;
       width: 25%;
-    }
-
-    &__name {
-      width: 20%;
     }
 
     &__item {

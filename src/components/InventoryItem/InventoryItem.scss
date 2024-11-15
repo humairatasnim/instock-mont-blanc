@@ -38,7 +38,7 @@ ul {
 
     @include tablet {
       padding: 0;
-      width: fit-content;
+      width: 25%;
     }
   }
 
@@ -52,10 +52,6 @@ ul {
     }
   }
 
-  &__name{
-    @include tablet {
-    }
-  }
 
   &__status {
     @include tablet {
