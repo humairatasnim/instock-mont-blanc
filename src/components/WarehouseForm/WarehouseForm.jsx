@@ -85,9 +85,40 @@ function WarehouseForm( {action, warehouses} ) {
         return true;
     };
 
+    // Add Warehouse Button Function:
+
+    const handleAddWarehouse = (e) =>  {
+        e.preventDefault();
+        if (!isFormValid()) {
+            alert("Please ensure all fields are filled out");
+        return;
+        }
+
+        const addWarehouse = async () => {
+            try {
+                const {data} = await axios.post(`${baseUrl}/api/warehouses/`, 
+                    {warehouse_name: warehouseNameInput,
+                        address: addressInput,
+                        city: cityInput,
+                        country: countryInput,
+                        contact_name: contactNameInput, 
+                        contact_position: contactPositionInput,
+                        contact_phone: contactPhoneInput,
+                        contact_email: contactEmailInput,
+                    });
+                alert(`New warehouse ${warehouseNameInput} added`);
+                navigate(`/warehouses/`);
+                console.log(data); 
+            } catch (error) {
+                console.error("Error posting to API", error);
+                }
+            };
+            addWarehouse();
+    }
+
     // Save Button Function:
 
-    const handleSubmit = (e) =>  {
+    const handleEditWarehouse = (e) =>  {
         e.preventDefault();
         if (!isFormValid()) {
             alert("Please ensure all fields are filled out");
@@ -227,7 +258,7 @@ function WarehouseForm( {action, warehouses} ) {
 
         <div className="submit-container">
             <button className="button button-secondary" onClick={handleCancel} >Cancel</button>
-            <button type="submit" onClick={handleSubmit} className="button button-primary">{action}</button>
+            <button type="submit" onClick={handleAddWarehouse} className="button button-primary">{action}</button>
         </div>
     </section>
     );
