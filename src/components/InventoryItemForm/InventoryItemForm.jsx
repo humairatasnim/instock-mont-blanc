@@ -39,12 +39,13 @@ function InventoryItemForm({ warehouses }) {
     label: warehouse.warehouse_name,
   }));
 
+  // Handle cancel
   const navigate = useNavigate();
-
   const handleCancel = () => {
     navigate("/inventory");
   };
 
+  // Handle default and error states of form fields
   const [itemName, setItemName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(null);
@@ -87,6 +88,7 @@ function InventoryItemForm({ warehouses }) {
     setWarehouseError(false);
   };
 
+  // Handle form validation
   const validateForm = () => {
     let isValid = true;
 
@@ -118,6 +120,7 @@ function InventoryItemForm({ warehouses }) {
     return isValid;
   };
 
+  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 

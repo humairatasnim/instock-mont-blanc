@@ -3,9 +3,29 @@
 @use "../../styles/partials/global";
 
 .form {
+  display: flex;
+  flex-direction: column;
+
+  @include tablet {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
   &__section {
     padding: 1rem 1.5rem 1.5rem;
     border-bottom: 1px solid $cloud;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include tablet {
+      flex: 1;
+      border: 0;
+      border-right: 1px solid $cloud;
+      padding: 0rem 2rem;
+      margin: 1.5rem 0;
+      gap: 2rem;
+    }
   }
 
   &__section:last-of-type {
@@ -14,13 +34,16 @@
 
   &__heading {
     @extend .subheader;
-    margin-bottom: 1.5rem;
   }
 
   &__fields {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    @include tablet {
+      gap: 1.5rem;
+    }
   }
 
   &__dropdown {
@@ -52,6 +75,12 @@
     gap: 1rem;
     padding: 1rem 1.5rem;
     background: rgba(247, 248, 249, 0.7);
+
+    @include tablet {
+      flex: 1 1 100%;
+      justify-content: flex-end;
+      padding: 1rem 2rem;
+    }
   }
 
   &__error {
