@@ -15,7 +15,7 @@ function EditWarehouse({warehouses}) {
         <h1 className="page-header">Edit Warehouse</h1>
       </section>
       
-      <WarehouseForm warehouses={warehouses}action={"Save"}/>
+      <WarehouseForm warehouses={warehouses} action={"edit"}/>
       </section>
     </div>
   );
