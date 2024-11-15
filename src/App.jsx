@@ -67,7 +67,7 @@ function App() {
         <Route path="/inventory" element={<Inventory inventories={inventories} warehouses={warehouses} />} />
         <Route path="/inventory/:id" element={<InventoryItemDetails warehouses={warehouses} />} />
         <Route path="/inventory/add" element={<AddInventoryItem warehouses={warehouses} />} />
-        <Route path="/inventory/:id/edit" element={<EditInventoryItem />} />
+        <Route path="/inventory/:id/edit" element={<EditInventoryItem warehouses={warehouses} inventories={inventories} />} />
 
         {/* TEMPORARY: UI Library Route */}
         <Route path="/ui" element={<UILibrary />} />
