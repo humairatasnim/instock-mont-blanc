@@ -16,7 +16,7 @@ function Inventory({ inventories, warehouses }) {
             name="name"
             placeholder="Search..."
           />
-          <NavLink to="inventory/add" className="button button-primary">
+          <NavLink to="/inventory/add" className="button button-primary">
             + Add New Item
           </NavLink>
         </div>
