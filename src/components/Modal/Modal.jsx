@@ -2,16 +2,16 @@ import "./Modal.scss";
 import closeButton from "/src/assets/icons/close-24px.svg";
 import { useEffect, useRef } from "react";
 
-const Modal = ({ warehouse, type, onClose }) => {
+const Modal = ({ warehouse, type, onClose, item }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    if (warehouse) {
+    if (warehouse ||item ) {
       modalRef.current?.showModal();
     } else {
       modalRef.current?.close();
     }
-  }, [warehouse]);
+  }, [warehouse, item]);
 
   const handleClose = () => {
     modalRef.current?.close();

@@ -4,7 +4,7 @@ import editIcon from "/src/assets/icons/edit-24px.svg";
 import deleteIcon from "/src/assets/icons/delete_outline-24px.svg";
 import chevronIcon from "/src/assets/icons/chevron_right-24px.svg";
 
-function InventoryList({ item, warehouses }) {
+function InventoryList({ item, warehouses, deleteHandler }) {
 
   const { id, item_name, status, category, quantity, warehouse_id } = item;
 
@@ -52,14 +52,13 @@ function InventoryList({ item, warehouses }) {
         </div>
 
       <div className="item__icons">
-        <NavLink  to="/" className="link" >
-          {/* ADD DELETE MODAL HERE */}
+        <div className="link" onClick={() => deleteHandler(item)}  >
           <img
             className="link__icon"
             src={deleteIcon}
             alt="delete icon to delete inventory item"
           ></img>
-        </NavLink>
+        </div>
         <NavLink to={`/inventory/${id}/edit`} className="link" >
           <img
             className="link__icon"

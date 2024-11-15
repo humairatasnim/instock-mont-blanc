@@ -6,11 +6,19 @@ import arrowBack from "/src/assets/icons/arrow_back-24px.svg";
 import InventoryItem from "../../components/InventoryItem/InventoryItem";
 import editWhite from "/src/assets/icons/edit-white-24px.svg";
 import sortIcon from "/src/assets/icons/sort-24px.svg";
+import Modal from "../../components/Modal/Modal";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function WarehouseDetails({ warehouses }) {
   const [inventories, setInventories] = useState([]);
   const { id } = useParams();
+
+  const [itemToDelete, setItemToDelete] = useState(null);
+
+  function deleteItemHandler(item) {
+    setItemToDelete(item);
+  }
+
 
   const {
     warehouse_name,
@@ -44,6 +52,11 @@ function WarehouseDetails({ warehouses }) {
   return (
     <>
       <main className="container">
+      <Modal
+        item={itemToDelete}
+        type={'item'}
+        onClose={() => setItemToDelete(null)}
+      />
         <div className="warehouse">
           {/* WAREHOUSE table-header */}
           <div className="warehouse__header">
@@ -128,7 +141,7 @@ function WarehouseDetails({ warehouses }) {
             {inventories.length > 0 &&
               inventories.map((item) => (
                 <li key={item.id}>
-                  <InventoryItem item={item} />
+                  <InventoryItem item={item} deleteHandler={deleteItemHandler} />
                 </li>
               ))}
           </ul>
