@@ -1,10 +1,23 @@
+import WarehouseForm from "../../components/WarehouseForm/WarehouseForm";
 import "./EditWarehouse.scss";
+import backbutton from "../../assets/icons/arrow_back-24px.svg"
+import { Link } from "react-router-dom"
 
-function EditWarehouse() {
+
+function EditWarehouse({warehouses}) {
   return (
-    <>
-      <h1>Edit Warehouse</h1>
-    </>
+    <div className="container">
+      <section className="warehouse">
+      <section className="formcontainer__title">
+        <Link to="/warehouses">
+          <img className="icon" src={backbutton}/>
+        </Link>
+        <h1 className="page-header">Edit Warehouse</h1>
+      </section>
+      
+      <WarehouseForm warehouses={warehouses}action={"Save"}/>
+      </section>
+    </div>
   );
 }
 
