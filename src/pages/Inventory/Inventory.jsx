@@ -15,7 +15,7 @@ function Inventory({ inventories: initialInventories, warehouses }) {
 
   //Sort Button Function
 
-  const handleSort = async (sortBy = "item_name") =>  {
+  const handleSort = async (sortBy = "item_name" || "category" || "status" || "warehouse_id") =>  {
     try {
         const { data } = await axios.get(`${BASE_URL}/api/inventories/`, {
           params: { sortBy, order: sortOrder },
@@ -65,39 +65,47 @@ function Inventory({ inventories: initialInventories, warehouses }) {
 
               <div className="table-header__status table-header__title">
                 <span className="table-header__text">Status</span>
+                <button className="table__sort-btn" onClick={() => handleSort()}>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
 
               <div className="table-header__category table-header__title">
                 <span className="table-header__text">Category</span>
+                <button className="table__sort-btn" onClick={() => handleSort()}>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
 
               <div className="table-header__quantity table-header__title">
                 <span className="table-header__text">QTY</span>
+                <button className="table__sort-btn" onClick={() => handleSort()}>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
             </div>
 
               <div className="table-header__warehouse table-header__title">
                 <span className="table-header__text">Warehouse</span>
+                <button className="table__sort-btn" onClick={() => handleSort()}>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
 
             <div className="table-header__actions">
