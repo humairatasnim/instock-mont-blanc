@@ -19,6 +19,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 function App() {
   const [warehouses, setWarehouses] = useState(null);
 
+
   const getWarehouses = async () => {
     try {
       const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
@@ -43,16 +44,9 @@ function App() {
 
         {/* Warehouse routes */}
         <Route path="/warehouses" element={<Warehouses warehouses={warehouses} />} />
-        <Route
-          path="/warehouses/:id"
-          element={
-            <WarehouseDetails
-              warehouses={warehouses}
-            />
-          }
-        />
-        <Route path="/warehouses/add" element={<AddWarehouse />} />
-        <Route path="/warehouses/:id/edit" element={<EditWarehouse />} />
+        <Route path="/warehouses/:id" element={<WarehouseDetails warehouses={warehouses}/>}/>
+        <Route path="/warehouses/add" element={<AddWarehouse warehouses={warehouses}/>} />
+        <Route path="/warehouses/:id/edit" element={<EditWarehouse warehouses={warehouses}/>} />
 
         {/* Inventory routes */}
         <Route path="/inventory" element={<Inventory />} />
