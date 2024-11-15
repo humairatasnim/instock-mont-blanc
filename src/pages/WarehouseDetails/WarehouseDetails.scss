@@ -31,6 +31,14 @@
     gap: 0.5rem;
   }
 
+  &__back-icon{
+    transition: transform 0.2s ease;
+
+    &:hover{
+      transform: translateX(-0.25rem);
+    }
+  }
+
   &__edit {
     width: 2.25rem;
     height: 2.25rem;
@@ -54,11 +62,6 @@
     @include tablet {
       display: inherit;
     }
-  }
-
-  &__name {
-    font-size: 1.75rem;
-    height: 2.5rem;
   }
 
   &__details {

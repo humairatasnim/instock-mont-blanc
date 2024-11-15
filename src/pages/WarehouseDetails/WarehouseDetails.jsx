@@ -50,12 +50,12 @@ function WarehouseDetails({ warehouses }) {
             <div className="warehouse__title">
               <NavLink to="/warehouses" className="link">
                 <img
-                  className="link__icon"
+                  className="warehouse__back-icon"
                   src={arrowBack}
                   alt="arrow to return to /warehouses"
                 ></img>
               </NavLink>
-              <h2 className="warehouse__name">{warehouse_name}</h2>
+              <h1 className="warehouse__name">{warehouse_name}</h1>
             </div>
             <NavLink to={`/warehouses/${id}/edit`} className="warehouse__edit link">
               <img className="link__icon" src={editWhite}></img>
