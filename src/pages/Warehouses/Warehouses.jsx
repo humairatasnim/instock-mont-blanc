@@ -6,8 +6,6 @@ import WarehouseList from "../../components/WarehouseList/WarehouseList";
 import "./Warehouses.scss";
 import Modal from "../../components/Modal/Modal";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
-
 function Warehouses({ warehouses }) {
   const [warehouseToDelete, setWarehouseToDelete] = useState(null);
 
