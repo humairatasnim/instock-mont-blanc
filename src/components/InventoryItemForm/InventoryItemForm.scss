@@ -1,0 +1,153 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global";
+
+.inventory-form {
+  display: flex;
+  flex-direction: column;
+
+  @include tablet {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__section {
+    padding: 1rem 1.5rem 1.5rem;
+    border-bottom: 1px solid $cloud;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include tablet {
+      flex: 1;
+      border: 0;
+      border-right: 1px solid $cloud;
+      padding: 0rem 2rem 0.5rem;
+      margin: 1.5rem 0;
+      gap: 2rem;
+    }
+
+    @include desktop {
+      padding: 0rem 2.5rem 0.5rem;
+    }
+  }
+
+  &__section:last-of-type {
+    border: 0;
+
+    @include tablet {
+      padding-bottom: 0;
+    }
+  }
+
+  &__heading {
+    @extend .subheader;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include tablet {
+      gap: 1.5rem;
+    }
+  }
+
+  &__field {
+    @extend .form__field;
+  }
+
+  &__label {
+    @extend .form__label;
+  }
+
+  &__input {
+    @extend .form__input;
+  }
+
+  &__textarea {
+    @extend .form__textarea;
+  }
+
+  &__radio-group {
+    @extend .form__radio-group;
+  }
+
+  &__radio-item {
+    @extend .form__radio-item;
+  }
+
+  &__radio-label {
+    @extend .form__radio-label;
+  }
+
+  &__radio-input:checked + label {
+    color: $instock-black;
+  }
+
+  &__dropdown {
+    @extend .form__input;
+
+    &--placeholder {
+      @extend .body-medium;
+      color: $slate;
+    }
+
+    &--menu {
+      border-radius: 8px;
+      border: 1px solid $cloud;
+      margin-top: 0.25rem;
+    }
+
+    &--menu .Dropdown-option {
+      @extend .body-medium;
+      color: $slate;
+
+      &:hover {
+        background-color: $light-grey;
+      }
+
+      &.is-selected {
+        background-color: $cloud;
+      }
+    }
+
+    &--placeholder.is-selected {
+      color: $instock-black;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(247, 248, 249, 0.7);
+
+    @include tablet {
+      flex: 1 1 100%;
+      justify-content: flex-end;
+      padding: 1rem 2rem;
+    }
+
+    @include desktop {
+      padding: 1rem 2.5rem;
+    }
+  }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    &-message {
+      @extend .body-small;
+      color: $red;
+    }
+
+    &-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}

@@ -1,19 +1,22 @@
-import "./InventoryItem.scss";
-import { NavLink} from "react-router-dom";
+import "./InventoryList.scss";
+import { NavLink } from "react-router-dom";
 import editIcon from "/src/assets/icons/edit-24px.svg";
 import deleteIcon from "/src/assets/icons/delete_outline-24px.svg";
 import chevronIcon from "/src/assets/icons/chevron_right-24px.svg";
 
-function InventoryItem({ item }) {
+function InventoryList({ item, warehouses }) {
 
-  const {id, item_name, status, category, quantity} = item;
+  const { id, item_name, status, category, quantity, warehouse_id } = item;
+
+  const warehouse = warehouses.find((wh)=>(wh.id === warehouse_id));
 
   return (
     <div className="item">
       <div className="item__mobile-box">
-        <div className="item__column">
+
+        <div className="item__name item__column">
           <p className="item__subtitle">INVENTORY ITEM</p>
-          <NavLink to={`/inventory/${id}`} className="item__name link">
+          <NavLink to={`/inventory/${id}`} className="link">
             <span className="link__text body-medium">{item_name}</span>
             <img
               className="link__icon"
@@ -24,12 +27,9 @@ function InventoryItem({ item }) {
         </div>
 
         <div className="item__status item__column">
+
           <p className="item__subtitle">STATUS</p>
-          <div
-            className={
-              status === "In Stock" ? "tag in-stock" : "tag out-of-stock"
-            }
-          >
+          <div className={status === "In Stock" ? "tag in-stock" : "tag out-of-stock"}>
             {status}
           </div>
         </div>
@@ -38,20 +38,29 @@ function InventoryItem({ item }) {
           <p className="item__subtitle">CATEGORY</p>
           <p className="body-medium">{category}</p>
         </div>
+
         <div className="item__quantity item__column">
           <p className="item__subtitle">QTY</p>
           <p className="body-medium">{quantity}</p>
         </div>
+
       </div>
+
+      <div className="item__warehouse item__column">
+          <p className="item__subtitle">WAREHOUSE</p>
+          <p className="body-medium">{warehouse.warehouse_name}</p>
+        </div>
+
       <div className="item__icons">
-        <NavLink to="/">  {/* ADD DELETE MODAL HERE */}
+        <NavLink  to="/" className="link" >
+          {/* ADD DELETE MODAL HERE */}
           <img
             className="link__icon"
             src={deleteIcon}
             alt="delete icon to delete inventory item"
           ></img>
         </NavLink>
-        <NavLink to={`/inventory/${id}/edit`}>
+        <NavLink to={`/inventory/${id}/edit`} className="link" >
           <img
             className="link__icon"
             src={editIcon}
@@ -59,8 +68,9 @@ function InventoryItem({ item }) {
           ></img>
         </NavLink>
       </div>
+
     </div>
   );
 }
 
-export default InventoryItem;
+export default InventoryList;

@@ -267,7 +267,7 @@ img {
       border: 1px solid $instock-indigo;
     }
 
-    &:error {
+    &.error {
       border: 1px solid $red;
     }
   }
@@ -285,10 +285,10 @@ img {
 
   &__radio-group {
     display: flex;
+    gap: 2.5rem;
   }
 
   &__radio-item {
-    flex: 1;
     display: flex;
     align-items: center;
     gap: 0.5rem;
