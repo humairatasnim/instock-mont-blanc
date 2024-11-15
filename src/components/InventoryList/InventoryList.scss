@@ -16,6 +16,7 @@ ul {
     flex-direction: row;
     justify-content: space-between;
     padding: 1rem 2rem;
+    align-items: center;
   }
 
   @include desktop {
@@ -39,6 +40,7 @@ ul {
     @include tablet {
       flex-wrap: nowrap;
       width: 100%;
+      align-items: center;
     }
   }
 
@@ -54,6 +56,16 @@ ul {
 
   &__name{
     display: flex;
+    flex-direction: column;
+    @include tablet {
+      width: 35%;
+     }
+  }
+
+  &__category{
+   @include tablet {
+    width: 25%;
+   }
   }
 
   &__status {
@@ -66,8 +78,12 @@ ul {
   &__quantity {
     @include tablet {
       order: 3;
-      width: 30%;
+      width: 15%;
     }
+  }
+
+  &__warehouse{
+    align-self: flex-end
   }
 
   &__icons {

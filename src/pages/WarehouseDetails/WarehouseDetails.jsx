@@ -6,11 +6,10 @@ import arrowBack from "/src/assets/icons/arrow_back-24px.svg";
 import InventoryItem from "../../components/InventoryItem/InventoryItem";
 import editWhite from "/src/assets/icons/edit-white-24px.svg";
 import sortIcon from "/src/assets/icons/sort-24px.svg";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function WarehouseDetails({ warehouses }) {
   const [inventories, setInventories] = useState([]);
-  const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_API_URL;
   const { id } = useParams();
 
   const {
