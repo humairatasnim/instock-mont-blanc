@@ -6,20 +6,30 @@ ul {
   list-style: none;
 }
 
-.item {
+.warehouse-item {
   padding: 1rem 1.5rem 1.5rem 1.5rem;
+  border-bottom: 1px solid $cloud;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid $cloud;
 
   @include tablet {
+    padding: 1rem 2rem;
     flex-direction: row;
     justify-content: space-between;
-    padding: 1rem 2rem;
   }
 
   @include desktop {
     padding: 1rem 2.5rem;
+  }
+
+  &__mobile-box {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include tablet {
+      flex-wrap: nowrap;
+      width: 100%;
+    }
   }
 
   &__column {
@@ -29,16 +39,6 @@ ul {
     @include tablet {
       padding: 0;
       width: 25%;
-    }
-  }
-  
-  &__mobile-box {
-    display: flex;
-    flex-wrap: wrap;
-
-    @include tablet {
-      flex-wrap: nowrap;
-      width: 100%;
     }
   }
 
@@ -52,9 +52,6 @@ ul {
     }
   }
 
-  &__name{
-    display: flex;
-  }
 
   &__status {
     @include tablet {
