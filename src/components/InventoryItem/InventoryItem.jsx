@@ -9,11 +9,13 @@ function InventoryItem({ item }) {
   const {id, item_name, status, category, quantity} = item;
 
   return (
-    <div className="inventory">
-      <div className="inventory__mobile-box">
-        <div className="inventory__column">
-          <p className="inventory__subtitle">INVENTORY ITEM</p>
-          <NavLink to={`/inventory/${id}`} className="inventory__name link">
+    <div className="warehouse-item">
+
+      <div className="warehouse-item__mobile-box">
+
+        <div className="warehouse-item__column warehouse-item__name">
+          <p className="warehouse-item__subtitle">INVENTORY ITEM</p>
+          <NavLink to={`/inventory/${id}`} className="link">
             <span className="link__text body-medium">{item_name}</span>
             <img
               className="link__icon"
@@ -23,8 +25,8 @@ function InventoryItem({ item }) {
           </NavLink>
         </div>
 
-        <div className="inventory__status inventory__column">
-          <p className="inventory__subtitle">STATUS</p>
+        <div className="warehouse-item__status warehouse-item__column">
+          <p className="warehouse-item__subtitle">STATUS</p>
           <div
             className={
               status === "In Stock" ? "tag in-stock" : "tag out-of-stock"
@@ -34,16 +36,16 @@ function InventoryItem({ item }) {
           </div>
         </div>
 
-        <div className="inventory__category inventory__column">
-          <p className="inventory__subtitle">CATEGORY</p>
+        <div className="warehouse-item__category warehouse-item__column">
+          <p className="warehouse-item__subtitle">CATEGORY</p>
           <p className="body-medium">{category}</p>
         </div>
-        <div className="inventory__quantity inventory__column">
-          <p className="inventory__subtitle">QTY</p>
+        <div className="warehouse-item__quantity warehouse-item__column">
+          <p className="warehouse-item__subtitle">QTY</p>
           <p className="body-medium">{quantity}</p>
         </div>
       </div>
-      <div className="inventory__icons">
+      <div className="warehouse-item__icons">
         <NavLink to="/">  {/* ADD DELETE MODAL HERE */}
           <img
             className="link__icon"

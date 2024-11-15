@@ -3,6 +3,9 @@
 @use "../../styles/partials/global";
 
 .warehouses {
+  display: flex;
+  flex-direction: column;
+  
   &__header {
     display: flex;
     flex-direction: column;

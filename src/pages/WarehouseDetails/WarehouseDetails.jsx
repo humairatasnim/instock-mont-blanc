@@ -1,4 +1,4 @@
-import { NavLink, useParams, useNavigate } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./WarehouseDetails.scss";
@@ -6,11 +6,10 @@ import arrowBack from "/src/assets/icons/arrow_back-24px.svg";
 import InventoryItem from "../../components/InventoryItem/InventoryItem";
 import editWhite from "/src/assets/icons/edit-white-24px.svg";
 import sortIcon from "/src/assets/icons/sort-24px.svg";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function WarehouseDetails({ warehouses }) {
   const [inventories, setInventories] = useState([]);
-  const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_API_URL;
   const { id } = useParams();
 
   const {
@@ -46,7 +45,7 @@ function WarehouseDetails({ warehouses }) {
     <>
       <main className="container">
         <div className="warehouse">
-          {/* WAREHOUSE table-header */}
+          {/* WAREHOUSE item-header */}
           <div className="warehouse__header">
             <div className="warehouse__title">
               <NavLink to="/warehouses" className="link">
@@ -83,35 +82,35 @@ function WarehouseDetails({ warehouses }) {
               </div>
             </div>
           </div>
-          {/* TABLET/DESKTOP LIST table-header */}
-          <div className="table-header">
-            <div className="table-header__box">
-              <div className="table-header__item table-header__title">
-                <span className="table-header__text">INVENTORY ITEM</span>
+          {/* TABLET/DESKTOP LIST item-header */}
+          <div className="item-header">
+            <div className="item-header__box">
+              <div className="item-header__item item-header__title">
+                <span className="item-header__text">INVENTORY ITEM</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
-              <div className="table-header__status table-header__title">
-                <span className="table-header__text">STATUS</span>
+              <div className="item-header__status item-header__title">
+                <span className="item-header__text">STATUS</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
-              <div className="table-header__category table-header__title">
-                <span className="table-header__text">CATEGORY</span>
+              <div className="item-header__category item-header__title">
+                <span className="item-header__text">CATEGORY</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
-              <div className="table-header__quantity table-header__title">
-                <span className="table-header__text">QUANTITY</span>
+              <div className="item-header__quantity item-header__title">
+                <span className="item-header__text">QUANTITY</span>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -119,8 +118,8 @@ function WarehouseDetails({ warehouses }) {
                 ></img>
               </div>
             </div>
-            <div className="table-header__actions">
-              <span className="table-header__text">ACTIONS</span>
+            <div className="item-header__actions">
+              <span className="item-header__text">ACTIONS</span>
             </div>
           </div>
           {/* WAREHOUSE INVENTORY LIST */}
