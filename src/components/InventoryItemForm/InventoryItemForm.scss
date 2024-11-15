@@ -53,4 +53,20 @@
     padding: 1rem 1.5rem;
     background: rgba(247, 248, 249, 0.7);
   }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    &-message {
+      @extend .body-small;
+      color: $red;
+    }
+
+    &-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 }

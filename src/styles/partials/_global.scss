@@ -266,7 +266,7 @@ img {
       border: 1px solid $instock-indigo;
     }
 
-    &:error {
+    &.error {
       border: 1px solid $red;
     }
   }

@@ -2,21 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Dropdown from "react-dropdown";
+import errorIcon from "/src/assets/icons/error-24px.svg";
 import "react-dropdown/style.css";
 import "./InventoryItemForm.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function InventoryItemForm({ warehouses }) {
-  const navigate = useNavigate();
-
-  const [itemName, setItemName] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState(null);
-  const [status, setStatus] = useState("In Stock");
-  const [quantity, setQuantity] = useState(0);
-  const [warehouse, setWarehouse] = useState(null);
-
   const categoryOptions = [
     { value: "Electronics", label: "Electronics" },
     { value: "Gear", label: "Gear" },
@@ -28,16 +20,38 @@ function InventoryItemForm({ warehouses }) {
     label: warehouse.warehouse_name,
   }));
 
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate("/inventory");
+  };
+
+  const [itemName, setItemName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState(null);
+  const [status, setStatus] = useState("In Stock");
+  const [quantity, setQuantity] = useState(0);
+  const [warehouse, setWarehouse] = useState(null);
+
+  const [itemNameError, setItemNameError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const [categoryError, setCategoryError] = useState(false);
+  const [quantityError, setQuantityError] = useState(false);
+  const [warehouseError, setWarehouseError] = useState(false);
+
   const handleNameChange = (event) => {
     setItemName(event.target.value);
+    setItemNameError(false);
   };
 
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
+    setDescriptionError(false);
   };
 
   const handleCategorySelect = (selectedOption) => {
     setCategory(selectedOption);
+    setCategoryError(false);
   };
 
   const handleStatusChange = (event) => {
@@ -46,43 +60,49 @@ function InventoryItemForm({ warehouses }) {
 
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
+    setQuantityError(false);
   };
 
   const handleWarehouseSelect = (selectedOption) => {
     setWarehouse(selectedOption);
+    setWarehouseError(false);
   };
 
-  const handleCancel = () => {
-    navigate("/inventory");
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!itemName.trim()) {
+      setItemNameError(true);
+      isValid = false;
+    }
+
+    if (!description.trim()) {
+      setDescriptionError(true);
+      isValid = false;
+    }
+
+    if (!category) {
+      setCategoryError(true);
+      isValid = false;
+    }
+
+    if (!warehouse) {
+      setWarehouseError(true);
+      isValid = false;
+    }
+
+    if (status === "In Stock" && (quantity === "" || quantity === 0)) {
+      setQuantityError(true);
+      isValid = false;
+    }
+
+    return isValid;
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!itemName) {
-      alert("Please enter the item name.");
-      return;
-    }
-  
-    if (!description) {
-      alert("Please enter a description.");
-      return;
-    }
-  
-    if (!category) {
-      alert("Please select a category.");
-      return;
-    }
-  
-    if (!warehouse) {
-      alert("Please select a warehouse.");
-      return;
-    }
-  
-    if (!quantity) {
-      alert("Please enter a quantity.");
-      return;
-    }
+    if (!validateForm()) return;
 
     const formData = {
       item_name: itemName,
@@ -95,12 +115,9 @@ function InventoryItemForm({ warehouses }) {
 
     const createInventoryItem = async () => {
       try {
-        const response = await axios.post(
-          `${BASE_URL}/api/inventories`,
-          formData
-        );
-        const inventoryItemId = response.data.id;
-        alert("Inventory item added successfully");
+        const { data } = await axios.post(`${BASE_URL}/api/inventories`, formData);
+        const inventoryItemId = data[0].id;
+        alert("Inventory item added successfully!");
         navigate(`/inventory/${inventoryItemId}`);
       } catch (error) {
         console.error("Error creating inventory item:", error);
@@ -120,13 +137,19 @@ function InventoryItemForm({ warehouses }) {
             </label>
             <input
               id="item_name"
-              className="form__input"
+              className={`form__input ${itemNameError ? "error" : ""}`}
               type="text"
               name="item_name"
               placeholder="Item Name"
               value={itemName}
               onChange={handleNameChange}
             />
+            {itemNameError && (
+              <div className="form__error">
+                <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
+                <span className="form__error-message">This field is required</span>
+              </div>
+            )}
           </fieldset>
           <fieldset className="form__field">
             <label className="form__label" htmlFor="description">
@@ -134,12 +157,18 @@ function InventoryItemForm({ warehouses }) {
             </label>
             <textarea
               id="description"
-              className="form__textarea"
+              className={`form__textarea ${descriptionError ? "error" : ""}`}
               name="description"
               placeholder="Please enter a brief item description..."
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
+            {descriptionError && (
+              <div className="form__error">
+                <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
+                <span className="form__error-message">This field is required</span>
+              </div>
+            )}
           </fieldset>
           <fieldset className="form__field">
             <label className="form__label" htmlFor="category">
@@ -147,7 +176,9 @@ function InventoryItemForm({ warehouses }) {
             </label>
             <Dropdown
               id="category"
-              controlClassName="form__dropdown"
+              controlClassName={`form__dropdown ${
+                categoryError ? "error" : ""
+              }`}
               placeholderClassName="form__dropdown--placeholder"
               menuClassName="form__dropdown--menu"
               options={categoryOptions}
@@ -155,6 +186,12 @@ function InventoryItemForm({ warehouses }) {
               value={category}
               onChange={handleCategorySelect}
             />
+            {categoryError && (
+              <div className="form__error">
+                <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
+                <span className="form__error-message">This field is required</span>
+              </div>
+            )}
           </fieldset>
         </div>
       </section>
@@ -201,13 +238,19 @@ function InventoryItemForm({ warehouses }) {
               </label>
               <input
                 id="quantity"
-                className="form__input"
+                className={`form__input ${quantityError ? "error" : ""}`}
                 type="number"
                 name="quantity"
                 min="0"
                 value={quantity}
                 onChange={handleQuantityChange}
               />
+              {quantityError && (
+                <div className="form__error">
+                  <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
+                  <span className="form__error-message">This field is required</span>
+                </div>
+              )}
             </fieldset>
           )}
           <fieldset className="form__field">
@@ -216,7 +259,9 @@ function InventoryItemForm({ warehouses }) {
             </label>
             <Dropdown
               id="warehouse"
-              controlClassName="form__dropdown"
+              controlClassName={`form__dropdown ${
+                warehouseError ? "error" : ""
+              }`}
               placeholderClassName="form__dropdown--placeholder"
               menuClassName="form__dropdown--menu"
               options={warehouseOptions}
@@ -224,6 +269,12 @@ function InventoryItemForm({ warehouses }) {
               value={warehouse}
               onChange={handleWarehouseSelect}
             />
+            {warehouseError && (
+              <div className="form__error">
+                <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
+                <span className="form__error-message">This field is required</span>
+              </div>
+            )}
           </fieldset>
         </div>
       </section>
