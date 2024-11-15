@@ -19,6 +19,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 function App() {
   const [warehouses, setWarehouses] = useState(null);
 
+
   const getWarehouses = async () => {
     try {
       const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
