@@ -149,17 +149,17 @@ function InventoryItemForm({ warehouses }) {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <section className="form__section">
-        <h2 className="form__heading">Item Details</h2>
-        <div className="form__fields">
-          <fieldset className="form__field">
-            <label className="form__label" htmlFor="item_name">
+    <form className="inventory-form" onSubmit={handleSubmit}>
+      <section className="inventory-form__section">
+        <h2 className="inventory-form__heading">Item Details</h2>
+        <div className="inventory-form__fields">
+          <fieldset className="inventory-form__field">
+            <label className="inventory-form__label" htmlFor="item_name">
               Item Name
             </label>
             <input
               id="item_name"
-              className={`form__input ${itemNameError ? "error" : ""}`}
+              className={`inventory-form__input ${itemNameError ? "error" : ""}`}
               type="text"
               name="item_name"
               placeholder="Item Name"
@@ -167,98 +167,98 @@ function InventoryItemForm({ warehouses }) {
               onChange={handleNameChange}
             />
             {itemNameError && (
-              <div className="form__error">
-                <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
-                <span className="form__error-message">This field is required</span>
+              <div className="inventory-form__error">
+                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
           </fieldset>
-          <fieldset className="form__field">
-            <label className="form__label" htmlFor="description">
+          <fieldset className="inventory-form__field">
+            <label className="inventory-form__label" htmlFor="description">
               Description
             </label>
             <textarea
               id="description"
-              className={`form__textarea ${descriptionError ? "error" : ""}`}
+              className={`inventory-form__textarea ${descriptionError ? "error" : ""}`}
               name="description"
               placeholder="Please enter a brief item description..."
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
             {descriptionError && (
-              <div className="form__error">
-                <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
-                <span className="form__error-message">This field is required</span>
+              <div className="inventory-form__error">
+                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
           </fieldset>
-          <fieldset className="form__field">
-            <label className="form__label" htmlFor="category">
+          <fieldset className="inventory-form__field">
+            <label className="inventory-form__label" htmlFor="category">
               Category
             </label>
             <Dropdown
               id="category"
-              controlClassName={`form__dropdown ${categoryError ? "error" : ""}`}
-              placeholderClassName="form__dropdown--placeholder"
-              menuClassName="form__dropdown--menu"
+              controlClassName={`inventory-form__dropdown ${categoryError ? "error" : ""}`}
+              placeholderClassName="inventory-form__dropdown--placeholder"
+              menuClassName="inventory-form__dropdown--menu"
               options={categoryOptions}
               placeholder="Please select"
               value={category}
               onChange={handleCategorySelect}
             />
             {categoryError && (
-              <div className="form__error">
-                <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
-                <span className="form__error-message">This field is required</span>
+              <div className="inventory-form__error">
+                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
           </fieldset>
         </div>
       </section>
-      <section className="form__section">
-        <h2 className="form__heading">Item Availability</h2>
-        <div className="form__fields">
-          <fieldset className="form__field">
-            <label className="form__label">Status</label>
-            <div className="form__radio-group">
-              <div className="form__radio-item">
+      <section className="inventory-form__section">
+        <h2 className="inventory-form__heading">Item Availability</h2>
+        <div className="inventory-form__fields">
+          <fieldset className="inventory-form__field">
+            <label className="inventory-form__label">Status</label>
+            <div className="inventory-form__radio-group">
+              <div className="inventory-form__radio-item">
                 <input
                   id="in-stock"
-                  className="form__radio-input"
+                  className="inventory-form__radio-input"
                   type="radio"
                   name="status"
                   value="In Stock"
                   checked={status === "In Stock"}
                   onChange={handleStatusChange}
                 />
-                <label className="form__radio-label" htmlFor="in-stock">
+                <label className="inventory-form__radio-label" htmlFor="in-stock">
                   In Stock
                 </label>
               </div>
-              <div className="form__radio-item">
+              <div className="inventory-form__radio-item">
                 <input
                   id="out-of-stock"
-                  className="form__radio-input"
+                  className="inventory-form__radio-input"
                   type="radio"
                   name="status"
                   value="Out of Stock"
                   checked={status === "Out of Stock"}
                   onChange={handleStatusChange}
                 />
-                <label className="form__radio-label" htmlFor="out-of-stock">
+                <label className="inventory-form__radio-label" htmlFor="out-of-stock">
                   Out of Stock
                 </label>
               </div>
             </div>
           </fieldset>
           {status === "In Stock" && (
-            <fieldset className="form__field">
-              <label className="form__label" htmlFor="quantity">
+            <fieldset className="inventory-form__field">
+              <label className="inventory-form__label" htmlFor="quantity">
                 Quantity
               </label>
               <input
                 id="quantity"
-                className={`form__input ${quantityError ? "error" : ""}`}
+                className={`inventory-form__input ${quantityError ? "error" : ""}`}
                 type="number"
                 name="quantity"
                 min="0"
@@ -266,37 +266,37 @@ function InventoryItemForm({ warehouses }) {
                 onChange={handleQuantityChange}
               />
               {quantityError && (
-                <div className="form__error">
-                  <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
-                  <span className="form__error-message">This field is required</span>
+                <div className="inventory-form__error">
+                  <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                  <span className="inventory-form__error-message">This field is required</span>
                 </div>
               )}
             </fieldset>
           )}
-          <fieldset className="form__field">
-            <label className="form__label" htmlFor="warehouse">
+          <fieldset className="inventory-form__field">
+            <label className="inventory-form__label" htmlFor="warehouse">
               Warehouse
             </label>
             <Dropdown
               id="warehouse"
-              controlClassName={`form__dropdown ${warehouseError ? "error" : ""}`}
-              placeholderClassName="form__dropdown--placeholder"
-              menuClassName="form__dropdown--menu"
+              controlClassName={`inventory-form__dropdown ${warehouseError ? "error" : ""}`}
+              placeholderClassName="inventory-form__dropdown--placeholder"
+              menuClassName="inventory-form__dropdown--menu"
               options={warehouseOptions}
               placeholder="Please select"
               value={warehouse}
               onChange={handleWarehouseSelect}
             />
             {warehouseError && (
-              <div className="form__error">
-                <img src={errorIcon} alt="Error Icon" className="form__error-icon" />
-                <span className="form__error-message">This field is required</span>
+              <div className="inventory-form__error">
+                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
           </fieldset>
         </div>
       </section>
-      <div className="form__actions">
+      <div className="inventory-form__actions">
         <button
           type="button"
           className="button button-secondary"

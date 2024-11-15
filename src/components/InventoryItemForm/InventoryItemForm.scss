@@ -2,7 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/global";
 
-.form {
+.inventory-form {
   display: flex;
   flex-direction: column;
 
@@ -54,6 +54,38 @@
     }
   }
 
+  &__field {
+    @extend .form__field;
+  }
+
+  &__label {
+    @extend .form__label;
+  }
+
+  &__input {
+    @extend .form__input;
+  }
+
+  &__textarea {
+    @extend .form__textarea;
+  }
+
+  &__radio-group {
+    @extend .form__radio-group;
+  }
+
+  &__radio-item {
+    @extend .form__radio-item;
+  }
+
+  &__radio-label {
+    @extend .form__radio-label;
+  }
+
+  &__radio-input:checked + label {
+    color: $instock-black;
+  }
+
   &__dropdown {
     @extend .form__input;
 
@@ -72,9 +104,17 @@
       @extend .body-medium;
       color: $slate;
 
+      &:hover {
+        background-color: $light-grey;
+      }
+
       &.is-selected {
         background-color: $cloud;
       }
+    }
+
+    &--placeholder.is-selected {
+      color: $instock-black;
     }
   }
 
