@@ -17,6 +17,7 @@
     @include tablet {
       flex-direction: row;
       padding: 2rem 2rem 1.5rem;
+      height: 6rem;
     }
 
     @include desktop {
@@ -28,6 +29,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  &__back-icon{
+    transition: transform 0.2s ease;
+
+    &:hover{
+      transform: translateX(-0.25rem);
+    }
   }
 
   &__edit {
@@ -53,10 +62,6 @@
     @include tablet {
       display: inherit;
     }
-  }
-
-  &__name {
-    font-size: 1.75rem;
   }
 
   &__details {

@@ -12,6 +12,8 @@ function WarehouseDetails({ warehouses }) {
   const [inventories, setInventories] = useState([]);
   const { id } = useParams();
 
+  const warehouse = warehouses.find((wh)=>(wh.id == id));
+
   const {
     warehouse_name,
     address,
@@ -21,7 +23,7 @@ function WarehouseDetails({ warehouses }) {
     contact_position,
     contact_phone,
     contact_email,
-  } = warehouses[id - 1] || {};
+  } = warehouse || {};
 
   const getInventories = async () => {
     try {
@@ -50,12 +52,12 @@ function WarehouseDetails({ warehouses }) {
             <div className="warehouse__title">
               <NavLink to="/warehouses" className="link">
                 <img
-                  className="link__icon"
+                  className="warehouse__back-icon"
                   src={arrowBack}
                   alt="arrow to return to /warehouses"
                 ></img>
               </NavLink>
-              <h2 className="warehouse__name">{warehouse_name}</h2>
+              <h1 className="warehouse__name">{warehouse_name}</h1>
             </div>
             <NavLink to={`/warehouses/${id}/edit`} className="warehouse__edit link">
               <img className="link__icon" src={editWhite}></img>
@@ -86,7 +88,7 @@ function WarehouseDetails({ warehouses }) {
           <div className="item-header">
             <div className="item-header__box">
               <div className="item-header__item item-header__title">
-                <span className="item-header__text">INVENTORY ITEM</span>
+                <h4>INVENTORY ITEM</h4>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -94,7 +96,7 @@ function WarehouseDetails({ warehouses }) {
                 ></img>
               </div>
               <div className="item-header__status item-header__title">
-                <span className="item-header__text">STATUS</span>
+                <h4>STATUS</h4>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -102,7 +104,7 @@ function WarehouseDetails({ warehouses }) {
                 ></img>
               </div>
               <div className="item-header__category item-header__title">
-                <span className="item-header__text">CATEGORY</span>
+                <h4>CATEGORY</h4>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -110,7 +112,7 @@ function WarehouseDetails({ warehouses }) {
                 ></img>
               </div>
               <div className="item-header__quantity item-header__title">
-                <span className="item-header__text">QUANTITY</span>
+                <h4>QUANTITY</h4>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -119,7 +121,7 @@ function WarehouseDetails({ warehouses }) {
               </div>
             </div>
             <div className="item-header__actions">
-              <span className="item-header__text">ACTIONS</span>
+              <h4>ACTIONS</h4>
             </div>
           </div>
           {/* WAREHOUSE INVENTORY LIST */}
@@ -127,9 +129,7 @@ function WarehouseDetails({ warehouses }) {
           <ul>
             {inventories.length > 0 &&
               inventories.map((item) => (
-                <li key={item.id}>
-                  <InventoryItem item={item} />
-                </li>
+                  <InventoryItem key={item.id} item={item} />
               ))}
           </ul>
         </div>

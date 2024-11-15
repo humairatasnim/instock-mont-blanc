@@ -3,54 +3,80 @@
 @use "../../styles/partials/global" as *;
 
 
+
 .container {
-    gap: 0px;
+  gap: 0px;
 }
 
-.formcontainer {
-    border-top: 1px solid $cloud;
-    
-    @include tablet {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 24px;
-
+.icon {
+    transition: transform 0.2s ease;
+    &:hover {
+      transform: translateX(-0.25rem);
     }
-    &__title {
+  }
+
+.formcontainer {
+  border-top: 1px solid $cloud;
+
+  @include tablet {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+  }
+
+  @include desktop {
+    padding: 2rem 1rem; 
+  }
+  &__title {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     justify-content: flex-start;
-    gap: 8px;
-    padding: 32px 24px;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem;
     background-color: $white;
     border-radius: 3px;
-    }
+  }
 }
 
 .form__field {
-    padding: 16px;
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+
+  @include tablet {
+    padding: 0 2rem;
+  }
+
+  @include desktop {
+    padding: 0 2.5rem;
+  }
+}
+
+.form__input {
+    margin-bottom: 1rem;
+    &:last-of-type{
+        margin:0;
+    }
+
+    @include tablet {
+    margin-bottom: 1.5rem;
+    }
+
 }
 
 .divider {
-    border: .5px solid $cloud;
-    margin: 24px 0px;
-
-    @include tablet {
-        margin: 0px 16px;
-    }
+  border: 0.5px solid $cloud;
 }
 
 .submit-container {
-    background-color: $light-grey;
-    padding: 16px 24px;
-    display: flex;
-    flex-direction: row;
-    gap: 17px;
-    border-radius: 3px;
+  background-color: $light-grey;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1.0625rem;
+  border-radius: 0.1875rem;
 
-    @include tablet {
-        justify-content: end;
-    }
+  @include tablet {
+    justify-content: end;
+  }
 }
