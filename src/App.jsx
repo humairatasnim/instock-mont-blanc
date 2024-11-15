@@ -48,35 +48,37 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Header />
-      {(!warehouses || !inventories) ? (
-        <div>Loading data...</div>
-      ) : (
-      <Routes>
-        {/* Homepage - Warehouses list */}
-        <Route path="/" element={<Warehouses warehouses={warehouses} />} />
+    <div className="app">
+      <BrowserRouter>
+        <Header />
+        {(!warehouses || !inventories) ? (
+          <div>Loading data...</div>
+        ) : (
+        <Routes>
+          {/* Homepage - Warehouses list */}
+          <Route path="/" element={<Warehouses warehouses={warehouses} />} />
 
-        {/* Warehouse routes */}
-        <Route path="/warehouses" element={<Warehouses warehouses={warehouses} />} />
-        <Route path="/warehouses/:id" element={<WarehouseDetails warehouses={warehouses}/>}/>
-        <Route path="/warehouses/add" element={<AddWarehouse warehouses={warehouses}/>} />
-        <Route path="/warehouses/:id/edit" element={<EditWarehouse warehouses={warehouses}/>} />
+          {/* Warehouse routes */}
+          <Route path="/warehouses" element={<Warehouses warehouses={warehouses} />} />
+          <Route path="/warehouses/:id" element={<WarehouseDetails warehouses={warehouses}/>}/>
+          <Route path="/warehouses/add" element={<AddWarehouse warehouses={warehouses}/>} />
+          <Route path="/warehouses/:id/edit" element={<EditWarehouse warehouses={warehouses}/>} />
 
-        {/* Inventory routes */}
-        <Route path="/inventory" element={<Inventory inventories={inventories} warehouses={warehouses} />} />
-        <Route path="/inventory/:id" element={<InventoryItemDetails warehouses={warehouses} />} />
-        <Route path="/inventory/add" element={<AddInventoryItem warehouses={warehouses} />} />
-        <Route path="/inventory/:id/edit" element={<EditInventoryItem warehouses={warehouses} inventories={inventories} />} />
+          {/* Inventory routes */}
+          <Route path="/inventory" element={<Inventory inventories={inventories} warehouses={warehouses} />} />
+          <Route path="/inventory/:id" element={<InventoryItemDetails warehouses={warehouses} />} />
+          <Route path="/inventory/add" element={<AddInventoryItem warehouses={warehouses} />} />
+          <Route path="/inventory/:id/edit" element={<EditInventoryItem warehouses={warehouses} inventories={inventories} />} />
 
-        {/* TEMPORARY: UI Library Route */}
-        <Route path="/ui" element={<UILibrary />} />
+          {/* TEMPORARY: UI Library Route */}
+          <Route path="/ui" element={<UILibrary />} />
 
-        {/* Fallback route */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>)}
-      <Footer />
-    </BrowserRouter>
+          {/* Fallback route */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>)}
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 
