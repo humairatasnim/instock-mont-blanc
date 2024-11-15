@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Dropdown from "react-dropdown";
@@ -9,13 +9,32 @@ import "./InventoryItemForm.scss";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function InventoryItemForm({ warehouses }) {
-  const categoryOptions = [
-    { value: "Electronics", label: "Electronics" },
-    { value: "Gear", label: "Gear" },
-    { value: "Health", label: "Health" },
-  ];
 
-  const warehouseOptions = warehouses.map((warehouse) => ({
+  // Get list of inventory categories for Category dropdown
+  const [categories, setCategories] = useState([]);
+
+  const getCategories = async () => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/api/inventories/categories`);
+      setCategories(data);
+    } catch (error) {
+      console.error("Error fetching inventory categories:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  if (!categories) return <div>Loading...</div>
+
+  const categoryOptions = categories.map(category => ({
+    value: category,
+    label: category,
+  }));
+
+  // Get list of warehouses for Warehouse dropdown
+  const warehouseOptions = warehouses.map(warehouse => ({
     value: warehouse.id,
     label: warehouse.warehouse_name,
   }));
@@ -176,9 +195,7 @@ function InventoryItemForm({ warehouses }) {
             </label>
             <Dropdown
               id="category"
-              controlClassName={`form__dropdown ${
-                categoryError ? "error" : ""
-              }`}
+              controlClassName={`form__dropdown ${categoryError ? "error" : ""}`}
               placeholderClassName="form__dropdown--placeholder"
               menuClassName="form__dropdown--menu"
               options={categoryOptions}
@@ -259,9 +276,7 @@ function InventoryItemForm({ warehouses }) {
             </label>
             <Dropdown
               id="warehouse"
-              controlClassName={`form__dropdown ${
-                warehouseError ? "error" : ""
-              }`}
+              controlClassName={`form__dropdown ${warehouseError ? "error" : ""}`}
               placeholderClassName="form__dropdown--placeholder"
               menuClassName="form__dropdown--menu"
               options={warehouseOptions}
