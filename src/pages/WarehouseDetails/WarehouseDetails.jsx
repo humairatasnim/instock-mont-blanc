@@ -127,9 +127,7 @@ function WarehouseDetails({ warehouses }) {
           <ul>
             {inventories.length > 0 &&
               inventories.map((item) => (
-                <li key={item.id}>
-                  <InventoryItem item={item} />
-                </li>
+                  <InventoryItem key={item.id} item={item} />
               ))}
           </ul>
         </div>
