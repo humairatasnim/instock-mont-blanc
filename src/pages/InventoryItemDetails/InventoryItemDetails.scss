@@ -1,5 +1,6 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
 
 .inventory-item {
   &__header {
@@ -38,9 +39,16 @@
       height: 2.375rem;
     }
   }
+
   &__backIcon{
     cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover{
+      transform: translateX(-0.25rem);
+    }
   }
+
   &__body {
     @include tablet {
       display: flex;
