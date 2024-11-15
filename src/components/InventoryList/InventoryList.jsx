@@ -55,14 +55,14 @@ function InventoryList({ item, warehouses }) {
         <NavLink  to="/" className="link" >
           {/* ADD DELETE MODAL HERE */}
           <img
-            className="link__icon"
+            className="icon"
             src={deleteIcon}
             alt="delete icon to delete inventory item"
           ></img>
         </NavLink>
         <NavLink to={`/inventory/${id}/edit`} className="link" >
           <img
-            className="link__icon"
+            className="icon"
             src={editIcon}
             alt="edit icon to edit inventory item details"
           ></img>
