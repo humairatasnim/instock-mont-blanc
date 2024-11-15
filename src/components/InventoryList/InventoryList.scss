@@ -12,6 +12,10 @@ ul {
   flex-direction: column;
   border-bottom: 1px solid $cloud;
 
+  &:last-child {
+    border: none;
+  }
+
   @include tablet {
     flex-direction: row;
     justify-content: space-between;

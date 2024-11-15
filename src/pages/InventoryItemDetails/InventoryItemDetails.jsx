@@ -41,7 +41,7 @@ function InventoryItemDetails({ warehouses, path }) {
           <div className="inventory-item">
             <div className="inventory-item__header">
               <div className="inventory-item__title">
-                <img className="link__icon inventory-item__backIcon" src={arrowBack} alt="arrow to return to previous page" onClick={returnUrl}></img>
+                <img className="link__icon inventory-item__back-icon" src={arrowBack} alt="arrow to return to previous page" onClick={returnUrl}></img>
                 <h1 className="page-header inventory-item__heading">{item_name}</h1>
               </div>
               <NavLink to={`/inventory/${id}/edit`} className="inventory-item__edit link">

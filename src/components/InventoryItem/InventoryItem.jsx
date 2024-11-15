@@ -9,7 +9,7 @@ function InventoryItem({ item }) {
   const {id, item_name, status, category, quantity} = item;
 
   return (
-    <div className="warehouse-item">
+    <li className="warehouse-item">
 
       <div className="warehouse-item__mobile-box">
 
@@ -61,7 +61,7 @@ function InventoryItem({ item }) {
           ></img>
         </NavLink>
       </div>
-    </div>
+    </li>
   );
 }
 
