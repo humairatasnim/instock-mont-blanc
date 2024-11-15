@@ -20,7 +20,7 @@ function Warehouses({warehouses: initialWarehouses}) {
 
   //Sort Button Function
 
-  const handleSort = async (sortBy = "warehouse_name") =>  {
+  const handleSort = async (sortBy = "warehouse_name" || "address" || "contact_name" || "contact_email") =>  {
     try {
         const { data } = await axios.get(`${BASE_URL}/api/warehouses/`, {
           params: { sortBy, order: sortOrder },
@@ -73,7 +73,7 @@ function Warehouses({warehouses: initialWarehouses}) {
 
               <div className="table__header-cell table__cell--address">
                 <h2 className="table__header-text">Address</h2>
-                <button className="table__sort-btn">
+                <button className="table__sort-btn" onClick={() => handleSort()}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
@@ -86,7 +86,7 @@ function Warehouses({warehouses: initialWarehouses}) {
             <div className="table__column table__column--contact">
               <div className="table__header-cell table__cell--contact">
                 <h2 className="table__header-text">Contact Name</h2>
-                <button className="table__sort-btn">
+                <button className="table__sort-btn" onClick={() => handleSort()}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
@@ -97,7 +97,7 @@ function Warehouses({warehouses: initialWarehouses}) {
 
               <div className="table__header-cell table__cell--contact-info">
                 <h2 className="table__header-text">Contact Information</h2>
-                <button className="table__sort-btn">
+                <button className="table__sort-btn" onClick={() => handleSort()}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
