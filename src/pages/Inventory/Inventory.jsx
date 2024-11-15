@@ -57,6 +57,14 @@ function Inventory({ inventories }) {
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
+              <div className="table-header__warehouse table-header__title">
+                <span className="table-header__text">WAREHOUSE</span>
+                <img
+                  className="link__icon"
+                  src={sortIcon}
+                  alt="sort icon to sort inventory item"
+                ></img>
+              </div>
             </div>
             <div className="table-header__actions">
               <span className="table-header__text">ACTIONS</span>
