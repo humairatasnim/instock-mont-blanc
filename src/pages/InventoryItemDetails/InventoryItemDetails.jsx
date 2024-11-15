@@ -1,12 +1,5 @@
 import "./InventoryItemDetails.scss";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  NavLink,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import {NavLink,useParams} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import editWhite from "/src/assets/icons/edit-white-24px.svg";
@@ -15,6 +8,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 function InventoryItemDetails({ warehouses, path }) {
   const [selectedItem, setSelectedItem] = useState(null);
+
   const { id } = useParams();
 
   const getInventoryItem = async () => {
@@ -28,7 +22,13 @@ function InventoryItemDetails({ warehouses, path }) {
   useEffect(() => {
     getInventoryItem();
   }, [id]);
-  path = '/warehouses'
+
+  const returnUrl = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+    }
+  };
+
   if (!selectedItem) return <div>Loading item details...</div>;
 
   const { item_name, description, category, status, quantity, warehouse_id } = selectedItem[0];
@@ -41,7 +41,7 @@ function InventoryItemDetails({ warehouses, path }) {
           <div className="inventory-item">
             <div className="inventory-item__header">
               <div className="inventory-item__title">
-                <NavLink to={path} className="link"><img className="link__icon" src={arrowBack} alt="arrow to return to previous page"></img></NavLink>
+                <img className="link__icon inventory-item__backIcon" src={arrowBack} alt="arrow to return to previous page" onClick={returnUrl}></img>
                 <h1 className="page-header inventory-item__heading">{item_name}</h1>
               </div>
               <NavLink to={`/inventory/${id}/edit`} className="inventory-item__edit link">
