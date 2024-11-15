@@ -1,4 +1,4 @@
-import { NavLink, useParams, useNavigate } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./WarehouseDetails.scss";
