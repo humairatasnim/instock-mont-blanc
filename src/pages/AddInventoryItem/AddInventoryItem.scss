@@ -7,8 +7,16 @@
     display: flex;
     gap: 0.5rem;
     align-items: flex-start;
-    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    padding: 2rem 1.5rem 1.5rem;
     border-bottom: 1px solid $cloud;
+
+    @include tablet {
+      padding: 2rem 2rem 1.3rem;
+    }
+
+    @include desktop {
+      padding: 2rem 2.5rem 1.3rem;
+    }
   }
 
   &__title {
