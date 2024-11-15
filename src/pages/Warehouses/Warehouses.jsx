@@ -8,9 +8,10 @@ import Modal from "../../components/Modal/Modal";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-function Warehouses({warehouses}) {
+function Warehouses({warehouses: initialWarehouses}) {
   const [warehouseToDelete, setWarehouseToDelete] = useState(null);
-  // const [sortWarehouses, setSortWarehouses] = useState(null);
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [warehouses, setWarehouses] = useState(initialWarehouses);
 
 
   function deleteWarehouseHandler(warehouse) {
@@ -19,23 +20,18 @@ function Warehouses({warehouses}) {
 
   //Sort Button Function
 
-  const handleSort = async (sortBy = "warehouse_name", order = "asc") =>  {
+  const handleSort = async (sortBy = "warehouse_name") =>  {
     try {
         const { data } = await axios.get(`${BASE_URL}/api/warehouses/`, {
-          params: { sortBy, order },
+          params: { sortBy, order: sortOrder },
         });
           console.log("Sorted Warehouses:", data); 
-          return data;
+          setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+          setWarehouses(data);
       } catch (error) {
           console.error("Error getting warehouse data from API call", error);
-          return [];
           }
       }
-
-
-  handleSort("warehouse_name", "asc")
-  handleSort("warehouse_name", "desc")
-
       
   if (!warehouses) return <div>Loading warehouses...</div>;
 
@@ -66,7 +62,7 @@ function Warehouses({warehouses}) {
             <div className="table__column table__column--warehouse">
               <div className="table__header-cell table__cell--name">
                 <h2 className="table__header-text">Warehouse</h2>
-                <button className="table__sort-btn" onClick={handleSort}>
+                <button className="table__sort-btn" onClick={() => handleSort()}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
