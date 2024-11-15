@@ -20,7 +20,6 @@ function App() {
   const [warehouses, setWarehouses] = useState(null);
   const [inventories, setInventories] = useState(null);
 
-
   const getWarehouses = async () => {
     try {
       const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
@@ -65,8 +64,8 @@ function App() {
         <Route path="/warehouses/:id/edit" element={<EditWarehouse warehouses={warehouses}/>} />
 
         {/* Inventory routes */}
-        <Route path="/inventory" element={<Inventory inventories={inventories} />} />
-        <Route path="/inventory/:id" element={<InventoryItemDetails />} />
+        <Route path="/inventory" element={<Inventory inventories={inventories} warehouses={warehouses} />} />
+        <Route path="/inventory/:id" element={<InventoryItemDetails inventories={inventories} warehouses={warehouses} />} />
         <Route path="/inventory/add" element={<AddInventoryItem />} />
         <Route path="/inventory/:id/edit" element={<EditInventoryItem />} />
 

@@ -41,6 +41,22 @@
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 1.5rem 1.5rem;
+
+    @include tablet{
+      width: 11.5625rem;
+    }
+
+    @include desktop {
+      width: 17.125rem;
+    }
+  }
+
+  &__mobile-box { 
+    @include tablet{
+      display: flex;
+      width: 70%;
+      justify-content: space-between;
+    }
   }
 }
 
@@ -58,108 +74,52 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    // gap: 1%;
 
     @include desktop {
       padding: 0 2.5rem;
     }
 
-    &__box {
-      display: flex;
-      flex-grow: 1;
-      justify-content: space-between;
-    }
-
     &__title {
       display: flex;
       align-items: center;
-      gap: 0.25rem;
-      width: 25%;
+      width: fit-content;
+    }
+
+    &__item {
+      @include tablet {
+        width: 35%;
+       }
+    }
+
+    &__category {
+      @include tablet {
+        width: 25%;
+       }
     }
 
     &__status {
-      order: 2;
-      width: 30%;
+      @include tablet {
+        order: 2;
+        width: 30%;
+      }
     }
 
     &__quantity {
-      width: 30%;
+      @include tablet {
+        order: 3;
+        width: fit-content;
+        padding-right: .5rem;
+      }
+    }
+
+    &__warehouse {
+      order: 3;
+      flex-grow: .5;
+    }
+
+    &__actions {
       order: 3;
     }
   }
 }
-
-// .table {
-//   &__header {
-//     display: none;
-
-//     @include tablet {
-//       display: flex;
-//       background-color: $light-grey;
-//       padding: 0.75rem 2rem;
-//       gap: 1rem;
-//     }
-
-//     @include desktop {
-//       padding: 0.75rem 2.5rem;
-//       gap: 2.5rem;
-//     }
-//   }
-
-//   &__header-cell {
-//     display: flex;
-//     flex-direction: row;
-//     gap: 0.25rem;
-//     align-items: center;
-
-//     @include tablet {
-//       flex: 0.5;
-//     }
-//   }
-
-//   &__header-text {
-//     @extend .table-header;
-//     color: $slate;
-//   }
-
-//   &__sort-btn {
-//     border: none;
-//     background: none;
-//     cursor: pointer;
-//     height: 1rem;
-//   }
-
-//   &__sort-icon {
-//     width: 1rem;
-//     height: 1rem;
-//   }
-
-//   &__column--warehouse {
-//     @include tablet {
-//       width: 40%;
-//     }
-//     @include desktop {
-//       width: 44%;
-//     }
-//   }
-
-//   &__column--contact {
-//     @include tablet {
-//       width: 44%;
-//     }
-//     @include desktop {
-//       width: 40%;
-//     }
-//   }
-
-//   &__cell--address {
-//     @include desktop {
-//       flex: 0.75;
-//     }
-//   }
-
-//   &__cell--contact-info {
-//     @include tablet {
-//       flex: 0.65;
-//     }
-//   }
-// }
