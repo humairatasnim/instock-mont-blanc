@@ -8,11 +8,12 @@ import Modal from "../../components/Modal/Modal";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-function Warehouses({warehouses: initialWarehouses}) {
+function Warehouses({warehouses: initialWarehouses, getWarehouses}) {
   const [warehouseToDelete, setWarehouseToDelete] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
   const [warehouses, setWarehouses] = useState(initialWarehouses);
 
+  console.log(getWarehouses())
 
   function deleteWarehouseHandler(warehouse) {
     setWarehouseToDelete(warehouse);
@@ -32,14 +33,14 @@ function Warehouses({warehouses: initialWarehouses}) {
           }
       }
       
-      const getWarehouses = async () => {
-        try {
-          const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
-          setWarehouses(data);
-        } catch (error) {
-          console.error("Error fetching warehouses:", error);
-        }
-      };
+      // const getWarehouses = async () => {
+      //   try {
+      //     const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
+      //     setWarehouses(data);
+      //   } catch (error) {
+      //     console.error("Error fetching warehouses:", error);
+      //   }
+      // };
     
       useEffect(() => {
         getWarehouses();

@@ -10,7 +10,7 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 
-function Inventory({ inventories: initialInventories, warehouses }) {
+function Inventory({ inventories: initialInventories, warehouses, getInventories }) {
   const [sortOrder, setSortOrder] = useState("asc");
   const [inventories, setInventories] = useState(initialInventories);
 
@@ -29,14 +29,14 @@ function Inventory({ inventories: initialInventories, warehouses }) {
           }
       }
 
-  const getInventories = async () => {
-    try {
-      const { data } = await axios.get(`${BASE_URL}/api/inventories`);
-      setInventories(data);
-    } catch (error) {
-      console.error("Error fetching warehouses:", error);
-    }
-  };
+  // const getInventories = async () => {
+  //   try {
+  //     const { data } = await axios.get(`${BASE_URL}/api/inventories`);
+  //     setInventories(data);
+  //   } catch (error) {
+  //     console.error("Error fetching warehouses:", error);
+  //   }
+  // };
 
   const [itemToDelete, setItemToDelete] = useState(null);
 
