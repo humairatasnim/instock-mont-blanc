@@ -13,40 +13,42 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 function Inventory({ inventories: initialInventories, warehouses, getInventories }) {
   const [sortOrder, setSortOrder] = useState("asc");
   const [inventories, setInventories] = useState(initialInventories);
-
-  //Sort Button Function
-
-  const handleSort = async (sortBy = "item_name" || "category" || "status" || "quantity" ) =>  {
-    try {
-        const { data } = await axios.get(`${BASE_URL}/api/inventories/`, {
-          params: { sortBy, order: sortOrder },
-        });
-          console.log("Sorted Inventories:", data); 
-          setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-          setInventories(data);
-      } catch (error) {
-          console.error("Error getting inventory data from API call", error);
-          }
-      }
-
-  // const getInventories = async () => {
-  //   try {
-  //     const { data } = await axios.get(`${BASE_URL}/api/inventories`);
-  //     setInventories(data);
-  //   } catch (error) {
-  //     console.error("Error fetching warehouses:", error);
-  //   }
-  // };
-
   const [itemToDelete, setItemToDelete] = useState(null);
 
   function deleteItemHandler(item) {
     setItemToDelete(item);
   }
 
+  const getInventories = async () => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/api/inventories`);
+      setInventories(data);
+    } catch (error) {
+      console.error("Error fetching inventories:", error);
+    }
+  };
+
   useEffect(() => {
     getInventories();
-  }, [inventories, itemToDelete]);
+  }, [itemToDelete]);
+
+    //Sort Button Function
+
+    const handleSort = async (sortBy = "item_name" || "category" || "status" || "quantity" ) =>  {
+      try {
+          const { data } = await axios.get(`${BASE_URL}/api/inventories/`, {
+            params: { sortBy, order: sortOrder },
+          });
+            setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+            setInventories(data);
+        } catch (error) {
+            console.error("Error getting inventory data from API call", error);
+            }
+        }
+  
+    useEffect(() => {
+      setInventories(inventories);
+    }, [inventories]);
 
   if (!inventories) return <div>Loading items...</div>;
 

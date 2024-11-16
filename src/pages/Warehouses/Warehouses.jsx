@@ -8,30 +8,14 @@ import Modal from "../../components/Modal/Modal";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-function Warehouses({warehouses: initialWarehouses, getWarehouses}) {
-  const [warehouseToDelete, setWarehouseToDelete] = useState(null);
+function Warehouses({warehouses: initialWarehouses}) {
   const [sortOrder, setSortOrder] = useState("asc");
   const [warehouses, setWarehouses] = useState(initialWarehouses);
-
-  console.log(getWarehouses())
+  const [warehouseToDelete, setWarehouseToDelete] = useState(null);
 
   function deleteWarehouseHandler(warehouse) {
     setWarehouseToDelete(warehouse);
   }
-
-  //Sort Button Function
-
-  const handleSort = async (sortBy = "warehouse_name" || "address" || "contact_name" || "contact_email") =>  {
-    try {
-        const { data } = await axios.get(`${BASE_URL}/api/warehouses/`, {
-          params: { sortBy, order: sortOrder },
-        });
-          setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-          setWarehouses(data);
-      } catch (error) {
-          console.error("Error getting warehouse data from API call", error);
-          }
-      }
       
       // const getWarehouses = async () => {
       //   try {
@@ -44,7 +28,25 @@ function Warehouses({warehouses: initialWarehouses, getWarehouses}) {
     
       useEffect(() => {
         getWarehouses();
-      }, [warehouses, warehouseToDelete]);
+      }, [warehouseToDelete]);
+
+       //Sort Button Function
+
+  const handleSort = async (sortBy = "warehouse_name" || "address" || "contact_name" || "contact_email") =>  {
+    try {
+        const { data } = await axios.get(`${BASE_URL}/api/warehouses/`, {
+          params: { sortBy, order: sortOrder },
+        });
+          setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+          setWarehouses(data);
+      } catch (error) {
+          console.error("Error getting warehouse data from API call", error);
+          }
+      }
+
+      useEffect(() => {
+        setWarehouses(warehouses);
+      }, [warehouses]);
       
   if (!warehouses) return <div>Loading warehouses...</div>;
 
