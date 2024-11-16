@@ -8,8 +8,8 @@ import "./InventoryItemForm.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-function InventoryItemForm({ warehouses }) {
-
+function InventoryItemForm({ warehouses, item }) {
+  
   // Get list of inventory categories for Category dropdown
   const [categories, setCategories] = useState([]);
 
@@ -26,15 +26,15 @@ function InventoryItemForm({ warehouses }) {
     getCategories();
   }, []);
 
-  if (!categories) return <div>Loading...</div>
+  if (!categories) return <div>Loading categories...</div>;
 
-  const categoryOptions = categories.map(category => ({
-    value: category,
+  const categoryList = categories.map(category => ({
     label: category,
+    value: category,
   }));
 
   // Get list of warehouses for Warehouse dropdown
-  const warehouseOptions = warehouses.map(warehouse => ({
+  const warehouseList = warehouses.map(warehouse => ({
     value: warehouse.id,
     label: warehouse.warehouse_name,
   }));
@@ -45,19 +45,28 @@ function InventoryItemForm({ warehouses }) {
     navigate("/inventory");
   };
 
-  // Handle default and error states of form fields
-  const [itemName, setItemName] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState(null);
-  const [status, setStatus] = useState("In Stock");
-  const [quantity, setQuantity] = useState(0);
-  const [warehouse, setWarehouse] = useState(null);
-
+  // State for form fields
+  const [itemName, setItemName] = useState(item?.item_name || "");
+  const [description, setDescription] = useState(item?.description || "");
+  const [category, setCategory] = useState(item ? { label: item.category, value: item.category } : null);
+  const [status, setStatus] = useState(item?.status || "In Stock");
+  const [quantity, setQuantity] = useState(item?.quantity || 0);
+  const [warehouse, setWarehouse] = useState(item ? warehouseList.find(option => option.value === item.warehouse_id) : null);
+  
   const [itemNameError, setItemNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [categoryError, setCategoryError] = useState(false);
   const [quantityError, setQuantityError] = useState(false);
   const [warehouseError, setWarehouseError] = useState(false);
+
+  useEffect(() => {
+    if (item && categoryList.length > 0) {
+      const matchedCategory = categoryList.find(category => category.value === item.category);
+      if (matchedCategory) {
+        setCategory(matchedCategory);
+      }
+    }
+  }, [item, categoryList]);
 
   const handleNameChange = (event) => {
     setItemName(event.target.value);
@@ -120,7 +129,7 @@ function InventoryItemForm({ warehouses }) {
     return isValid;
   };
 
-  // Handle form submission
+  // Handle form submission (for both add and edit)
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -135,17 +144,26 @@ function InventoryItemForm({ warehouses }) {
       warehouse_id: warehouse.value,
     };
 
-    const createInventoryItem = async () => {
+    const submitInventoryItem = async () => {
       try {
-        const { data } = await axios.post(`${BASE_URL}/api/inventories`, formData);
-        const inventoryItemId = data[0].id;
-        alert("Inventory item added successfully!");
-        navigate(`/inventory/${inventoryItemId}`);
+        if (item) {
+          // Edit existing inventory item
+          const { data } = await axios.put(`${BASE_URL}/api/inventories/${item.id}`, formData);
+          alert("Inventory item updated successfully!");
+          navigate(`/inventory/${item.id}`);
+        } else {
+          // Add new inventory item
+          const { data } = await axios.post(`${BASE_URL}/api/inventories`, formData);
+          const inventoryItemId = data[0].id;
+          alert("Inventory item added successfully!");
+          navigate(`/inventory/${inventoryItemId}`);
+        }
       } catch (error) {
-        console.error("Error creating inventory item:", error);
+        console.error("Error submitting inventory item:", error);
       }
     };
-    createInventoryItem();
+
+    submitInventoryItem();
   };
 
   return (
@@ -154,9 +172,7 @@ function InventoryItemForm({ warehouses }) {
         <h2 className="inventory-form__heading">Item Details</h2>
         <div className="inventory-form__fields">
           <fieldset className="inventory-form__field">
-            <label className="inventory-form__label" htmlFor="item_name">
-              Item Name
-            </label>
+            <label className="inventory-form__label" htmlFor="item_name">Item Name</label>
             <input
               id="item_name"
               className={`inventory-form__input ${itemNameError ? "error" : ""}`}
@@ -168,15 +184,13 @@ function InventoryItemForm({ warehouses }) {
             />
             {itemNameError && (
               <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                 <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
           </fieldset>
           <fieldset className="inventory-form__field">
-            <label className="inventory-form__label" htmlFor="description">
-              Description
-            </label>
+            <label className="inventory-form__label" htmlFor="description">Description</label>
             <textarea
               id="description"
               className={`inventory-form__textarea ${descriptionError ? "error" : ""}`}
@@ -187,28 +201,26 @@ function InventoryItemForm({ warehouses }) {
             ></textarea>
             {descriptionError && (
               <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                 <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
           </fieldset>
           <fieldset className="inventory-form__field">
-            <label className="inventory-form__label" htmlFor="category">
-              Category
-            </label>
+            <label className="inventory-form__label" htmlFor="category">Category</label>
             <Dropdown
               id="category"
               controlClassName={`inventory-form__dropdown ${categoryError ? "error" : ""}`}
               placeholderClassName="inventory-form__dropdown--placeholder"
               menuClassName="inventory-form__dropdown--menu"
-              options={categoryOptions}
+              options={categoryList}
               placeholder="Please select"
               value={category}
               onChange={handleCategorySelect}
             />
             {categoryError && (
               <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                 <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
@@ -231,9 +243,7 @@ function InventoryItemForm({ warehouses }) {
                   checked={status === "In Stock"}
                   onChange={handleStatusChange}
                 />
-                <label className="inventory-form__radio-label" htmlFor="in-stock">
-                  In Stock
-                </label>
+                <label className="inventory-form__radio-label" htmlFor="in-stock">In Stock</label>
               </div>
               <div className="inventory-form__radio-item">
                 <input
@@ -245,17 +255,13 @@ function InventoryItemForm({ warehouses }) {
                   checked={status === "Out of Stock"}
                   onChange={handleStatusChange}
                 />
-                <label className="inventory-form__radio-label" htmlFor="out-of-stock">
-                  Out of Stock
-                </label>
+                <label className="inventory-form__radio-label" htmlFor="out-of-stock">Out of Stock</label>
               </div>
             </div>
           </fieldset>
           {status === "In Stock" && (
             <fieldset className="inventory-form__field">
-              <label className="inventory-form__label" htmlFor="quantity">
-                Quantity
-              </label>
+              <label className="inventory-form__label" htmlFor="quantity">Quantity</label>
               <input
                 id="quantity"
                 className={`inventory-form__input ${quantityError ? "error" : ""}`}
@@ -267,29 +273,27 @@ function InventoryItemForm({ warehouses }) {
               />
               {quantityError && (
                 <div className="inventory-form__error">
-                  <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                  <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                   <span className="inventory-form__error-message">This field is required</span>
                 </div>
               )}
             </fieldset>
           )}
           <fieldset className="inventory-form__field">
-            <label className="inventory-form__label" htmlFor="warehouse">
-              Warehouse
-            </label>
+            <label className="inventory-form__label" htmlFor="warehouse">Warehouse</label>
             <Dropdown
               id="warehouse"
               controlClassName={`inventory-form__dropdown ${warehouseError ? "error" : ""}`}
               placeholderClassName="inventory-form__dropdown--placeholder"
               menuClassName="inventory-form__dropdown--menu"
-              options={warehouseOptions}
+              options={warehouseList}
               placeholder="Please select"
               value={warehouse}
               onChange={handleWarehouseSelect}
             />
             {warehouseError && (
               <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error Icon" className="inventory-form__error-icon" />
+                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
                 <span className="inventory-form__error-message">This field is required</span>
               </div>
             )}
@@ -305,7 +309,7 @@ function InventoryItemForm({ warehouses }) {
           Cancel
         </button>
         <button type="submit" className="button button-primary">
-          + Add Item
+          {item ? "Save" : "+ Add Item"}
         </button>
       </div>
     </form>

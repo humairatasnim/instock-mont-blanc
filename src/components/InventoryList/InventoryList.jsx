@@ -54,14 +54,14 @@ function InventoryList({ item, warehouses, deleteHandler }) {
       <div className="item__icons">
         <div className="link" onClick={() => deleteHandler(item)}  >
           <img
-            className="link__icon"
+            className="icon"
             src={deleteIcon}
             alt="delete icon to delete inventory item"
           ></img>
         </div>
         <NavLink to={`/inventory/${id}/edit`} className="link" >
           <img
-            className="link__icon"
+            className="icon"
             src={editIcon}
             alt="edit icon to edit inventory item details"
           ></img>

@@ -16,22 +16,31 @@ textarea,
 button {
   font-family: "Titillium Web", sans-serif;
   color: $instock-black;
-  background-color: $light-grey;
 }
 
 body {
   background: linear-gradient(
     rgba(35, 41, 65, 1) 200px,
-    rgba(255, 255, 255, 1) 200px
+    rgba(247, 248, 249, 1) 200px
   );
   min-height: 100vh;
 
   @include tablet {
     background: linear-gradient(
       rgba(35, 41, 65, 1) 196px,
-      rgba(255, 255, 255, 1) 196px
+      rgba(247, 248, 249, 1) 196px
     );
   }
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 img {

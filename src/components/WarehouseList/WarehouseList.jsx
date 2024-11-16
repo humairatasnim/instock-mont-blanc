@@ -70,7 +70,7 @@ function WarehouseList({ warehouse, deleteHandler }) {
         <button type="button" onClick={() => deleteHandler(warehouse)} className="table__delete-btn">
          <img src={deleteIcon} alt="Delete icon" className="icon" />
         </button>
-        <button type="button" onClick={() => handleEdit} className="table__edit-btn">
+        <button type="button" onClick={() => handleEdit()} className="table__edit-btn">
           <img src={editIcon} alt="Edit icon" className="icon" />
         </button>
       </div>

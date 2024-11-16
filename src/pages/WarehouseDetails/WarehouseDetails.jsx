@@ -1,4 +1,4 @@
-import { NavLink, useParams, useNavigate } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./WarehouseDetails.scss";
@@ -13,12 +13,16 @@ function WarehouseDetails({ warehouses }) {
   const [inventories, setInventories] = useState([]);
   const { id } = useParams();
 
+<<<<<<< HEAD
   const [itemToDelete, setItemToDelete] = useState(null);
 
   function deleteItemHandler(item) {
     setItemToDelete(item);
   }
 
+=======
+  const warehouse = warehouses.find((wh)=>(wh.id == id));
+>>>>>>> develop
 
   const {
     warehouse_name,
@@ -29,7 +33,7 @@ function WarehouseDetails({ warehouses }) {
     contact_position,
     contact_phone,
     contact_email,
-  } = warehouses[id - 1] || {};
+  } = warehouse || {};
 
   const getInventories = async () => {
     try {
@@ -58,17 +62,17 @@ function WarehouseDetails({ warehouses }) {
         onClose={() => setItemToDelete(null)}
       />
         <div className="warehouse">
-          {/* WAREHOUSE table-header */}
+          {/* WAREHOUSE item-header */}
           <div className="warehouse__header">
             <div className="warehouse__title">
               <NavLink to="/warehouses" className="link">
                 <img
-                  className="link__icon"
+                  className="warehouse__back-icon"
                   src={arrowBack}
                   alt="arrow to return to /warehouses"
                 ></img>
               </NavLink>
-              <h2 className="warehouse__name">{warehouse_name}</h2>
+              <h1 className="warehouse__name">{warehouse_name}</h1>
             </div>
             <NavLink to={`/warehouses/${id}/edit`} className="warehouse__edit link">
               <img className="link__icon" src={editWhite}></img>
@@ -95,35 +99,35 @@ function WarehouseDetails({ warehouses }) {
               </div>
             </div>
           </div>
-          {/* TABLET/DESKTOP LIST table-header */}
-          <div className="table-header">
-            <div className="table-header__box">
-              <div className="table-header__item table-header__title">
-                <span className="table-header__text">INVENTORY ITEM</span>
+          {/* TABLET/DESKTOP LIST item-header */}
+          <div className="item-header">
+            <div className="item-header__box">
+              <div className="item-header__item item-header__title">
+                <h4>INVENTORY ITEM</h4>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
-              <div className="table-header__status table-header__title">
-                <span className="table-header__text">STATUS</span>
+              <div className="item-header__status item-header__title">
+                <h4>STATUS</h4>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
-              <div className="table-header__category table-header__title">
-                <span className="table-header__text">CATEGORY</span>
+              <div className="item-header__category item-header__title">
+                <h4>CATEGORY</h4>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
               </div>
-              <div className="table-header__quantity table-header__title">
-                <span className="table-header__text">QUANTITY</span>
+              <div className="item-header__quantity item-header__title">
+                <h4>QUANTITY</h4>
                 <img
                   className="link__icon"
                   src={sortIcon}
@@ -131,8 +135,8 @@ function WarehouseDetails({ warehouses }) {
                 ></img>
               </div>
             </div>
-            <div className="table-header__actions">
-              <span className="table-header__text">ACTIONS</span>
+            <div className="item-header__actions">
+              <h4>ACTIONS</h4>
             </div>
           </div>
           {/* WAREHOUSE INVENTORY LIST */}
@@ -140,9 +144,13 @@ function WarehouseDetails({ warehouses }) {
           <ul>
             {inventories.length > 0 &&
               inventories.map((item) => (
+<<<<<<< HEAD
                 <li key={item.id}>
                   <InventoryItem item={item} deleteHandler={deleteItemHandler} />
                 </li>
+=======
+                  <InventoryItem key={item.id} item={item} />
+>>>>>>> develop
               ))}
           </ul>
         </div>

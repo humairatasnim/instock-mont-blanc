@@ -17,6 +17,7 @@
     @include tablet {
       flex-direction: row;
       padding: 2rem 2rem 1.5rem;
+      height: 6rem;
     }
 
     @include desktop {
@@ -28,6 +29,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  &__back-icon{
+    transition: transform 0.2s ease;
+
+    &:hover{
+      transform: translateX(-0.25rem);
+    }
   }
 
   &__edit {
@@ -53,10 +62,6 @@
     @include tablet {
       display: inherit;
     }
-  }
-
-  &__name {
-    font-size: 1.75rem;
   }
 
   &__details {
@@ -108,7 +113,7 @@
   }
 }
 
-.table-header {
+.item-header {
   display: none;
   font-size: 0.75rem;
   line-height: 1.125rem;
@@ -120,7 +125,8 @@
     background-color: $light-grey;
     color: $slate;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
 
     @include desktop {
@@ -129,8 +135,7 @@
 
     &__box {
       display: flex;
-      flex-grow: 1;
-      justify-content: space-between;
+      width: 100%;
     }
 
     &__title {
@@ -138,6 +143,10 @@
       align-items: center;
       gap: 0.25rem;
       width: 25%;
+    }
+
+    &__item {
+      display: flex;
     }
 
     &__status {

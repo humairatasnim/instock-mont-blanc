@@ -9,11 +9,13 @@ function InventoryItem({ item, deleteHandler }) {
   const { id, item_name, status, category, quantity } = item;
 
   return (
-    <div className="item">
-      <div className="item__mobile-box">
-        <div className="item__column">
-          <p className="item__subtitle">INVENTORY ITEM</p>
-          <NavLink to={`/inventory/${id}`} className="item__name link">
+    <li className="warehouse-item">
+
+      <div className="warehouse-item__mobile-box">
+
+        <div className="warehouse-item__column warehouse-item__name">
+          <p className="warehouse-item__subtitle">INVENTORY ITEM</p>
+          <NavLink to={`/inventory/${id}`} className="link">
             <span className="link__text body-medium">{item_name}</span>
             <img
               className="link__icon"
@@ -23,8 +25,8 @@ function InventoryItem({ item, deleteHandler }) {
           </NavLink>
         </div>
 
-        <div className="item__status item__column">
-          <p className="item__subtitle">STATUS</p>
+        <div className="warehouse-item__status warehouse-item__column">
+          <p className="warehouse-item__subtitle">STATUS</p>
           <div
             className={
               status === "In Stock" ? "tag in-stock" : "tag out-of-stock"
@@ -34,16 +36,16 @@ function InventoryItem({ item, deleteHandler }) {
           </div>
         </div>
 
-        <div className="item__category item__column">
-          <p className="item__subtitle">CATEGORY</p>
+        <div className="warehouse-item__category warehouse-item__column">
+          <p className="warehouse-item__subtitle">CATEGORY</p>
           <p className="body-medium">{category}</p>
         </div>
-        <div className="item__quantity item__column">
-          <p className="item__subtitle">QTY</p>
+        <div className="warehouse-item__quantity warehouse-item__column">
+          <p className="warehouse-item__subtitle">QTY</p>
           <p className="body-medium">{quantity}</p>
         </div>
       </div>
-      <div className="item__icons">
+      <div className="warehouse-item__icons">
         <img
           className="link__icon"
           src={deleteIcon}
@@ -58,7 +60,7 @@ function InventoryItem({ item, deleteHandler }) {
           ></img>
         </NavLink>
       </div>
-    </div>
+    </li>
   );
 }
 
