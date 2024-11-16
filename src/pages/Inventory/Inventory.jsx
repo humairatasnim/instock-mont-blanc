@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import sortIcon from "../../assets/icons/sort-24px.svg";
-import { useState } from "react";
 import "./Inventory.scss";
 import InventoryList from "../../components/InventoryList/InventoryList";
 import Modal from "../../components/Modal/Modal";
