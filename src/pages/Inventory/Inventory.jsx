@@ -31,8 +31,6 @@ function Inventory({ inventories: initialInventories, warehouses }) {
       
   if (!inventories) return <div>Loading items...</div>;
 
-
-
   const [itemToDelete, setItemToDelete] = useState(null);
 
   function deleteItemHandler(item) {
