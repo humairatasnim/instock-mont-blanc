@@ -28,7 +28,7 @@ function Warehouses({warehouses: initialWarehouses}) {
     
       useEffect(() => {
         getWarehouses();
-      }, [warehouses, warehouseToDelete]);
+      }, [warehouseToDelete]);
 
        //Sort Button Function
 
@@ -44,9 +44,9 @@ function Warehouses({warehouses: initialWarehouses}) {
           }
       }
 
-      // useEffect(() => {
-      //   setWarehouses(warehouses);
-      // }, [warehouses]);
+      useEffect(() => {
+        setWarehouses(warehouses);
+      }, [warehouses]);
       
   if (!warehouses) return <div>Loading warehouses...</div>;
 
