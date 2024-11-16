@@ -1,12 +1,12 @@
 import "./InventoryItem.scss";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import editIcon from "/src/assets/icons/edit-24px.svg";
 import deleteIcon from "/src/assets/icons/delete_outline-24px.svg";
 import chevronIcon from "/src/assets/icons/chevron_right-24px.svg";
 
-function InventoryItem({ item }) {
+function InventoryItem({ item, deleteHandler }) {
 
-  const {id, item_name, status, category, quantity} = item;
+  const { id, item_name, status, category, quantity } = item;
 
   return (
     <li className="warehouse-item">
@@ -46,13 +46,12 @@ function InventoryItem({ item }) {
         </div>
       </div>
       <div className="warehouse-item__icons">
-        <NavLink to="/">  {/* ADD DELETE MODAL HERE */}
-          <img
-            className="link__icon"
-            src={deleteIcon}
-            alt="delete icon to delete inventory item"
-          ></img>
-        </NavLink>
+        <img
+          className="link__icon"
+          src={deleteIcon}
+          alt="delete icon to delete inventory item"
+          onClick={() => deleteHandler(item)}
+        ></img>
         <NavLink to={`/inventory/${id}/edit`}>
           <img
             className="link__icon"

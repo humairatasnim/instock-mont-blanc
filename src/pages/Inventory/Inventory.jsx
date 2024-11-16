@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 import "./Inventory.scss";
 import InventoryList from "../../components/InventoryList/InventoryList";
+import Modal from "../../components/Modal/Modal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -32,8 +33,19 @@ function Inventory({ inventories: initialInventories, warehouses }) {
 
 
 
+  const [itemToDelete, setItemToDelete] = useState(null);
+
+  function deleteItemHandler(item) {
+    setItemToDelete(item);
+  }
+
   return (
     <main className="container">
+      <Modal
+        item={itemToDelete}
+        type={"item"}
+        onClose={() => setItemToDelete(null)}
+      />
       <section className="inventory">
         <div className="inventory__header">
           <h1 className="inventory__title">Inventory</h1>
@@ -48,7 +60,6 @@ function Inventory({ inventories: initialInventories, warehouses }) {
             + Add New Item
           </NavLink>
         </div>
-
 
           <div className="table-header">
            <div className="inventory__mobile-box">
@@ -114,11 +125,15 @@ function Inventory({ inventories: initialInventories, warehouses }) {
           </div>
 
         <ul className="table__body">
-            {inventories.map((inventory) => (
-              <InventoryList key={inventory.id} item={inventory} warehouses={warehouses} />
-            ))}
-          </ul>
-
+          {inventories.map((inventory) => (
+            <InventoryList
+              key={inventory.id}
+              item={inventory}
+              warehouses={warehouses}
+              deleteHandler={deleteItemHandler}
+            />
+          ))}
+        </ul>
       </section>
     </main>
   );
