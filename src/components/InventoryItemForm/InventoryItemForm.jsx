@@ -150,13 +150,12 @@ function InventoryItemForm({ warehouses, item }) {
           // Edit existing inventory item
           const { data } = await axios.put(`${BASE_URL}/api/inventories/${item.id}`, formData);
           alert("Inventory item updated successfully!");
-          navigate(`/inventory/${item.id}`);
+          navigate('/inventory');
         } else {
           // Add new inventory item
           const { data } = await axios.post(`${BASE_URL}/api/inventories`, formData);
-          const inventoryItemId = data[0].id;
           alert("Inventory item added successfully!");
-          navigate(`/inventory/${inventoryItemId}`);
+          navigate('/inventory');
         }
       } catch (error) {
         console.error("Error submitting inventory item:", error);

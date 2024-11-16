@@ -98,7 +98,7 @@ function WarehouseForm( {action, warehouses} ) {
             try {
                 const {data} = await axios.post(`${baseUrl}/api/warehouses/`, warehouseData);
                 alert(`New warehouse ${warehouseNameInput} added`);
-                navigate(`/warehouses/`);
+                navigate('/warehouses');
                 console.log(data); 
             } catch (error) {
                 console.error("Error adding warehouse", error);
@@ -108,7 +108,7 @@ function WarehouseForm( {action, warehouses} ) {
             try {
                 const {data} = await axios.put(`${baseUrl}/api/warehouses/${id}`, warehouseData);
                 alert(`Changes made to Warehouse ${warehouseNameInput}`);
-                navigate(`/warehouses/${id}`);
+                navigate('/warehouses');
             } catch (error) {
                 console.error("Error updating warehouse", error);
             }
