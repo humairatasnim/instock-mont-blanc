@@ -19,7 +19,6 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 function App() {
   const [warehouses, setWarehouses] = useState(null);
   const [inventories, setInventories] = useState(null);
-  const [warehouseToDelete, setWarehouseToDelete] = useState(null);
 
   const getWarehouses = async () => {
     try {
@@ -41,7 +40,7 @@ function App() {
 
   useEffect(() => {
     getWarehouses();
-  }, [warehouseToDelete]);
+  }, []);
 
 
   useEffect(() => {

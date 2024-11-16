@@ -35,8 +35,6 @@ const Modal = ({ warehouse, type, onClose, item }) => {
     }
   };
 
- // function triggerDel()
-
   useEffect(() => {
     if (warehouse) {
       setWarehouseToDelete(warehouse.id)

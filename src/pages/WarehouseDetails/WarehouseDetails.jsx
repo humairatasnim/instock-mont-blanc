@@ -11,18 +11,14 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 function WarehouseDetails({ warehouses }) {
   const [inventories, setInventories] = useState([]);
-  const { id } = useParams();
-
-<<<<<<< HEAD
   const [itemToDelete, setItemToDelete] = useState(null);
 
   function deleteItemHandler(item) {
     setItemToDelete(item);
   }
+  const { id } = useParams();
 
-=======
   const warehouse = warehouses.find((wh)=>(wh.id == id));
->>>>>>> develop
 
   const {
     warehouse_name,
@@ -144,13 +140,7 @@ function WarehouseDetails({ warehouses }) {
           <ul>
             {inventories.length > 0 &&
               inventories.map((item) => (
-<<<<<<< HEAD
-                <li key={item.id}>
-                  <InventoryItem item={item} deleteHandler={deleteItemHandler} />
-                </li>
-=======
-                  <InventoryItem key={item.id} item={item} />
->>>>>>> develop
+                  <InventoryItem key={item.id} item={item} deleteHandler={deleteItemHandler}/>
               ))}
           </ul>
         </div>
