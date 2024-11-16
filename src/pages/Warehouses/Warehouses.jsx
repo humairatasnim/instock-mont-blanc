@@ -25,7 +25,6 @@ function Warehouses({warehouses: initialWarehouses}) {
         const { data } = await axios.get(`${BASE_URL}/api/warehouses/`, {
           params: { sortBy, order: sortOrder },
         });
-          console.log("Sorted Warehouses:", data); 
           setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
           setWarehouses(data);
       } catch (error) {
@@ -62,7 +61,7 @@ function Warehouses({warehouses: initialWarehouses}) {
             <div className="table__column table__column--warehouse">
               <div className="table__header-cell table__cell--name">
                 <h2 className="table__header-text">Warehouse</h2>
-                <button className="table__sort-btn" onClick={() => handleSort()}>
+                <button className="table__sort-btn" onClick={() => handleSort("warehouse_name")}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
@@ -73,7 +72,7 @@ function Warehouses({warehouses: initialWarehouses}) {
 
               <div className="table__header-cell table__cell--address">
                 <h2 className="table__header-text">Address</h2>
-                <button className="table__sort-btn" onClick={() => handleSort()}>
+                <button className="table__sort-btn" onClick={() => handleSort("address")}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
@@ -86,7 +85,7 @@ function Warehouses({warehouses: initialWarehouses}) {
             <div className="table__column table__column--contact">
               <div className="table__header-cell table__cell--contact">
                 <h2 className="table__header-text">Contact Name</h2>
-                <button className="table__sort-btn" onClick={() => handleSort()}>
+                <button className="table__sort-btn" onClick={() => handleSort("contact_name")}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
@@ -97,7 +96,7 @@ function Warehouses({warehouses: initialWarehouses}) {
 
               <div className="table__header-cell table__cell--contact-info">
                 <h2 className="table__header-text">Contact Information</h2>
-                <button className="table__sort-btn" onClick={() => handleSort()}>
+                <button className="table__sort-btn" onClick={() => handleSort("contact_email")}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
