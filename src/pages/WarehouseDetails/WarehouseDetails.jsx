@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./WarehouseDetails.scss";
@@ -17,6 +17,8 @@ function WarehouseDetails({ warehouses }) {
     setItemToDelete(item);
   }
   const { id } = useParams();
+
+  const [sortOrder, setSortOrder] = useState("asc");
 
   const warehouse = warehouses.find((wh)=>(wh.id == id));
 
@@ -48,6 +50,26 @@ function WarehouseDetails({ warehouses }) {
   useEffect(() => {
     getInventories();
   }, [itemToDelete]);
+
+//SortBy Function 
+
+const handleSort = async (sortBy = "item_name" || "category" || "status" || "quantity" || "warehouse_id") =>  {
+  try {
+      const { data } = await axios.get(`${BASE_URL}/api/inventories/`, {
+        params: { sortBy, order: sortOrder },
+      });
+        console.log("Sorted Inventories:", data); 
+        setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+        setInventories(data);
+    } catch (error) {
+        console.error("Error getting inventory data from API call", error);
+        }
+    }
+
+    useEffect(() => {
+      setInventories(inventories);
+    }, [inventories]);
+  
 
   return (
     <>
@@ -96,45 +118,60 @@ function WarehouseDetails({ warehouses }) {
             </div>
           </div>
           {/* TABLET/DESKTOP LIST item-header */}
+          {inventories.length > 0 ? (
           <div className="item-header">
             <div className="item-header__box">
               <div className="item-header__item item-header__title">
                 <h4>INVENTORY ITEM</h4>
+                <button className="table__sort-btn" onClick={() => handleSort("item_name")}>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button> 
               </div>
               <div className="item-header__status item-header__title">
                 <h4>STATUS</h4>
-                <img
+                <button className="table__sort-btn" onClick={() => handleSort("status")}>
+                  <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
               <div className="item-header__category item-header__title">
                 <h4>CATEGORY</h4>
-                <img
+                <button className="table__sort-btn" onClick={() => handleSort("category")}>
+                  <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
               <div className="item-header__quantity item-header__title">
                 <h4>QUANTITY</h4>
-                <img
+                <button className="table__sort-btn" onClick={() => handleSort("quantity")}>
+                  <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
             </div>
             <div className="item-header__actions">
               <h4>ACTIONS</h4>
             </div>
           </div>
+          ) : (
+            <div className="warehouse__empty-state">
+              <p className="warehouse__empty-state-text">Your inventory is currently empty. Add some items to get started!</p>
+              <Link to="/inventory/add" className="button button-primary">+ Add New Item</Link>
+            </div>
+          )}
           {/* WAREHOUSE INVENTORY LIST */}
           <div className="invetory-list"></div>
           <ul>

@@ -9,29 +9,44 @@ import Modal from "../../components/Modal/Modal";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function Warehouses({warehouses: initialWarehouses}) {
-  const [warehouseToDelete, setWarehouseToDelete] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
   const [warehouses, setWarehouses] = useState(initialWarehouses);
-
+  const [warehouseToDelete, setWarehouseToDelete] = useState(null);
 
   function deleteWarehouseHandler(warehouse) {
     setWarehouseToDelete(warehouse);
   }
+      
+      const getWarehouses = async () => {
+        try {
+          const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
+          setWarehouses(data);
+        } catch (error) {
+          console.error("Error fetching warehouses:", error);
+        }
+      };
+    
+      useEffect(() => {
+        getWarehouses();
+      }, [warehouseToDelete]);
 
-  //Sort Button Function
+       //Sort Button Function
 
   const handleSort = async (sortBy = "warehouse_name" || "address" || "contact_name" || "contact_email") =>  {
     try {
         const { data } = await axios.get(`${BASE_URL}/api/warehouses/`, {
           params: { sortBy, order: sortOrder },
         });
-          console.log("Sorted Warehouses:", data); 
           setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
           setWarehouses(data);
       } catch (error) {
           console.error("Error getting warehouse data from API call", error);
           }
       }
+
+      useEffect(() => {
+        setWarehouses(warehouses);
+      }, [warehouses]);
       
   if (!warehouses) return <div>Loading warehouses...</div>;
 
@@ -62,7 +77,7 @@ function Warehouses({warehouses: initialWarehouses}) {
             <div className="table__column table__column--warehouse">
               <div className="table__header-cell table__cell--name">
                 <h2 className="table__header-text">Warehouse</h2>
-                <button className="table__sort-btn" onClick={() => handleSort()}>
+                <button className="table__sort-btn" onClick={() => handleSort("warehouse_name")}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
@@ -73,7 +88,7 @@ function Warehouses({warehouses: initialWarehouses}) {
 
               <div className="table__header-cell table__cell--address">
                 <h2 className="table__header-text">Address</h2>
-                <button className="table__sort-btn" onClick={() => handleSort()}>
+                <button className="table__sort-btn" onClick={() => handleSort("address")}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
@@ -86,7 +101,7 @@ function Warehouses({warehouses: initialWarehouses}) {
             <div className="table__column table__column--contact">
               <div className="table__header-cell table__cell--contact">
                 <h2 className="table__header-text">Contact Name</h2>
-                <button className="table__sort-btn" onClick={() => handleSort()}>
+                <button className="table__sort-btn" onClick={() => handleSort("contact_name")}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"
@@ -97,7 +112,7 @@ function Warehouses({warehouses: initialWarehouses}) {
 
               <div className="table__header-cell table__cell--contact-info">
                 <h2 className="table__header-text">Contact Information</h2>
-                <button className="table__sort-btn" onClick={() => handleSort()}>
+                <button className="table__sort-btn" onClick={() => handleSort("contact_email")}>
                   <img
                     src={sortIcon}
                     alt="Sort icon"

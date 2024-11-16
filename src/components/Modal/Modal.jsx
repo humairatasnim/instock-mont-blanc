@@ -18,7 +18,6 @@ const Modal = ({ warehouse, type, onClose, item }) => {
     try {
       const { data } = await axios.delete(`${BASE_URL}/api/warehouses/${warehouseToDelete}`);
       alert(`${warehouse?.warehouse_name} was sucessfully deleted. Refreshing Warehouses list.`);
-      pageRefresh();
       modalRef.current?.close();
     } catch (error) {
       alert(`Error deleting warehouse with id: ${warehouseToDelete}`);
