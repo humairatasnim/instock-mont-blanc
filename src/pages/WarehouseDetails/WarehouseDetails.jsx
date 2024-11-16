@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./WarehouseDetails.scss";
@@ -118,6 +118,7 @@ const handleSort = async (sortBy = "item_name" || "category" || "status" || "qua
             </div>
           </div>
           {/* TABLET/DESKTOP LIST item-header */}
+          {inventories.length > 0 ? (
           <div className="item-header">
             <div className="item-header__box">
               <div className="item-header__item item-header__title">
@@ -165,6 +166,12 @@ const handleSort = async (sortBy = "item_name" || "category" || "status" || "qua
               <h4>ACTIONS</h4>
             </div>
           </div>
+          ) : (
+            <div className="warehouse__empty-state">
+              <p className="warehouse__empty-state-text">Your inventory is currently empty. Add some items to get started!</p>
+              <Link to="/inventory/add" className="button button-primary">+ Add New Item</Link>
+            </div>
+          )}
           {/* WAREHOUSE INVENTORY LIST */}
           <div className="invetory-list"></div>
           <ul>
