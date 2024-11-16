@@ -42,7 +42,7 @@ function InventoryItemForm({ warehouses, item }) {
   // Handle cancel
   const navigate = useNavigate();
   const handleCancel = () => {
-    navigate("/inventory");
+    navigate(-1);
   };
 
   // State for form fields
@@ -150,12 +150,12 @@ function InventoryItemForm({ warehouses, item }) {
           // Edit existing inventory item
           const { data } = await axios.put(`${BASE_URL}/api/inventories/${item.id}`, formData);
           alert("Inventory item updated successfully!");
-          navigate('/inventory');
+          navigate(-1);
         } else {
           // Add new inventory item
           const { data } = await axios.post(`${BASE_URL}/api/inventories`, formData);
           alert("Inventory item added successfully!");
-          navigate('/inventory');
+          navigate(-1);
         }
       } catch (error) {
         console.error("Error submitting inventory item:", error);

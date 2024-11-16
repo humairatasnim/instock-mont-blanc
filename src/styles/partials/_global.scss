@@ -33,6 +33,12 @@ body {
   }
 }
 
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .app {
   display: flex;
   flex-direction: column;
