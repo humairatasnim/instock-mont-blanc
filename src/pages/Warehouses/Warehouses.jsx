@@ -28,6 +28,10 @@ function Warehouses({ warehouses: initialWarehouses }) {
       console.error("Error fetching warehouses:", error);
     }
   };
+  
+  useEffect(() => {
+    setWarehouses(warehouses);
+  }, [warehouses]);
 
   useEffect(() => {
     getWarehouses();
@@ -69,9 +73,6 @@ function Warehouses({ warehouses: initialWarehouses }) {
     }
   };
 
-  useEffect(() => {
-    setWarehouses(warehouses);
-  }, [warehouses]);
 
 
   if (!warehouses) return <div>Loading warehouses...</div>;
