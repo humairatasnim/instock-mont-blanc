@@ -47,7 +47,7 @@ function WarehouseDetails({ warehouses }) {
 
   useEffect(() => {
     getInventories();
-  }, []);
+  }, [itemToDelete]);
 
   return (
     <>

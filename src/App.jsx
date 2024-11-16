@@ -19,6 +19,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 function App() {
   const [warehouses, setWarehouses] = useState(null);
   const [inventories, setInventories] = useState(null);
+  const [warehouseToDelete, setWarehouseToDelete] = useState(null);
 
   const getWarehouses = async () => {
     try {
@@ -40,7 +41,7 @@ function App() {
 
   useEffect(() => {
     getWarehouses();
-  }, []);
+  }, [warehouseToDelete]);
 
 
   useEffect(() => {
@@ -58,7 +59,7 @@ function App() {
         <Route path="/" element={<Warehouses warehouses={warehouses} />} />
 
         {/* Warehouse routes */}
-        <Route path="/warehouses" element={<Warehouses warehouses={warehouses} />} />
+        <Route path="/warehouses" element={<Warehouses warehouses={warehouses} setWarehouseToDelete={setWarehouseToDelete} warehouseToDelete={warehouseToDelete}/>} />
         <Route path="/warehouses/:id" element={<WarehouseDetails warehouses={warehouses}/>}/>
         <Route path="/warehouses/add" element={<AddWarehouse warehouses={warehouses}/>} />
         <Route path="/warehouses/:id/edit" element={<EditWarehouse warehouses={warehouses}/>} />
