@@ -2,8 +2,6 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/global" as *;
 
-
-
 .container {
   gap: 0px;
 }
@@ -34,9 +32,18 @@
     align-items: flex-end;
     justify-content: flex-start;
     gap: 0.5rem;
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
     background-color: $white;
     border-radius: 3px;
+
+    @include tablet {
+      height: 6rem;
+      padding: 2rem 2rem 1.3125rem 2rem;
+    }
+
+    @include desktop {
+      padding: 2rem 2.5rem 1.3125rem 2.5rem;
+    }
   }
 }
 

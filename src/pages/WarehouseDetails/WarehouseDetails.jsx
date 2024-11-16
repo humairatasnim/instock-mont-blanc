@@ -6,11 +6,19 @@ import arrowBack from "/src/assets/icons/arrow_back-24px.svg";
 import InventoryItem from "../../components/InventoryItem/InventoryItem";
 import editWhite from "/src/assets/icons/edit-white-24px.svg";
 import sortIcon from "/src/assets/icons/sort-24px.svg";
+import Modal from "../../components/Modal/Modal";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function WarehouseDetails({ warehouses }) {
   const [inventories, setInventories] = useState([]);
+  const [itemToDelete, setItemToDelete] = useState(null);
+
+  function deleteItemHandler(item) {
+    setItemToDelete(item);
+  }
   const { id } = useParams();
+
+  const [sortOrder, setSortOrder] = useState("asc");
 
   const warehouse = warehouses.find((wh)=>(wh.id == id));
 
@@ -41,11 +49,36 @@ function WarehouseDetails({ warehouses }) {
 
   useEffect(() => {
     getInventories();
-  }, []);
+  }, [itemToDelete]);
+
+//SortBy Function 
+
+const handleSort = async (sortBy = "item_name" || "category" || "status" || "quantity" || "warehouse_id") =>  {
+  try {
+      const { data } = await axios.get(`${BASE_URL}/api/inventories/`, {
+        params: { sortBy, order: sortOrder },
+      });
+        console.log("Sorted Inventories:", data); 
+        setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+        setInventories(data);
+    } catch (error) {
+        console.error("Error getting inventory data from API call", error);
+        }
+    }
+
+    useEffect(() => {
+      setInventories(inventories);
+    }, [inventories]);
+  
 
   return (
     <>
       <main className="container">
+      <Modal
+        item={itemToDelete}
+        type={'item'}
+        onClose={() => setItemToDelete(null)}
+      />
         <div className="warehouse">
           {/* WAREHOUSE item-header */}
           <div className="warehouse__header">
@@ -89,35 +122,43 @@ function WarehouseDetails({ warehouses }) {
             <div className="item-header__box">
               <div className="item-header__item item-header__title">
                 <h4>INVENTORY ITEM</h4>
+                <button className="table__sort-btn" onClick={() => handleSort("item_name")}>
                 <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button> 
               </div>
               <div className="item-header__status item-header__title">
                 <h4>STATUS</h4>
-                <img
+                <button className="table__sort-btn" onClick={() => handleSort("status")}>
+                  <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
               <div className="item-header__category item-header__title">
                 <h4>CATEGORY</h4>
-                <img
+                <button className="table__sort-btn" onClick={() => handleSort("category")}>
+                  <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
               <div className="item-header__quantity item-header__title">
                 <h4>QUANTITY</h4>
-                <img
+                <button className="table__sort-btn" onClick={() => handleSort("quantity")}>
+                  <img
                   className="link__icon"
                   src={sortIcon}
                   alt="sort icon to sort inventory item"
                 ></img>
+                </button>
               </div>
             </div>
             <div className="item-header__actions">
@@ -129,7 +170,7 @@ function WarehouseDetails({ warehouses }) {
           <ul>
             {inventories.length > 0 &&
               inventories.map((item) => (
-                  <InventoryItem key={item.id} item={item} />
+                  <InventoryItem key={item.id} item={item} deleteHandler={deleteItemHandler}/>
               ))}
           </ul>
         </div>
