@@ -1,6 +1,5 @@
 import "./Modal.scss";
 import closeButton from "/src/assets/icons/close-24px.svg";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -18,7 +17,8 @@ const Modal = ({ warehouse, type, onClose, item }) => {
   const delWarehouse = async () => {
     try {
       const { data } = await axios.delete(`${BASE_URL}/api/warehouses/${warehouseToDelete}`);
-      alert(`${warehouse?.warehouse_name} was sucessfully deleted. Refreshing Warehouses list`);
+      alert(`${warehouse?.warehouse_name} was sucessfully deleted. Refreshing Warehouses list.`);
+      pageRefresh();
       modalRef.current?.close();
     } catch (error) {
       alert(`Error deleting warehouse with id: ${warehouseToDelete}`);

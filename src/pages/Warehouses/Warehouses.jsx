@@ -6,11 +6,15 @@ import WarehouseList from "../../components/WarehouseList/WarehouseList";
 import "./Warehouses.scss";
 import Modal from "../../components/Modal/Modal";
 
-function Warehouses({ warehouses, setWarehouseToDelete,warehouseToDelete }) {
+function Warehouses({ warehouses, onStateChange }) {
+
+  const [warehouseToDelete,setWarehouseToDelete] = useState(null);
+  
 
   function deleteWarehouseHandler(warehouse) {
     setWarehouseToDelete(warehouse);
   }
+ 
 
   return (
     <main className="container">
