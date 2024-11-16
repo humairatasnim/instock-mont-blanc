@@ -28,16 +28,27 @@ function Inventory({ inventories: initialInventories, warehouses }) {
           console.error("Error getting inventory data from API call", error);
           }
       }
-      
-  if (!inventories) return <div>Loading items...</div>;
 
-
+  const getInventories = async () => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/api/inventories`);
+      setInventories(data);
+    } catch (error) {
+      console.error("Error fetching warehouses:", error);
+    }
+  };
 
   const [itemToDelete, setItemToDelete] = useState(null);
 
   function deleteItemHandler(item) {
     setItemToDelete(item);
   }
+
+  useEffect(() => {
+    getInventories();
+  }, [inventories, itemToDelete]);
+
+  if (!inventories) return <div>Loading items...</div>;
 
   return (
     <main className="container">

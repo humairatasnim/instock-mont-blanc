@@ -32,6 +32,19 @@ function Warehouses({warehouses: initialWarehouses}) {
           }
       }
       
+      const getWarehouses = async () => {
+        try {
+          const { data } = await axios.get(`${BASE_URL}/api/warehouses`);
+          setWarehouses(data);
+        } catch (error) {
+          console.error("Error fetching warehouses:", error);
+        }
+      };
+    
+      useEffect(() => {
+        getWarehouses();
+      }, [warehouses, warehouseToDelete]);
+      
   if (!warehouses) return <div>Loading warehouses...</div>;
 
   return (

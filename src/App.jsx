@@ -40,12 +40,12 @@ function App() {
 
   useEffect(() => {
     getWarehouses();
-  }, []);
+  }, [warehouses]);
 
 
   useEffect(() => {
     getInventories();
-  }, []);
+  }, [inventories]);
 
   return (
     <div className="app">
