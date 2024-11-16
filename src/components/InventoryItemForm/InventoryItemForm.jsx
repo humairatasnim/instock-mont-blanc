@@ -5,6 +5,7 @@ import Dropdown from "react-dropdown";
 import errorIcon from "/src/assets/icons/error-24px.svg";
 import "react-dropdown/style.css";
 import "./InventoryItemForm.scss";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -181,12 +182,7 @@ function InventoryItemForm({ warehouses, item }) {
               value={itemName}
               onChange={handleNameChange}
             />
-            {itemNameError && (
-              <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
-                <span className="inventory-form__error-message">This field is required</span>
-              </div>
-            )}
+            {itemNameError && <ErrorMessage/>}
           </fieldset>
           <fieldset className="inventory-form__field">
             <label className="inventory-form__label" htmlFor="description">Description</label>
@@ -198,12 +194,7 @@ function InventoryItemForm({ warehouses, item }) {
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
-            {descriptionError && (
-              <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
-                <span className="inventory-form__error-message">This field is required</span>
-              </div>
-            )}
+            {descriptionError && <ErrorMessage/>}
           </fieldset>
           <fieldset className="inventory-form__field">
             <label className="inventory-form__label" htmlFor="category">Category</label>
@@ -217,12 +208,7 @@ function InventoryItemForm({ warehouses, item }) {
               value={category}
               onChange={handleCategorySelect}
             />
-            {categoryError && (
-              <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
-                <span className="inventory-form__error-message">This field is required</span>
-              </div>
-            )}
+            {categoryError && <ErrorMessage/>}
           </fieldset>
         </div>
       </section>
@@ -270,12 +256,7 @@ function InventoryItemForm({ warehouses, item }) {
                 value={quantity}
                 onChange={handleQuantityChange}
               />
-              {quantityError && (
-                <div className="inventory-form__error">
-                  <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
-                  <span className="inventory-form__error-message">This field is required</span>
-                </div>
-              )}
+              {quantityError && <ErrorMessage/>}
             </fieldset>
           )}
           <fieldset className="inventory-form__field">
