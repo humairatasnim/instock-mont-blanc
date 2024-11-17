@@ -28,37 +28,26 @@ function Warehouses({ warehouses: initialWarehouses }) {
       console.error("Error fetching warehouses:", error);
     }
   };
-  
+
   useEffect(() => {
     setWarehouses(warehouses);
-  }, [warehouses]);
+
+    const lowerCaseKey = searchKeyword.toLowerCase();
+
+    setFilteredWarehouses(
+      warehouses.filter((warehouse) =>
+        Object.keys(warehouse).filter((key) => key !== 'id').some((field) =>
+          warehouse[field]?.toString().toLowerCase().includes(lowerCaseKey)
+        )
+      )
+    );
+  }, [searchKeyword,warehouses]);
 
   useEffect(() => {
     getWarehouses();
   }, [warehouseToDelete]);
 
-  useEffect(() => {
-    const lowerCaseKey = searchKeyword.toLowerCase();
-
-    const searchFields = [
-      "warehouse_name",
-      "address",
-      "city",
-      "country",
-      "contact_phone",
-      "contact_email",
-    ];
-
-    setFilteredWarehouses(
-      warehouses.filter((warehouse) =>
-        searchFields.some((field) =>
-          warehouse[field]?.toString().toLowerCase().includes(lowerCaseKey)
-        )
-      )
-    );
-  }, [searchKeyword, warehouses]);
-
-  //Sort Button Function]
+  //Sort Button Function
   const handleSort = async (
     sortBy = "warehouse_name" || "address" || "contact_name" || "contact_email"
   ) => {
@@ -165,15 +154,15 @@ function Warehouses({ warehouses: initialWarehouses }) {
               <h2 className="table__header-text">Actions</h2>
             </div>
           </div>
-
           <ul className="table__body">
-            {filteredWarehouses.map((warehouse) => (
+          {filteredWarehouses.length==0?(<p className="result-message">No results found.</p>):
+            (filteredWarehouses.map((warehouse) => (
               <WarehouseList
                 key={warehouse.id}
                 warehouse={warehouse}
                 deleteHandler={deleteWarehouseHandler}
               />
-            ))}
+            )))}
           </ul>
         </div>
       </section>
