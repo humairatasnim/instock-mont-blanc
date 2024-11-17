@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Dropdown from "react-dropdown";
-import errorIcon from "/src/assets/icons/error-24px.svg";
 import "react-dropdown/style.css";
 import "./InventoryItemForm.scss";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
