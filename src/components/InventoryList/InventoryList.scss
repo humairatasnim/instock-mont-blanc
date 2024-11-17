@@ -97,6 +97,7 @@ ul {
   &__icons {
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
     
     @include tablet {
       gap: 1rem;
