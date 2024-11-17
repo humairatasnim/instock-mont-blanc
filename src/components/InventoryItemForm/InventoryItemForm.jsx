@@ -270,12 +270,7 @@ function InventoryItemForm({ warehouses, item }) {
               value={warehouse}
               onChange={handleWarehouseSelect}
             />
-            {warehouseError && (
-              <div className="inventory-form__error">
-                <img src={errorIcon} alt="Error icon" className="inventory-form__error-icon" />
-                <span className="inventory-form__error-message">This field is required</span>
-              </div>
-            )}
+            {warehouseError && <ErrorMessage/>}
           </fieldset>
         </div>
       </section>
