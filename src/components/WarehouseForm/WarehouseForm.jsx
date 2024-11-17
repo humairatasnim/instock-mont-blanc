@@ -159,11 +159,11 @@ function WarehouseForm( {action, warehouses} ) {
                 if (id) {
                     const {data} = await axios.put(`${baseUrl}/api/warehouses/${id}`, warehouseData);
                     alert(`Changes made to Warehouse ${warehouseNameInput}!`);
-                    navigate('/warehouses');
+                    navigate(-1);
                 } else {
-                const {data} = await axios.post(`${baseUrl}/api/warehouses/`, warehouseData);
-                alert(`New warehouse ${warehouseNameInput} added!`);
-                navigate('/warehouses');
+                    const {data} = await axios.post(`${baseUrl}/api/warehouses/`, warehouseData);
+                    alert(`New warehouse ${warehouseNameInput} added!`);
+                    navigate(-1);
                 } 
             } catch (error) {
                 console.error("Error submitting warehouse:", error);
@@ -179,7 +179,7 @@ function WarehouseForm( {action, warehouses} ) {
     // Cancel Button Function:
 
     const handleCancel = () => {
-        navigate(`/warehouses/${id}`);
+        navigate(-1);
     };
 
     return (
@@ -327,7 +327,7 @@ function WarehouseForm( {action, warehouses} ) {
         </div>
 
         <div className="submit-container">
-            <button className="button button-secondary" onClick={handleCancel} >Cancel</button>
+            <button type="button" className="button button-secondary" onClick={handleCancel} >Cancel</button>
             <button type="submit" className="button button-primary">{action === "edit" ? "Save" : "+ Add Warehouse"}</button>
         </div>
     </form>
