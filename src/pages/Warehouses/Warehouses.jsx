@@ -8,7 +8,7 @@ import Modal from "../../components/Modal/Modal";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-function Warehouses({warehouses: initialWarehouses}) {
+function Warehouses({warehouses: initialWarehouses, getWarehouses}) {
   const [sortOrder, setSortOrder] = useState("asc");
   const [warehouses, setWarehouses] = useState(initialWarehouses);
   const [warehouseToDelete, setWarehouseToDelete] = useState(null);
@@ -28,7 +28,7 @@ function Warehouses({warehouses: initialWarehouses}) {
     
       useEffect(() => {
         getWarehouses();
-      }, [warehouseToDelete]);
+      }, [getWarehouses]);
 
        //Sort Button Function
 

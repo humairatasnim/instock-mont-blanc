@@ -19,18 +19,18 @@ function Inventory({ inventories: initialInventories, warehouses, getInventories
     setItemToDelete(item);
   }
 
-  const getInventories = async () => {
-    try {
-      const { data } = await axios.get(`${BASE_URL}/api/inventories`);
-      setInventories(data);
-    } catch (error) {
-      console.error("Error fetching inventories:", error);
-    }
-  };
+  // const getInventories = async () => {
+  //   try {
+  //     const { data } = await axios.get(`${BASE_URL}/api/inventories`);
+  //     setInventories(data);
+  //   } catch (error) {
+  //     console.error("Error fetching inventories:", error);
+  //   }
+  // };
 
   useEffect(() => {
     getInventories();
-  }, [itemToDelete]);
+  }, [getInventories]);
 
     //Sort Button Function
 
