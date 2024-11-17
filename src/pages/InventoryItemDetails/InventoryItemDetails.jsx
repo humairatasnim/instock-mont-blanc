@@ -1,5 +1,5 @@
 import "./InventoryItemDetails.scss";
-import {NavLink,useParams} from "react-router-dom";
+import {NavLink,useParams,useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import editWhite from "/src/assets/icons/edit-white-24px.svg";
@@ -8,6 +8,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 function InventoryItemDetails({ warehouses, path }) {
   const [selectedItem, setSelectedItem] = useState(null);
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -24,9 +25,7 @@ function InventoryItemDetails({ warehouses, path }) {
   }, [id]);
 
   const returnUrl = () => {
-    if (window.history.length > 1) {
-      window.history.back();
-    }
+    navigate(-1);
   };
 
   if (!selectedItem) return <div>Loading item details...</div>;
