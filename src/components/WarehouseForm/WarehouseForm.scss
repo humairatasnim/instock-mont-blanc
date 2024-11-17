@@ -26,6 +26,7 @@
   @include desktop {
     padding: 2rem 1rem;
   }
+
   &__title {
     display: flex;
     flex-direction: row;
@@ -44,14 +45,6 @@
     @include desktop {
       padding: 2rem 2.5rem 1.3125rem 2.5rem;
     }
-  }
-}
-
-fieldset.form__field {
-  padding: 9px 0px;
-
-  @include tablet {
-    padding: 12px 0px;
   }
 }
 
@@ -95,7 +88,6 @@ fieldset.form__field {
     }
   }
 }
-
 
 .divider {
   border: 0.5px solid $cloud;
