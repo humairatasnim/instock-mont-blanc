@@ -187,9 +187,8 @@ function WarehouseForm( {action, warehouses} ) {
 
         <div className="form-container">
             <div className="form__field">
-            <h2 className="form__subheader">Warehouse Details</h2>
-
             <fieldset className="form__field">
+            <h2 className="form__subheader">Warehouse Details</h2>
             <label className="form__label" htmlFor="warehouse_name">
                 Warehouse Name
             </label>
@@ -258,9 +257,9 @@ function WarehouseForm( {action, warehouses} ) {
             <div className="divider"></div>
        
        <div className="form__field">
-       <h2 className="subheader">Contact Details</h2>
             <fieldset className="form__field">
             <h2 className="form__subheader">Contact Details</h2>
+
             <label className="form__label" htmlFor="contact_name">
                 Contact Name
             </label>
