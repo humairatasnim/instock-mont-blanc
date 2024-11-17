@@ -13,7 +13,7 @@
     }
   }
 
-.formcontainer {
+.form-container {
   border-top: 1px solid $cloud;
 
   @include tablet {
@@ -26,6 +26,7 @@
   @include desktop {
     padding: 2rem 1rem; 
   }
+
   &__title {
     display: flex;
     flex-direction: row;
@@ -47,8 +48,8 @@
   }
 }
 
-.warehouseform__field {
-  border: none;
+fieldset.form__field {
+  padding: 0px;
 }
 
 .form__field {

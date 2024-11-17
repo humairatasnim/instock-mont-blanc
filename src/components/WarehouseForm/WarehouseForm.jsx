@@ -130,7 +130,7 @@ function WarehouseForm( {action, warehouses} ) {
             }
 
         if (!contactEmailInput.trim()) {
-            setContactPhoneError(true);
+            setContactEmailError(true);
             isValid = false;
             }
 
@@ -185,10 +185,11 @@ function WarehouseForm( {action, warehouses} ) {
     return (
     <form onSubmit={handleSubmit}>
 
-        <div className="formcontainer">
+        <div className="form-container">
             <div className="form__field">
-            <fieldset className="form__field">
             <h2 className="subheader">Warehouse Details</h2>
+
+            <fieldset className="form__field">
             <label className="form__label" htmlFor="warehouse_name">
                 Warehouse Name
             </label>
@@ -214,6 +215,8 @@ function WarehouseForm( {action, warehouses} ) {
                 onChange={handleAddressChange}
                 value={addressInput}
             />
+            {addressError && <ErrorMessage />}
+
             </fieldset>
             <fieldset className="form__field">
             <label className="form__label" htmlFor="city">
@@ -227,6 +230,7 @@ function WarehouseForm( {action, warehouses} ) {
                 onChange={handleCityChange}
                 value={cityInput}
             />
+            {cityError && <ErrorMessage />}
             </fieldset>           
              <fieldset className="form__field">
             <label className="form__label" htmlFor="country">
@@ -240,14 +244,15 @@ function WarehouseForm( {action, warehouses} ) {
                 onChange={handleCountryChange}
                 value={countryInput}
             />
+             {countryError && <ErrorMessage />}
             </fieldset>
             </div>
 
             <div className="divider"></div>
        
        <div className="form__field">
+       <h2 className="subheader">Contact Details</h2>
             <fieldset className="form__field">
-            <h2 className="subheader">Contact Details</h2>
             <label className="form__label" htmlFor="contact_name">
                 Contact Name
             </label>
@@ -259,6 +264,7 @@ function WarehouseForm( {action, warehouses} ) {
                 onChange={handleContactNameChange}
                 value={contactNameInput}
             />
+            {contactNameError && <ErrorMessage />}
             </fieldset>           
             <fieldset className="form__field">
             <label className="form__label" htmlFor="contact_position">
@@ -272,6 +278,7 @@ function WarehouseForm( {action, warehouses} ) {
                 onChange={handleContactPositionChange}
                 value={contactPositionInput}
             />
+            {contactPositionError && <ErrorMessage />}
             </fieldset>           
             <fieldset className="form__field">
             <label className="form__label" htmlFor="contact_phone">
@@ -285,6 +292,7 @@ function WarehouseForm( {action, warehouses} ) {
                 onChange={handleContactPhoneChange}
                 value={contactPhoneInput}
             />
+            {contactPhoneError && <ErrorMessage/>}
             </fieldset>           
             <fieldset className="form__field">
             <label className="form__label" htmlFor="contact_email">
@@ -298,6 +306,7 @@ function WarehouseForm( {action, warehouses} ) {
                 onChange={handleContactEmailChange}
                 value={contactEmailInput}
             />
+            {contactEmailError && <ErrorMessage/>}
             </fieldset>
              </div>
         </div>

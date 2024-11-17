@@ -8,7 +8,7 @@ function EditWarehouse({warehouses}) {
   return (
     <div className="container">
       <section className="warehouse">
-      <section className="formcontainer__title">
+      <section className="form-container__title">
         <Link to="/warehouses">
           <img className="icon" src={backbutton}/>
         </Link>
