@@ -47,14 +47,14 @@ function InventoryItem({ item, deleteHandler }) {
       </div>
       <div className="warehouse-item__icons">
         <img
-          className="link__icon"
+          className="icon"
           src={deleteIcon}
           alt="delete icon to delete inventory item"
           onClick={() => deleteHandler(item)}
         ></img>
         <NavLink to={`/inventory/${id}/edit`}>
           <img
-            className="link__icon"
+            className="icon"
             src={editIcon}
             alt="edit icon to edit inventory item details"
           ></img>

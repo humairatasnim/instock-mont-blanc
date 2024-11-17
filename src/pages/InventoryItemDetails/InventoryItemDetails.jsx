@@ -45,7 +45,7 @@ function InventoryItemDetails({ warehouses, path }) {
                 <h1 className="page-header inventory-item__heading">{item_name}</h1>
               </div>
               <NavLink to={`/inventory/${id}/edit`} className="inventory-item__edit link">
-                <img className="link__icon" src={editWhite}></img>
+                <img className="icon" src={editWhite}></img>
                 <span className="inventory-item__edit--hidden">Edit</span>
               </NavLink>
             </div>
