@@ -54,6 +54,7 @@ ul {
     font-size: 0.6875rem;
     color: $slate;
     font-weight: 600;
+    margin-bottom: .25rem;
 
     @include tablet {
       display: none;

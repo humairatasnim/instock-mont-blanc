@@ -93,25 +93,25 @@ const handleSort = async (sortBy = "item_name" || "category" || "status" || "qua
               <h1 className="warehouse__name">{warehouse_name}</h1>
             </div>
             <NavLink to={`/warehouses/${id}/edit`} className="warehouse__edit link">
-              <img className="link__icon" src={editWhite}></img>
+              <img className="icon" src={editWhite}></img>
               <span className="warehouse__edit--hidden">Edit</span>
             </NavLink>
           </div>
           {/* WAREHOUSE DETAILS */}
           <div className="warehouse__details">
             <div className="warehouse__address">
-              <p className="warehouse__subtitle">WAREHOUSE ADDRESS:</p>
+              <h4 className="warehouse__subtitle">WAREHOUSE ADDRESS:</h4>
               <p className="body-medium">{address}</p>
               <p className="body-medium">{`${city}, ${country}`}</p>
             </div>
             <div className="warehouse__contact">
               <div className="warehouse__column">
-                <p className="warehouse__subtitle">CONTACT NAME:</p>
+                <h4 className="warehouse__subtitle">CONTACT NAME:</h4>
                 <p className="body-medium">{contact_name}</p>
                 <p className="body-medium">{contact_position}</p>
               </div>
               <div className="warehouse__column">
-                <p className="warehouse__subtitle">CONTACT INFORMATION:</p>
+                <h4 className="warehouse__subtitle">CONTACT INFORMATION:</h4>
                 <p className="body-medium">{contact_phone}</p>
                 <p className="body-medium">{contact_email}</p>
               </div>
