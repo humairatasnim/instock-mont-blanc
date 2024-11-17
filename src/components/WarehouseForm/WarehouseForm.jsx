@@ -2,6 +2,8 @@ import "./WarehouseForm.scss";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -40,49 +42,107 @@ function WarehouseForm( {action, warehouses} ) {
     const [contactPhoneInput, setContactPhoneInput] = useState("");
     const [contactEmailInput, setContactEmailInput] = useState("");
 
+    const [warehouseNameError, setWarehouseNameError] = useState(false);
+    const [addressError, setAddressError] = useState(false);
+    const [cityError, setCityError] = useState(false);
+    const [countryError, setCountryError] = useState(false);
+    const [contactNameError, setContactNameError] = useState(false);
+    const [contactPositionError, setContactPositionError] = useState(false);
+    const [contactPhoneError, setContactPhoneError] = useState(false);
+    const [contactEmailError, setContactEmailError] = useState(false);
+
     //Form Field HandleChange Events
 
  
     const handleWarehouseChange = (e) => {
         setWarehouseNameInput(e.target.value);
+        setWarehouseNameError(false);
       };
     const handleAddressChange = (e) => {
         setAddressInput(e.target.value);
+        setAddressError(false);
     };
     const handleCountryChange = (e) => {
         setCountryInput(e.target.value);
+        setCountryError(false);
       };
     const handleCityChange = (e) => {
         setCityInput(e.target.value);
+        setCityError(false);
     };
+
     const handleContactNameChange = (e) => {
         setContactNameInput(e.target.value);
+        setContactNameError(false);
     };
     const handleContactPositionChange = (e) => {
         setContactPositionInput(e.target.value);
+        setContactPositionError(false);
     };
+
     const handleContactPhoneChange = (e) => {
         setContactPhoneInput(e.target.value);
+        setContactPhoneError(false);
     };
     const handleContactEmailChange = (e) => {
         setContactEmailInput(e.target.value);
+        setContactEmailError(false);
     };
 
     //Form Validation
 
-    const isFormValid = () => {
-        if (!warehouseNameInput || !addressInput || !countryInput || !cityInput || !contactNameInput || !contactPositionInput || !contactPhoneInput || !contactEmailInput) {
-            return false;
-        }
-        return true;
-    };
+    const validateForm = () => {
+        let isValid = true;
 
-    const handleSubmit = async (e) =>  {
+        if (!warehouseNameInput.trim()) {
+            setWarehouseNameError(true);
+            isValid = false;
+          }
+        
+        if (!addressInput.trim()) {
+            setAddressError(true);
+            isValid = false;
+          }
+
+        if (!countryInput.trim()) {
+            setCountryError(true);
+            isValid = false;
+          }
+
+        if (!cityInput.trim()) {
+            setCityError(true);
+            isValid = false;
+          }
+
+        if (!contactNameInput.trim()) {
+            setContactNameError(true);
+            isValid = false;
+            }
+
+        if (!contactPositionInput.trim()) {
+            setContactPositionError(true);
+            isValid = false;
+            }
+
+        if (!contactPhoneInput.trim()) {
+            setContactPhoneError(true);
+            isValid = false;
+            }
+
+        if (!contactEmailInput.trim()) {
+            setContactEmailError(true);
+            isValid = false;
+            }
+
+            return isValid;
+        };
+    
+
+    const handleSubmit = (e) =>  {
         e.preventDefault();
-        if (!isFormValid()) {
-            alert("Please ensure all fields are filled out");
-        return;
-        }
+
+        if (!validateForm()) return;
+
         const warehouseData = {
             warehouse_name: warehouseNameInput,
             address: addressInput,
@@ -94,26 +154,25 @@ function WarehouseForm( {action, warehouses} ) {
             contact_email: contactEmailInput,
         };
 
-        if (action === "add") {
+        const submitWarehouseForm = async () => {
             try {
+                if (id) {
+                    const {data} = await axios.put(`${baseUrl}/api/warehouses/${id}`, warehouseData);
+                    alert(`Changes made to Warehouse ${warehouseNameInput}!`);
+                    navigate('/warehouses');
+                } else {
                 const {data} = await axios.post(`${baseUrl}/api/warehouses/`, warehouseData);
-                alert(`New warehouse ${warehouseNameInput} added`);
+                alert(`New warehouse ${warehouseNameInput} added!`);
                 navigate('/warehouses');
-                console.log(data); 
+                } 
             } catch (error) {
-                console.error("Error adding warehouse", error);
+                console.error("Error submitting warehouse:", error);
                 }
-            }
-        else if ( action === "edit") {
-            try {
-                const {data} = await axios.put(`${baseUrl}/api/warehouses/${id}`, warehouseData);
-                alert(`Changes made to Warehouse ${warehouseNameInput}`);
-                navigate('/warehouses');
-            } catch (error) {
-                console.error("Error updating warehouse", error);
-            }
-        }
-    }
+            };
+
+            submitWarehouseForm();
+        };
+    
 
 
 
@@ -124,113 +183,154 @@ function WarehouseForm( {action, warehouses} ) {
     };
 
     return (
-    <section>
+    <form onSubmit={handleSubmit}>
 
-        <div className="formcontainer">
+        <div className="form-container">
+            <div className="form__field">
             <fieldset className="form__field">
             <h2 className="form__subheader">Warehouse Details</h2>
             <label className="form__label" htmlFor="warehouse_name">
                 Warehouse Name
             </label>
             <input
-                className="form__input"
+                className={`form__input ${warehouseNameError ? "error" : ""}`}
                 type="text"
                 id="warehouse_name"
                 name="warehouse_name"
                 onChange={handleWarehouseChange}
                 value={warehouseNameInput}
+                placeholder="Warehouse Name"
             />
+            {warehouseNameError && <ErrorMessage/>}
+            </fieldset>
+            <fieldset className="form__field">
             <label className="form__label" htmlFor="address">
                 Street Address
             </label>
             <input
-                className="form__input"
+                className={`form__input ${addressError ? "error" : ""}`}
                 type="text"
                 id="address"
                 name="address"
                 onChange={handleAddressChange}
                 value={addressInput}
+                placeholder="Address"
+
             />
+            {addressError && <ErrorMessage />}
+
+            </fieldset>
+            <fieldset className="form__field">
             <label className="form__label" htmlFor="city">
                 City
             </label>
             <input
-                className="form__input"
+                className={`form__input ${cityError ? "error" : ""}`}
                 type="text"
                 id="city"
                 name="city"
                 onChange={handleCityChange}
                 value={cityInput}
+                placeholder="City"
+
             />
+            {cityError && <ErrorMessage />}
+            </fieldset>           
+             <fieldset className="form__field">
             <label className="form__label" htmlFor="country">
                 Country
             </label>
             <input
-                className="form__input"
+                className={`form__input ${countryError ? "error" : ""}`}
                 type="text"
                 id="country"
                 name="country"
                 onChange={handleCountryChange}
                 value={countryInput}
+                placeholder="Country"
+
             />
+             {countryError && <ErrorMessage />}
             </fieldset>
+            </div>
 
             <div className="divider"></div>
        
+       <div className="form__field">
             <fieldset className="form__field">
             <h2 className="form__subheader">Contact Details</h2>
+
             <label className="form__label" htmlFor="contact_name">
                 Contact Name
             </label>
             <input
-                className="form__input"
+                className={`form__input ${contactNameError ? "error" : ""}`}
                 type="text"
                 id="contact_name"
                 name="contact_name"
                 onChange={handleContactNameChange}
                 value={contactNameInput}
+                placeholder="Contact Name"
+
             />
+            {contactNameError && <ErrorMessage />}
+            </fieldset>           
+            <fieldset className="form__field">
             <label className="form__label" htmlFor="contact_position">
                 Position
             </label>
             <input
-                className="form__input"
+                className={`form__input ${contactPositionError ? "error" : ""}`}
                 type="text"
                 id="contact_position"
                 name="contact_position"
                 onChange={handleContactPositionChange}
                 value={contactPositionInput}
+                placeholder="Contact Position"
+
             />
+            {contactPositionError && <ErrorMessage />}
+            </fieldset>           
+            <fieldset className="form__field">
             <label className="form__label" htmlFor="contact_phone">
                 Phone Number
             </label>
             <input
-                className="form__input"
+                className={`form__input ${contactPhoneError ? "error" : ""}`}
                 type="text"
                 id="contact_phone"
                 name="contact_phone"
                 onChange={handleContactPhoneChange}
                 value={contactPhoneInput}
+                placeholder="Contact Phone"
+
             />
+            {contactPhoneError && <ErrorMessage/>}
+            </fieldset>           
+            <fieldset className="form__field">
             <label className="form__label" htmlFor="contact_email">
                 Email
             </label>
             <input
-                className="form__input"
+                className={`form__input ${contactEmailError ? "error" : ""}`}
                 type="text"
                 id="contact_email"
                 name="contact_email"
                 onChange={handleContactEmailChange}
                 value={contactEmailInput}
+                placeholder="Contact Email"
+
             />
+            {contactEmailError && <ErrorMessage/>}
             </fieldset>
+             </div>
         </div>
 
         <div className="submit-container">
             <button className="button button-secondary" onClick={handleCancel} >Cancel</button>
-            <button type="submit" onClick={handleSubmit} className="button button-primary">{action === "edit" ? "Save" : "+ Add Warehouse"}</button>
+            <button type="submit" className="button button-primary">{action === "edit" ? "Save" : "+ Add Warehouse"}</button>
         </div>
-    </section>
+    </form>
     );
   }
   

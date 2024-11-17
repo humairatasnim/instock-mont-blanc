@@ -134,20 +134,4 @@
       padding: 1rem 2.5rem;
     }
   }
-
-  &__error {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-
-    &-message {
-      @extend .body-small;
-      color: $red;
-    }
-
-    &-icon {
-      width: 1rem;
-      height: 1rem;
-    }
-  }
 }
