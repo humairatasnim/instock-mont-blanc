@@ -49,7 +49,11 @@
 }
 
 fieldset.form__field {
-  padding: 0px;
+  padding: 9px 0px;
+
+  @include tablet {
+    padding: 12px 0px;
+  }
 }
 
 .form__field {

@@ -200,6 +200,7 @@ function WarehouseForm( {action, warehouses} ) {
                 name="warehouse_name"
                 onChange={handleWarehouseChange}
                 value={warehouseNameInput}
+                placeholder="Warehouse Name"
             />
             {warehouseNameError && <ErrorMessage/>}
             </fieldset>
@@ -208,12 +209,14 @@ function WarehouseForm( {action, warehouses} ) {
                 Street Address
             </label>
             <input
-                className="form__input"
+                className={`form__input ${addressError ? "error" : ""}`}
                 type="text"
                 id="address"
                 name="address"
                 onChange={handleAddressChange}
                 value={addressInput}
+                placeholder="Address"
+
             />
             {addressError && <ErrorMessage />}
 
@@ -223,12 +226,14 @@ function WarehouseForm( {action, warehouses} ) {
                 City
             </label>
             <input
-                className="form__input"
+                className={`form__input ${cityError ? "error" : ""}`}
                 type="text"
                 id="city"
                 name="city"
                 onChange={handleCityChange}
                 value={cityInput}
+                placeholder="City"
+
             />
             {cityError && <ErrorMessage />}
             </fieldset>           
@@ -237,12 +242,14 @@ function WarehouseForm( {action, warehouses} ) {
                 Country
             </label>
             <input
-                className="form__input"
+                className={`form__input ${countryError ? "error" : ""}`}
                 type="text"
                 id="country"
                 name="country"
                 onChange={handleCountryChange}
                 value={countryInput}
+                placeholder="Country"
+
             />
              {countryError && <ErrorMessage />}
             </fieldset>
@@ -257,12 +264,14 @@ function WarehouseForm( {action, warehouses} ) {
                 Contact Name
             </label>
             <input
-                className="form__input"
+                className={`form__input ${contactNameError ? "error" : ""}`}
                 type="text"
                 id="contact_name"
                 name="contact_name"
                 onChange={handleContactNameChange}
                 value={contactNameInput}
+                placeholder="Contact Name"
+
             />
             {contactNameError && <ErrorMessage />}
             </fieldset>           
@@ -271,12 +280,14 @@ function WarehouseForm( {action, warehouses} ) {
                 Position
             </label>
             <input
-                className="form__input"
+                className={`form__input ${contactPositionError ? "error" : ""}`}
                 type="text"
                 id="contact_position"
                 name="contact_position"
                 onChange={handleContactPositionChange}
                 value={contactPositionInput}
+                placeholder="Contact Position"
+
             />
             {contactPositionError && <ErrorMessage />}
             </fieldset>           
@@ -285,12 +296,14 @@ function WarehouseForm( {action, warehouses} ) {
                 Phone Number
             </label>
             <input
-                className="form__input"
+                className={`form__input ${contactPhoneError ? "error" : ""}`}
                 type="text"
                 id="contact_phone"
                 name="contact_phone"
                 onChange={handleContactPhoneChange}
                 value={contactPhoneInput}
+                placeholder="Contact Phone"
+
             />
             {contactPhoneError && <ErrorMessage/>}
             </fieldset>           
@@ -299,12 +312,14 @@ function WarehouseForm( {action, warehouses} ) {
                 Email
             </label>
             <input
-                className="form__input"
+                className={`form__input ${contactEmailError ? "error" : ""}`}
                 type="text"
                 id="contact_email"
                 name="contact_email"
                 onChange={handleContactEmailChange}
                 value={contactEmailInput}
+                placeholder="Contact Email"
+
             />
             {contactEmailError && <ErrorMessage/>}
             </fieldset>
