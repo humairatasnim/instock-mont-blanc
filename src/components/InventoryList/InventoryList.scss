@@ -1,0 +1,106 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+ul {
+  list-style: none;
+}
+
+.item {
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $cloud;
+
+  &:last-child {
+    border: none;
+  }
+  
+  &:hover {
+    background: rgba(46, 102, 229, 0.07);
+  }
+
+  @include tablet {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    align-items: center;
+  }
+
+  @include desktop {
+    padding: 1rem 2.5rem;
+  }
+
+  &__column {
+    width: 50%;
+    padding-bottom: 1rem;
+
+    @include tablet {
+      padding: 0;
+      width: 25%;
+    }
+  }
+  
+  &__mobile-box {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include tablet {
+      flex-wrap: nowrap;
+      width: 100%;
+      align-items: center;
+    }
+  }
+
+  &__subtitle {
+    font-size: 0.6875rem;
+    color: $slate;
+    font-weight: 600;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__name{
+    display: flex;
+    flex-direction: column;
+    @include tablet {
+      width: 35%;
+     }
+  }
+
+  &__category{
+   @include tablet {
+    width: 25%;
+   }
+  }
+
+  &__status {
+    @include tablet {
+      order: 2;
+      width: 30%;
+    }
+  }
+
+  &__quantity {
+    @include tablet {
+      order: 3;
+      width: 15%;
+    }
+  }
+
+  &__warehouse{
+    align-self: flex-end
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    
+    @include tablet {
+      gap: 1rem;
+    }
+  }
+}

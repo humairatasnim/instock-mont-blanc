@@ -1,0 +1,124 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.inventory-item {
+  &__header {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 1.5rem 1.5rem;
+    justify-content: space-between;
+    border-bottom: 1px solid $cloud;
+
+    @include tablet {
+      flex-direction: row;
+      padding: 2rem 2rem 1.35rem;
+    }
+
+    @include desktop {
+      padding: 2rem 2.5rem 1.5rem;
+    }
+  }
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  &__edit {
+    width: 2.25rem;
+    height: 2.25rem;
+    background-color: $instock-indigo;
+    border-radius: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+
+    @include tablet {
+      width: 5.0625rem;
+      height: 2.375rem;
+    }
+  }
+
+  &__back-icon{
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover{
+      transform: translateX(-0.25rem);
+    }
+  }
+
+  &__body {
+    @include tablet {
+      display: flex;
+    }
+  }
+
+  &__edit--hidden {
+    display: none;
+    color: $white;
+
+    @include tablet {
+      display: inherit;
+    }
+  }
+
+  &__info {
+    color: $instock-black;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem 2rem 2rem;
+      flex-basis: 50%;
+      border-bottom: none;
+    }
+    @include desktop {
+      padding: 1.5rem 2.5rem;
+      gap:2.5rem;
+    }
+  }
+
+  &__subtitle {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  &__description {
+    padding-bottom: 1rem;
+    @include tablet {
+      max-width: 24.5625rem;
+      padding-bottom: 0;
+    }
+    @include desktop {
+        width: 100%;
+        padding-bottom: 0;
+        max-width: 100%;
+      }
+  }
+  &__content {
+    @include tablet {
+      display: flex;
+      padding-left: 1rem;
+      flex-direction: column;
+      flex-grow: 1;
+      border-left: 1px solid $cloud;
+      margin: 1.5rem 0;
+      gap: 1rem;
+    }
+  }
+  &__details {
+    display: flex;
+    padding: 0 1.5rem;
+  }
+  &__quantity {
+    margin: 0 auto;
+  }
+  &__warehouse {
+    padding: 1rem 1.5rem;
+  }
+}

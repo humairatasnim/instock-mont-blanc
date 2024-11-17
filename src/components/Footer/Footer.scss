@@ -1,0 +1,15 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.footer {
+  padding: 2.5rem;
+
+  @include desktop {
+    padding: 3rem;
+  }
+}
+
+.body-small {
+  color: $slate;
+  text-align: center;
+}

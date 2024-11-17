@@ -1,0 +1,29 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global";
+
+.add-item {
+  &__header {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    padding: 2rem 1.5rem 1.5rem;
+    border-bottom: 1px solid $cloud;
+
+    @include tablet {
+      padding: 2rem 2rem 1.3rem;
+    }
+
+    @include desktop {
+      padding: 2rem 2.5rem 1.3rem;
+    }
+  }
+
+  &__title {
+    @extend .page-header;
+  }
+
+  &__back-icon {
+    margin-top: 0.5rem;
+  }
+}
