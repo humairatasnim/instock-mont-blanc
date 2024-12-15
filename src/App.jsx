@@ -11,7 +11,6 @@ import Inventory from "./pages/Inventory/Inventory";
 import InventoryItemDetails from "./pages/InventoryItemDetails/InventoryItemDetails";
 import AddInventoryItem from "./pages/AddInventoryItem/AddInventoryItem";
 import EditInventoryItem from "./pages/EditInventoryItem/EditInventoryItem";
-import UILibrary from "./pages/UILibrary/UILibrary";
 import "./App.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -69,10 +68,7 @@ function App() {
           <Route path="/inventory/:id" element={<InventoryItemDetails warehouses={warehouses} />} />
           <Route path="/inventory/add" element={<AddInventoryItem warehouses={warehouses} />} />
           <Route path="/inventory/:id/edit" element={<EditInventoryItem warehouses={warehouses} inventories={inventories} />} />
-
-          {/* TEMPORARY: UI Library Route */}
-          <Route path="/ui" element={<UILibrary />} />
-
+          
           {/* Fallback route */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>)}
